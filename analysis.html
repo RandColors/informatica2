@@ -1,0 +1,173 @@
+<!--Design and impl-->
+<section>   
+    <!--KonaWord-->
+      <!--MIDI Play Method in -->
+      <h2>MIDI Play Method in KonaWord </h2>
+
+      <p>
+          Questo metodo ci consente di mandare messaggi MIDI ad altri softwares:
+           eg: ableton o  Processing 
+           utilizza un range di note sui quali andrà ad agire 
+           othersComplete = (62..73) l'ottava che va da 62 nota MIDI  a 73 compresi
+
+      </p>
+
+
+      <pre><code lang="supercollider">
+
+      //Automated mapping of strokes for Kanjira virtual instrument
+      {\MIDIPlay} {
+              //bOne = [36, 37, 38, 39, 45, 46, 47].choose;
+      bOne = (62..73).choose;
+
+othersComplete = (62..73);
+              //othersComplete = (48..55);
+              othersTemp = Array.newFrom(othersComplete);
+              bOthers = Array.newClear(word.size-1);
+              (word.size-1).do { |i|
+                  val = othersTemp.choose;
+                  bOthers[i] = val;
+                  othersTemp = Array.newFrom(othersComplete);
+                  othersTemp.remove(val);
+              };
+          rout = Routine {
+              word.size.do { |i|
+                  if(word[i]!='-') {
+                      if(i==0) {
+                          note = bOne;
+                          vel = (100+accent).min(127);
+                          word[i].post; " ".post;
+
+                      } {
+                          note = bOthers[i-1];
+                          vel = (70..100).choose;
+                          word[i].asString.toLower.post; " ".post;
+
+                      };
+                      if(tani.midiOut != nil) { tani.midiOut.noteOn(0, note, vel); };
+                      speed.post; " ".post;
+                      speed.wait;
+                      if(tani.midiOut != nil) { tani.midiOut.noteOff(0, note, vel); };
+                  } {
+                      word[i].post; " ".post;
+                      speed.post; " ".post;
+                      speed.wait
+                  };
+              };
+              " ".postln;
+              yieldAndReset(nil);
+          };
+
+
+      };
+
+}
+</pre></code>
+
+
+
+</section>
+
+
+
+<!--Scriviamo una frase semplice e deterministica -->
+<section>
+    <h1>Scriviamo una frase semplice e deterministica</h1>
+    <p>utilizzando konaword scegliamo  ed aggiungiamone il rigth amount</p>
+
+
+    <pre><code lang="supercollider">
+        a = KonaTani.new(61, #["I4", "O", "O"], 4, argSynth:\MIDITranscribe);
+        // init MIDI and set the midi out device
+        MIDIClient.init;
+        a.midiOut = MIDIOut.newByName("loopMIDI Port", "loopMIDI Port");
+        
+        
+
+
+    </code></pre>
+</section>
+
+
+
+<section>
+    <h1>Examples</h1>
+    <p> sto analizzando un esempio che ci da la possibilità di mutare una frase,
+        analizza i vari paramentri e capiscine i settaggi <br>
+        aChance
+    </p>
+    
+    <pre><code lang="supercollider">
+    
+        //	mutatePhrase
+        //	Method to mutate a given phrase using many possible 
+        //		combinations of automated manipulation methods
+        //
+        //	@aKonaItem Item to manipulate;
+        mutatePhrase {|aKonaItem, aChance, aRec=0.75, aNum|
+            var col;		//	Input collection
+            var ret;		//	Output collection
+            var change;		//	The chance an item will be mutated;
+            var min;		//	Minimum value for alteration
+            var max;		//	Maximum value for alteration
+            var val;		//	Variable used to calculate density possibilties
+            var count;		//	Variable used when calculating density possibilities
+            var index;		//	Index of element to mutate
+            var store;		//	Array to store indexes to be removed (atDensity)
+            var num;		//	Index of process to use;
+    
+            if(aKonaItem.class==KonaTime) {
+                col = aKonaItem;
+            } {
+                col = KonaTime.newFrom([aKonaItem], tani);
+            };
+    
+            change = aChance ?? {(1/col.size)*1.5};
+            if(aNum==nil) {
+                num = {5.rand}
+            } {
+                num = {aNum}
+            };
+            ret = KonaTime.new(tani);
+            col.size.do { |i|
+                if(change.coin,
+                    {
+                        if(col[i].class==KonaWord) {
+                        switch (num.())
+                            {0}	{
+                                    ret.add(this.randomAtDensity(col[i]));
+                                }
+                            {1}	{
+                                    ret.add(this.randomExtendJati(col[i]));
+                                }
+                            {2}	{
+                                    ret.add(this.randomMuteJati(col[i]));
+                                }
+                            {3}	{
+                                    ret.add(this.randomDensityJati(col[i]));
+                                }
+                            {4}	{
+                                    ret.add(this.partitionWord(col[i]));
+                                };
+                        } {
+                            ret.add(this.mutatePhrase(col[i], aRec=aRec/4))
+                        };
+    
+                    },
+                    {
+                        ret.add(col[i])
+                    }
+                );
+            };
+    
+            //Possible recursion for more mutation.
+            if(aRec.coin) {
+                ^this.mutatePhrase(ret, aRec:aRec/2, aNum:aNum)
+            } {
+                ^ret
+            };
+        }
+    
+    </code></pre>
+    
+    

@@ -1,0 +1,2152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+
+    <title>Examples from The system</title>
+   <!-- Code Highlighiting.js for SC-->
+
+     <!--  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/styles/hybrid.min.css" > -->
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.8/highlight.min.js"></script>
+       <script src="C:\Users\taegg\Desktop\konnakol_Learning\dissertion on Konnakol\BlogKonnakol\Highlighting"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", event => {
+            document.querySelectorAll("pre code").forEach(block => {
+                hljs.highlightBlock(block);
+            });
+        });
+    </script>
+
+    <style>
+        body {
+            background: lightblue;
+            margin: 40px;
+        }
+
+
+        pre code {
+            max-height: fit-content;
+            /* trova il modo di dargli realmente il valore che ti serve*/
+            padding: 10px 20px !important;
+            border-radius: 4px;
+            box-shadow: 0px 0px 13px 0px rgba(0, 0, 0, 0.6);
+        }
+    </style>
+
+
+</head>
+
+
+<body>
+    <nav>
+        <ul class="nav__links" >
+            <li><a href="Outputs.html">Code Examples</a></li>
+            <li><a href="index.html">SC Home </a></li>
+            <li><a href="Applying Carnatic.html">Applying Carnatic Music to western culture</a></li>
+
+        </ul>
+
+    </nav>
+
+
+  
+
+    <main>
+
+
+        <article class="rapido">
+
+            <!--HEADER-->
+            <header>
+          <!-- navbar-->
+               
+                <h1>
+                    Code Examples
+                </h1>
+                <h4>Appunti tratti da: 
+                    Computer Representation and Generation of
+                    Karnatak Rhythms
+                    <a href="https://www.arthurcarabott.com/assets/projects/konnakkol/dissertation.pdf"
+                        target="_blank">Link alla Tesi</a>
+                    <br> <a href="https://github.com/acarabott/karnatak-rhythms/blob/main/examples/basic.scd" target="_blank" rel="noopener noreferrer"> Basic.scd</a>
+                        <br><a href="https://github.com/acarabott/karnatak-rhythms/blob/main/examples/turing-test.scd" target="_blank" rel="noopener noreferrer">Turing-test.scd</a>
+
+               
+                    </h4><br>
+                </header>
+
+              
+<!--Basic.scd-->
+                <section>
+                    <h1>Basic example, score and sound?</h1>
+                    <h2>Obiettivo di questo file è quello di catalogare le funzionalità offerte dal sistema compositivo documentando con codice e relativo audio file
+                        <br> Gran parte degli esempi partono dall'analisi di trascrizioni di importanti esponenti dello mrdangan.</h2>
+                        <p>
+                        <a href="http://www.palghatraghu.org/" target="_blank" rel="noopener noreferrer">Palghatraghu</a> <br>
+                        <a href="http://trichysankaran.com/books.html" target="_blank" rel="noopener noreferrer">Trichy Sankaran books</a> <br>
+                        Fondamentale è il lavoro svolto da Nelson per le trascrizioni ed analisi.
+                        Nelson, D. (1991), Mrdangam Mind: The Tani Avartanam in Karnatak Music, PhD thesis <br>
+                        https://dissexpress.umi.com/search.html questo è il motore di ricerca per le tesi <br>
+                        <a href="http://dpnelson.faculty.wesleyan.edu/publications-recordings/" target="_blank" rel="noopener noreferrer">Publications & Recordings</a><br>
+                        <a href="https://order.proquest.com/OA_HTML/pqdtibeCCtpItmDspRte.jsp?dlnow=1&item=9131475&rpath=http%3A%2F%2Fdissexpress.umi.com%2Fdxweb%2Fresults.html%3FQryTxt%3DMrdangam%2BMind%26By%3D%26Title%3D%26pubnum%3D&track=DxWeb&sitex=10020:22372:US&jttst0=6_22372%2C22372%2C-1%2C0%2C&jtfm0=&etfm1=" target="_blank" rel="noopener noreferrer">tesi in .pdf to buy</a> <br>
+                    <a href="https://www.hfsbooks.com/books/konnakkol-manual-nelson/" target="_blank" rel="noopener noreferrer">Testi sul konnakol di Nelson</a>
+                </p>
+
+                    <p>Generatore di Sarvalaghu, questa frase è quella sulla quale si baserà la composizione
+                    
+                    <br><audio controls>
+                            <source src="audio/render_code_audio/ex1.1.mp3" type="audio/mp3">
+                        </audio>
+                        
+
+
+                    <pre><code lang="supercollider">
+                        // Example 1, transcription
+// ----------------------------------------------------------------------------
+
+// create a piece at 155 bpm, in Adi Thala, with a gati of 4
+a = KonaTani.new(155, ["I4","O","O"], 4, argSynth:\MIDITranscribe);
+
+// init MIDI and set the midi out device
+MIDIClient.init;
+a.midiOut = MIDIOut.newByName("loopMIDI Port", "loopMIDI Port");
+
+// generate a phrase
+x = a.gen.vSarvaPhraseAuto
+
+// play it
+x.play;
+
+vSarvaPhraseLength*gati: oneBeat: 0.38709677419355
+maxBeats: 5.0
+phraseLength: 4.0
+16.0
+oneBeat: 0.38709677419355
+maxBeats: 5.0
+phraseLength: 4.0
+partsArray: [ 2, 3, 4 ]
+Conversion to KonaWords: 
+[ Ta      , Ka      , Ta      , Ka      , Ta      , Ka      , Ta      , Ka       ]
+[ 0.5     , 0.5     , 0.5     , 0.5     , 0.5     , 0.5     , 0.5     , 0.5      ]
+
+combineSimilar: 
+[ Ta      , Ka      , Ta      , Ka      , Di      , Mi      , Ta      , Ka       ]
+[ 0.5     , 0.5     , 0.5     , 0.5     , 0.5     , 0.5     , 0.5     , 0.5      ]
+
+randomMuteJati: 
+[ Ta      , Ka      , Ta      , Ka      , Di      , Mi      , Ta      , Ka       ]
+[ 0.5     , 0.5     , 0.5     , 0.5     , 0.5     , 0.5     , 0.5     , 0.5      ]
+
+-> KonaTime[ a KonaWord, a KonaWord, a KonaWord ]
+
+
+</code></pre>
+
+Stesso esempio con alterazione della densità e sviluppo in un'intera composizione.
+<br><audio controls>
+    <source src="audio/render_code_audio/ex1.2.mp3" type="audio/mp3">
+</audio>
+
+<pre><code lang="supercollider">
+// function to alter the density of syllables in the phrase
+z = {a.gen.randomDensityJati(x)}
+
+// generate and play one
+z.().play
+</code></pre>
+
+<p>Aggiungiamo come input l'ultima variazione che diventerà il seme per un'intera struttura ritmica</p>
+
+<br><audio controls>
+    <source src="audio/render_code_audio/ex1.3.mp3" type="audio/mp3">
+</audio>
+
+
+<pre><code lang="supercollider">
+
+// generate a whole composition
+a.add(a.gen.basicStructure)
+
+// play it
+a.play;
+
+// it may be long, you may want to stop it
+a.stop;
+
+maxBeats: 5.0
+phraseLength: 4.0
+16.0
+oneBeat: 0.38709677419355
+maxBeats: 5.0
+phraseLength: 4.0
+partsArray: [ 2, 3, 4 ]
+Conversion to KonaWords: 
+[ Ta      , Ta      , Ta      , Ta      , Ta      , Ta      , Ta       ]
+[ 0.5     , 0.5     , 1.0     , 0.5     , 0.5     , 0.5     , 0.5      ]
+
+combineSimilar: 
+[ Ta      , Ta      , Ta      , Ta      , Ka      , Ta      , Ka       ]
+[ 0.5     , 0.5     , 1.0     , 0.5     , 0.5     , 0.5     , 0.5      ]
+
+randomMuteJati: 
+[ Ta      , Ta      , Ta      , Ta      , Ka      , Ta      , Ka       ]
+[ 0.5     , 0.5     , 1.0     , 0.5     , 0.5     , 0.5     , 0.5      ]
+
+density: 2
+density: 4
+density: 4.0
+density: 4.0
+density: 4.0
+hi
+val: 1.0
+density: 1.0
+1st ret.dur: 8.0
+val: 2.0
+density: 2.0
+2nd ret.dur: 16.0
+partsArray: [ 2, 3, 4 ]
+Conversion to KonaWords: 
+[ Ta      , Ta      , Ta      , Ta      , Ta      , Ta      , Ta      , Ta       ]
+[ 0.5     , 0.5     , 0.5     , 0.5     , 0.5     , 0.5     , 0.5     , 0.5      ]
+
+combineSimilar: 
+[ Ta      , Ta      , Ta      , Ka      , Ta      , Ka      , Ta      , Ta       ]
+[ 0.5     , 0.5     , 0.5     , 0.5     , 0.5     , 0.5     , 0.5     , 0.5      ]
+
+randomMuteJati: 
+[ Ta      , Ta      , Ta      , Ka      , Ta      , Ka      , Ta      , Ta       ]
+[ 0.5     , 0.5     , 0.5     , 0.5     , 0.5     , 0.5     , 0.5     , 0.5      ]
+
+val: 2.0
+density: 2.0
+val: 1.0
+density: 1.0
+val: 2.0
+density: 2.0
+val: 1.0
+density: 1.0
+val: 1.0
+density: 1.0
+3rd ret.dur: 24.0
+val: 2.0
+density: 2.0
+val: 4.0
+density: 4.0
+val: 4.0
+density: 4.0
+val: 1.0
+density: 1.0
+4th ret.dur: 32.0
+5th 6th ret.dur: 48.0
+newGati: 7
+gatiChangeMatras: 438.85714285714
+ gati change  ret.dur: 157.85714285714
+changeRemainder: 22.857142857143
+partsArray: [ 2.0, 3.0, 4.0, 5.0, 6.0 ]
+Conversion to KonaWords: 
+[ Ta      , Ta      , Ta       ]
+[ 0.5     , 0.5     , 0.5      ]
+
+combineSimilar: 
+[ Ta      , Ta      , Ka       ]
+[ 0.5     , 0.5     , 0.5      ]
+
+randomMuteJati: 
+[ Ta      , Ta      , Ka       ]
+[ 0.5     , 0.5     , 0.5      ]
+
+ret.dur: 160.57142857143
+-> a KonaTani
+
+                    </code></pre>
+
+                   
+                     </p>
+            
+<p>
+    Esempio di mutazione di una frase presa da una trascrizione del suonatore di Mridangan Trichy Sankaran.
+    l'esempio è in 	["U1", "R", "W", "W", "R"]	Khanda Capu 5/4 <br>
+    9 estreme variazioni della frase inizale scritta usata come "seme" per variazioni<br> 
+
+    <br><audio controls>
+        <source src="audio/render_code_audio/ex2.mp3" type="audio/mp3">
+    </audio>
+    
+</p>
+                    <pre><code lang="supercollider">
+                        // example 2, MIDI for transcription
+// ----------------------------------------------------------------------------
+b = KonaTani.new(84, #["U1", "R", "W", "W", "R"], 4, argSynth:\MIDITranscribe);
+// init MIDI and set the midi out device
+MIDIClient.init;
+a.midiOut = MIDIOut.newByName("loopMIDI Port", "loopMIDI Port");
+
+// generate a phrase
+~vikkuMisraTala = KonaTime.new(b);
+~vikkuMisraTala.add(KonaWord.new(2,4,1,b));		//	Ta	ka
+~vikkuMisraTala.add(KonaWord.new(1,4,2,b));		//	Dim
+~vikkuMisraTala.add(KonaWord.new(2,4,1,b));		//	Ta	ka
+~vikkuMisraTala.add(KonaWord.new(2,4,2,b));		//	Dim na
+
+// mutate and play it
+b.gen.mutatePhrase(~vikkuMisraTala,1).play
+
+
+// Originale
+[ Ta       , Ka       , Ta      , Ta       , Ka       , Ta      , Ka       ]
+[ 0.25     , 0.25     , 0.5     , 0.25     , 0.25     , 0.5     , 0.5      ]
+[ [ 1, 16 ], [ 1, 16 ], [ 1, 8 ], [ 1, 16 ], [ 1, 16 ], [ 1, 8 ], [ 1, 8 ] ]
+
+-> [ [ Ta       , Ka       , Ta      , Ta       , Ka       , Ta      , Ka       ], [ 0.25     , 0.25     , 0.5     , 0.25     , 0.25     , 0.5     , 0.5      ], [ [ 1, 16 ], [ 1, 16 ], [ 1, 8 ], [ 1, 16 ], [ 1, 16 ], [ 1, 8 ], [ 1, 8 ] ] ]
+
+
+val: 2.0
+density: 2.0
+val: 1.0
+density: 1.0
+density: 2
+density: 2
+-> KonaTime[ KonaTime[ a KonaWord, KonaTime[ a KonaWord, a KonaWord ] ], a KonaWord, a KonaWord, KonaTime[ a KonaWord ] ]
+Ta 0.25 Ta 0.125 Ta 0.125 Ta 0.25 ka 0.25 Ta 0.125 ka 0.125 di 0.125 mi 0.125 Ta 0.5 ka 0.5 density: 0
+-> KonaTime[ KonaTime[ a KonaWord ], KonaTime[ a KonaWord ], KonaTime[ a KonaWord ], a KonaWord ]
+Ta 0.25 ka 0.25 - 0.5 Ta 0.25 ka 0.25 Ta 1.0 val: 2.0
+density: 2.0
+val: 2.0
+density: 2.0
+val: 1.0
+density: 1.0
+val: 1.0
+density: 1.0
+val: 2.0
+density: 2.0
+val: 2.0
+density: 2.0
+density: 2
+-> KonaTime[ KonaTime[ KonaTime[ KonaTime[ a KonaWord, a KonaWord ] ], KonaTime[ a KonaWord, a KonaWord ] ], KonaTime[ KonaTime[ a KonaWord, a KonaWord ] ], a KonaWord, KonaTime[ a KonaWord, a KonaWord ] ]
+Ta 0.125 Ta 0.125 Ta 0.125 Ta 0.125 Ta 0.25 Ta 0.125 ka 0.125 Ta 0.125 ka 0.125 di 0.125 mi 0.125 Ta 0.5 - 0.5 density: 2
+-> KonaTime[ a KonaWord, KonaTime[ a KonaWord ], KonaTime[ a KonaWord ], KonaTime[ a KonaWord ] ]
+Ta 0.125 ka 0.125 di 0.125 mi 0.125 - 0.5 Ta 0.5 Ta 0.5 ka 0.5 val: 2.0
+density: 2.0
+-> KonaTime[ KonaTime[ a KonaWord, a KonaWord ], KonaTime[ a KonaWord ], KonaTime[ a KonaWord, a KonaWord ], KonaTime[ a KonaWord ] ]
+- 0.25 Ta 0.25 Ta 0.5 Ta 0.25 Ta 0.125 ka 0.125 Ta 0.5 ka 0.5 density: 2
+-> KonaTime[ KonaTime[ a KonaWord ], KonaTime[ KonaTime[ a KonaWord ] ], KonaTime[ a KonaWord ], KonaTime[ a KonaWord, a KonaWord ] ]
+Ta 0.5 Ta 0.5 Ta 0.5 - 0.5 Ta 0.5 val: 2.0
+density: 2.0
+val: 2.0
+density: 2.0
+val: 1.0
+density: 1.0
+val: 1.0
+density: 1.0
+val: 1.0
+density: 1.0
+density: 1
+-> KonaTime[ KonaTime[ a KonaWord ], KonaTime[ a KonaWord ], KonaTime[ KonaTime[ a KonaWord, a KonaWord ], KonaTime[ KonaTime[ KonaTime[ KonaTime[ a KonaWord ] ], KonaTime[ KonaTime[ a KonaWord ] ] ] ] ], KonaTime[ a KonaWord, a KonaWord ] ]
+Ta 0.5 Ta 0.5 Ta 0.125 Ta 0.125 - 0.125 Ta 0.125 - 0.5 Ta 0.5 val: 2.0
+density: 2.0
+val: 2.0
+density: 2.0
+val: 2.0
+density: 2.0
+val: 2.0
+density: 2.0
+val: 1.0
+density: 1.0
+-> KonaTime[ KonaTime[ a KonaWord, a KonaWord ], a KonaWord, KonaTime[ a KonaWord, KonaTime[ KonaTime[ a KonaWord, a KonaWord ] ] ], KonaTime[ KonaTime[ a KonaWord, a KonaWord ], a KonaWord ] ]
+Ta 0.25 Ta 0.125 ka 0.125 Ta 0.5 - 0.25 Ta 0.125 Ta 0.125 Ta 0.125 ka 0.125 Ta 0.25 Ta 0.5 density: 0
+val: 2.0
+density: 2.0
+val: 2.0
+density: 2.0
+val: 1.0
+density: 1.0
+-> KonaTime[ a KonaWord, KonaTime[ KonaTime[ KonaTime[ a KonaWord, a KonaWord ], a KonaWord ] ], KonaTime[ a KonaWord ], KonaTime[ a KonaWord ] ]
+Ta 0.5 Ta 0.125 Ta 0.125 Ta 0.25 Ta 0.25 ka 0.25 Ta 0.5 ka 0.5  
+
+                    </code></pre>
+            </section>
+
+
+            <section>
+<h1>Turing-test.scd</h1>
+<p>
+    //Palghat R. Raghu's opening phrase
+  
+
+<br><audio controls>
+    <source src="audio/render_code_audio/turing1.mp3" type="audio/mp3">
+</audio>
+
+<pre><code lang="supercollider">
+    raghuOpening.clear
+    //Palghat R. Raghu's opening phrase
+    a = KonaTani.new(98, #["I4","O","O"], 4, argSynth:\MIDITranscribe);
+    
+    // init MIDI and set the midi out device
+    MIDIClient.init;
+    a.midiOut = MIDIOut.newByName("loopMIDI Port", "loopMIDI Port");
+    
+    ~raghuOpening = KonaTime.new(a);
+    ~raghuOpening.add(KonaWord.new(2,4,2,a));		//	Din	-	Din	-
+    ~raghuOpening.add(KonaWord.new(0,4,2,a));		//	-	-
+    ~raghuOpening.add(KonaWord.new(1,4,2,a));		//	Tam	-
+    ~raghuOpening.add(KonaWord.new(0,4,4,a));		//	-	-	-	-
+    ~raghuOpening.add(KonaWord.new(0,4,2,a));		//	-	-
+    ~raghuOpening.add(KonaWord.new(1,4,2,a));		//	Tam	-
+    
+    // to see
+    ~raghuOpening.postWord;
+    
+    /*
+    [ Ta      , Ka      , -       , Ta      , -       , -       , Ta       ]
+    [ 0.5     , 0.5     , 0.5     , 0.5     , 1.0     , 0.5     , 0.5      ]
+    [ [ 1, 8 ], [ 1, 8 ], [ 1, 8 ], [ 1, 8 ], [ 1, 4 ], [ 1, 8 ], [ 1, 8 ] ]
+    
+    */
+    
+    a.add(~raghuOpening)
+    a.add(KonaWord.new(1,4,32,a))		//	break 1 battutua da 8/4
+    
+    ~myRaghuOpening = a.gen.vSarvaPhraseAuto
+    
+    /*
+    vSarvaPhraseLength*gati: oneBeat: 0.61224489795918
+    maxBeats: 5.0
+    phraseLength: 4.0
+    16.0
+    oneBeat: 0.61224489795918
+    maxBeats: 5.0
+    phraseLength: 4.0
+    partsArray: [ 2, 3, 4 ]
+    Conversion to KonaWords:
+    [ Ta      , Ta      , Ta      , Ka      , Ta      , Ka       ]
+    [ 1.0     , 1.0     , 0.5     , 0.5     , 0.5     , 0.5      ]
+    
+    combineSimilar:
+    [ Ta      , Ta      , Ta      , Ka      , Di      , Mi       ]
+    [ 1.0     , 1.0     , 0.5     , 0.5     , 0.5     , 0.5      ]
+    
+    randomMuteJati:
+    
+    [ Ta      , Ta      , Ta      , Ki      , Tah     , -        ]
+    [ 1.0     , 1.0     , 0.5     , 0.5     , 0.5     , 0.5      ]
+    
+    
+    */
+    
+        //
+    
+    2.do { |i|
+        a.add(~myRaghuOpening);
+        a.add(~myRaghuOpening);
+        a.add(KonaWord.new(1,4,32,a))		//	break 1 battutua da 8/4
+    };
+    
+    
+    
+    a.play
+    a.stop
+    
+
+</code></pre>
+
+</p>
+           
+
+<p>
+    //Trichy S. Sankaran's opening phrase
+  
+
+<br><audio controls>
+    <source src="audio/render_code_audio/turing3.mp3" type="audio/mp3">
+</audio>
+
+<pre><code lang="supercollider">
+    //Trichy S. Sankaran's opening phrase
+    a = KonaTani.new(90, #["I4","O","O"], 4, argSynth:\MIDITranscribe);
+        // init MIDI and set the midi out device
+    MIDIClient.init;
+    a.midiOut = MIDIOut.newByName("loopMIDI Port", "loopMIDI Port");
+    
+    ~trichyOpening = KonaTime.new(a);
+    4.do { |i|
+    ~trichyOpening.add(KonaWord.new(2,4,2,a))		//	Na -	Din -
+                                                    //	Din	-	Na	-
+    };
+    
+    ~trichyOpening.postWord;
+        /*
+        [ Ta      , Ka      , Ta      , Ka      , Ta      , Ka      , Ta      , Ka       ]
+    [ 0.5     , 0.5     , 0.5     , 0.5     , 0.5     , 0.5     , 0.5     , 0.5      ]
+    [ [ 1, 8 ], [ 1, 8 ], [ 1, 8 ], [ 1, 8 ], [ 1, 8 ], [ 1, 8 ], [ 1, 8 ], [ 1, 8 ] ]
+    
+        */
+    ~trichyOpening.add(KonaWord.new(1,4,16,a))		//	break
+    
+    a.add(~trichyOpening);
+    
+    ~myTrichyOpening = a.gen.vSarvaPhraseAuto
+    
+        /*
+    
+    vSarvaPhraseLength*gati: oneBeat: 0.66666666666667
+    maxBeats: 5.0
+    phraseLength: 4.0
+    16.0
+    oneBeat: 0.66666666666667
+    maxBeats: 5.0
+    phraseLength: 4.0
+    partsArray: [ 2, 3, 4 ]
+    Conversion to KonaWords:
+    [ Ta      , Ka      , Ta      , Ka      , Ta      , Ka      , Ta      , Ka       ]
+    [ 0.5     , 0.5     , 0.5     , 0.5     , 0.5     , 0.5     , 0.5     , 0.5      ]
+    
+    combineSimilar:
+    [ Ta      , Ka      , Ta      , Ka      , Di      , Mi      , Ta      , Ka       ]
+    [ 0.5     , 0.5     , 0.5     , 0.5     , 0.5     , 0.5     , 0.5     , 0.5      ]
+    
+    randomMuteJati:
+    
+    [ Ta      , -       , Ta      , Ka      , Di      , Mi      , Ta      , Ka       ]
+    [ 0.5     , 0.5     , 0.5     , 0.5     , 0.5     , 0.5     , 0.5     , 0.5      ]
+    
+    -> KonaTime[ KonaTime[ a KonaWord, a KonaWord ], a KonaWord, a KonaWord ]
+    
+    */
+    
+    2.do { |i|
+        a.add(~myTrichyOpening);
+        a.add(~myTrichyOpening);
+        a.add(KonaWord.new(1,4,32,a))		//	break
+    
+    };
+    
+    a.clear
+    a.play
+    a.stop
+
+</code></pre>
+
+</p>
+
+
+
+
+<p>
+    //Vikku Sankirna Chapu 9/4
+  
+
+<br><audio controls>
+    <source src="audio/render_code_audio/turing4.mp3" type="audio/mp3">
+</audio>
+
+<pre><code lang="supercollider">
+
+    //Vikku Sankirna Chapu
+    a = KonaTani.new(80, #["U","U","U", "W", "W", "R"], 4, argSynth:\MIDITranscribe);
+                // init MIDI and set the midi out device
+    MIDIClient.init;
+    a.midiOut = MIDIOut.newByName("loopMIDI Port", "loopMIDI Port");
+    
+    ~vikkuSankirna = KonaTime.new(a);
+    
+    ~vikkuSankirna.add(KonaWord.new(4,4,1, a));		//	Ta	ka	di	mi
+    ~vikkuSankirna.add(KonaWord.new(2,4,1, a));		//	Ta	ka
+    ~vikkuSankirna.add(KonaWord.new(2,4,1, a));		//	Ju	na
+    ~vikkuSankirna.add(KonaWord.new(4,4,1, a));		//	Ta	ka	di	mi
+    ~vikkuSankirna.add(KonaWord.new(3,4,1, a));		//	Ta	ki	ta
+    ~vikkuSankirna.add(KonaWord.new(3,4,1, a));		//	Ta	di	mi
+    
+    ~vikkuSankirna.postWord
+        // [ Ta       , Ka       , Di       , Mi       , Ta       , Ka       , Ta       , Ka       , Ta       , Ka       , Di       , Mi       , Ta       , Ki       , Tah      , Ta       , Ki       , Tah       ]
+        // [ 0.25     , 0.25     , 0.25     , 0.25     , 0.25     , 0.25     , 0.25     , 0.25     , 0.25     , 0.25     , 0.25     , 0.25     , 0.25     , 0.25     , 0.25     , 0.25     , 0.25     , 0.25      ]
+        // [ [ 1, 16 ], [ 1, 16 ], [ 1, 16 ], [ 1, 16 ], [ 1, 16 ], [ 1, 16 ], [ 1, 16 ], [ 1, 16 ], [ 1, 16 ], [ 1, 16 ], [ 1, 16 ], [ 1, 16 ], [ 1, 16 ], [ 1, 16 ], [ 1, 16 ], [ 1, 16 ], [ 1, 16 ], [ 1, 16 ] ]
+    
+    a.add(~vikkuSankirna)
+    a.add(KonaWord.new(1,4,18,a))
+    
+    
+    ~myVikkuSankirna = a.gen.vSarvaPhraseAuto;
+    
+    /*vSarvaPhraseLength*gati: oneBeat: 0.75
+    maxBeats: 5.0
+    phraseLength: 4.5
+    18.0
+    oneBeat: 0.75
+    maxBeats: 5.0
+    phraseLength: 4.5
+    partsArray: [ 2, 3, 4 ]
+    Conversion to KonaWords:
+    [ Ta      , Ta      , Ka      , Ta      , Ta      , Ka      , Ta      , Ka      , Ta       ]
+    [ 0.5     , 0.5     , 0.5     , 0.5     , 0.5     , 0.5     , 0.5     , 0.5     , 0.5      ]
+    
+    combineSimilar:
+    [ Ta      , Ta      , Ka      , Ta      , Ta      , Ka      , Di      , Mi      , Ta       ]
+    [ 0.5     , 0.5     , 0.5     , 0.5     , 0.5     , 0.5     , 0.5     , 0.5     , 0.5      ]
+    
+    randomMuteJati:
+    [ Ta      , Ta      , Ka      , Ta      , Ta      , Ka      , Di      , Mi      , Ta       ]
+    [ 0.5     , 0.5     , 0.5     , 0.5     , 0.5     , 0.5     , 0.5     , 0.5     , 0.5      ]*/
+    
+    ~myVikkuSankirna.postWord
+    2.do { |i|
+        a.add(~myVikkuSankirna);
+        a.add(~myVikkuSankirna);
+        a.add(KonaWord.new(1,4,18,a))
+    };
+    
+    a.play
+    a.stop
+
+</code></pre>
+
+</p>
+
+
+<p>
+    //Vikku Adi Tala Tisra Gati 8/4 in terzine
+  
+
+<br><audio controls>
+    <source src="audio/render_code_audio/turing5.mp3" type="audio/mp3">
+</audio>
+
+<pre><code lang="supercollider">
+    //Vikku Adi Tala Tisra Gati
+    a = KonaTani.new(120, #["I4","O","O"], 3, argSynth:\MIDITranscribe);
+                    // init MIDI and set the midi out device
+    MIDIClient.init;
+    a.midiOut = MIDIOut.newByName("loopMIDI Port", "loopMIDI Port");
+    
+    ~vikkuTisra = KonaTime.new(a);
+    
+    ~vikkuTisra.add(KonaWord.new(1,3,2, a));		//	Tam
+    ~vikkuTisra.add(KonaWord.new(6,3,1, a));		//	Ta	ka	ki	tah	ta	ka
+    ~vikkuTisra.add(KonaWord.new(2,3,1, a));		//	Din	ta
+    ~vikkuTisra.add(KonaWord.new(2,3,1, a));		//	Din	ta
+    
+    ~vikkuTisra.postWord
+    
+    /*[ Ta      , Ta       , Ki       , Tah      , Ta       , Ki       , Tah      , Ta       , Ka       , Ta       , Ka        ]
+    [ 0.666   , 0.333    , 0.333    , 0.333    , 0.333    , 0.333    , 0.333    , 0.333    , 0.333    , 0.333    , 0.333     ]
+    [ [ 1, 6 ], [ 1, 12 ], [ 1, 12 ], [ 1, 12 ], [ 1, 12 ], [ 1, 12 ], [ 1, 12 ], [ 1, 12 ], [ 1, 12 ], [ 1, 12 ], [ 1, 12 ] ]*/
+    
+    
+    2.do { |i|
+        a.add(~vikkuTisra)
+        a.add(KonaWord.new(1,3,24,a))
+    };
+    
+    ~myVikkuTisra = a.gen.vSarvaPhraseAuto;
+    
+    2.do { |i|
+        a.add(~myVikkuTisra);
+        a.add(~myVikkuTisra);
+        a.add(KonaWord.new(1,3,24,a))
+    };
+    
+    /*vSarvaPhraseLength*gati: oneBeat: 0.5
+    maxBeats: 5.0
+    phraseLength: 4.0
+    12.0
+    oneBeat: 0.5
+    maxBeats: 5.0
+    phraseLength: 4.0
+    partsArray: [ 2, 3 ]
+    Conversion to KonaWords:
+    [ Ta      , Ta      , Ta      , Ta       ]
+    [ 1.0     , 1.0     , 1.0     , 1.0      ]
+    
+    combineSimilar:
+    [ Ta      , Ta      , Ka      , Ta       ]
+    [ 1.0     , 1.0     , 1.0     , 1.0      ]
+    
+    randomMuteJati:
+    
+    [ -       , Ta      , Ka      , Ta       ]
+    [ 1.0     , 1.0     , 1.0     , 1.0      ]
+    
+    -> KonaTime[ KonaTime[ a KonaWord ], a KonaWord, a KonaWord ]*/
+    
+    a.play
+    a.stop
+
+</code></pre>
+
+</p>
+
+
+<p>
+
+    <br><audio controls>
+        <source src="audio/render_code_audio/turing6.mp3" type="audio/mp3">
+    </audio>
+    
+    <pre><code lang="supercollider">
+        //Vikku Rupaka Tala
+        //Also good for phrase variations.
+        a = KonaTani.new(90, #["U","O"], 4, argSynth:\MIDITranscribe);
+                        // init MIDI and set the midi out device
+        MIDIClient.init;
+        a.midiOut = MIDIOut.newByName("loopMIDI Port", "loopMIDI Port");
+        
+        
+        ~vikkuRupaka = KonaTime.new(a);
+        
+        2.do { |i|
+            2.do { |j|
+                ~vikkuRupaka.add(KonaWord.new(1,4,4,a));		//	Ta
+                ~vikkuRupaka.add(KonaWord.new(2,4,1,a));		//	Ta	ka
+                ~vikkuRupaka.add(KonaWord.new(1,4,2,a));		//	Ta
+                ~vikkuRupaka.add(KonaWord.new(2,4,2,a));		//	Ta	ka
+            };
+        ~vikkuRupaka.add(KonaWord.new(1,4,12,a));
+        
+        };
+            ~vikkuRupaka.postWord
+        /*[ Ta      , Ta       , Ka       , Ta      , Ta      , Ka      , Ta      , Ta       , Ka       , Ta      , Ta      , Ka      , Ta      , Ta      , Ta       , Ka       , Ta      , Ta      , Ka      , Ta      , Ta       , Ka       , Ta      , Ta      , Ka      , Ta       ]
+        [ 1.0     , 0.25     , 0.25     , 0.5     , 0.5     , 0.5     , 1.0     , 0.25     , 0.25     , 0.5     , 0.5     , 0.5     , 3.0     , 1.0     , 0.25     , 0.25     , 0.5     , 0.5     , 0.5     , 1.0     , 0.25     , 0.25     , 0.5     , 0.5     , 0.5     , 3.0      ]
+        [ [ 1, 4 ], [ 1, 16 ], [ 1, 16 ], [ 1, 8 ], [ 1, 8 ], [ 1, 8 ], [ 1, 4 ], [ 1, 16 ], [ 1, 16 ], [ 1, 8 ], [ 1, 8 ], [ 1, 8 ], [ 3, 4 ], [ 1, 4 ], [ 1, 16 ], [ 1, 16 ], [ 1, 8 ], [ 1, 8 ], [ 1, 8 ], [ 1, 4 ], [ 1, 16 ], [ 1, 16 ], [ 1, 8 ], [ 1, 8 ], [ 1, 8 ], [ 3, 4 ] ]*/
+        
+        a.add(~vikkuRupaka)
+        
+        ~myVikkuRupaka = a.gen.vSarvaPhraseAuto
+        
+        /*vSarvaPhraseLength*gati: oneBeat: 0.66666666666667
+        maxBeats: 5.0
+        phraseLength: 3.0
+        12.0
+        oneBeat: 0.66666666666667
+        maxBeats: 5.0
+        phraseLength: 3.0
+        partsArray: [ 2, 3, 4 ]
+        Conversion to KonaWords:
+        [ Ta      , Ka      , Ta      , Ta      , Ta      , Ta       ]
+        [ 0.5     , 0.5     , 0.5     , 0.5     , 0.5     , 0.5      ]
+        
+        combineSimilar:
+        [ Ta      , Ka      , Ta      , Ka      , Ta      , Ka       ]
+        [ 0.5     , 0.5     , 0.5     , 0.5     , 0.5     , 0.5      ]
+        
+        randomMuteJati:
+        [ Ta      , Ka      , Ta      , Ka      , Ta      , Ka       ]
+        [ 0.5     , 0.5     , 0.5     , 0.5     , 0.5     , 0.5      ]
+        
+        -> KonaTime[ a KonaWord, a KonaWord, a KonaWord ]*/
+        
+        
+        ~myVikkuRupaka.postWord
+        /*
+        [ Ta      , Ka      , Ta      , Ka      , Ta      , Ka       ]
+        [ 0.5     , 0.5     , 0.5     , 0.5     , 0.5     , 0.5      ]
+        [ [ 1, 8 ], [ 1, 8 ], [ 1, 8 ], [ 1, 8 ], [ 1, 8 ], [ 1, 8 ] ]
+        */
+            2.do { |i|
+            a.add(~myVikkuRupaka);
+            a.add(~myVikkuRupaka);
+            a.add(KonaWord.new(1,4,12,a));
+        };
+        a.play
+        a.stop
+        
+    </code></pre>
+    
+    </p>
+
+
+<p> //Vikku Adi Tala misra gati 8/4 in settimine 
+
+<br><audio controls>
+    <source src="audio/render_code_audio/turing7.mp3" type="audio/mp3">
+</audio>
+
+<pre><code lang="supercollider">
+    //Vikku Adi Tala misra gati
+
+    a = KonaTani.new(80, #["I4","O","O"], 7, argSynth:\MIDITranscribe);
+                    // init MIDI and set the midi out device
+    MIDIClient.init;
+    a.midiOut = MIDIOut.newByName("loopMIDI Port", "loopMIDI Port");
+    
+    ~vikkuMisraTala = KonaTime.new(a);
+    
+    (
+        ~vikkuMisraTala.add(KonaWord.new(2,7,2,a));		//	Ta	din
+        ~vikkuMisraTala.add(KonaWord.new(1,7,2,a));		//	Ta
+        ~vikkuMisraTala.add(KonaWord.new(1,7,1,a));		//	Gu
+    
+        ~vikkuMisraTala.add(KonaWord.new(2,7,2,a));		//	Ta	din
+        ~vikkuMisraTala.add(KonaWord.new(1,7,3,a));		//	Ta
+    
+        ~vikkuMisraTala.add(KonaWord.new(0,7,4,a));		//	-	-	-	-
+        ~vikkuMisraTala.add(KonaWord.new(1,7,2,a));		//	Ta
+        ~vikkuMisraTala.add(KonaWord.new(1,7,1,a));		//	Gu
+    
+        ~vikkuMisraTala.add(KonaWord.new(2,7,2,a));		//	Ta	din
+        ~vikkuMisraTala.add(KonaWord.new(1,7,2,a));		//	Ta
+        ~vikkuMisraTala.add(KonaWord.new(1,7,1,a));		//	Gu
+    
+        ~vikkuMisraTala.add(KonaWord.new(2,7,2,a));		//	Ta	din
+        ~vikkuMisraTala.add(KonaWord.new(1,7,2,a));		//	Ta
+        ~vikkuMisraTala.add(KonaWord.new(1,7,1,a));		//	Gu
+    
+        ~vikkuMisraTala.add(KonaWord.new(2,7,2,a));		//	Ta	din
+        ~vikkuMisraTala.add(KonaWord.new(1,7,3,a));		//	Ta
+    
+        ~vikkuMisraTala.add(KonaWord.new(0,7,4,a));		//	-	-	-	-
+        ~vikkuMisraTala.add(KonaWord.new(1,7,2,a));		//	Ta
+        ~vikkuMisraTala.add(KonaWord.new(1,7,1,a));		//	Gu
+    
+        ~vikkuMisraTala.add(KonaWord.new(2,7,2,a));		//	Ta	din
+        ~vikkuMisraTala.add(KonaWord.new(1,7,3,a));		//	Ta
+    
+        ~vikkuMisraTala.add(KonaWord.new(1,7,56,a));
+        )
+    
+    
+    ~vikkuMisraTala.postWord
+    /*[ Ta       , Ka       , Ta       , Ta       , Ta       , Ka       , Ta       , -       , Ta       , Ta       , Ta       , Ka       , Ta       , Ta       , Ta       , Ka       , Ta       , Ta       , Ta       , Ka       , Ta       , -       , Ta       , Ta       , Ta       , Ka       , Ta       , Ta       ]
+    [ 0.285    , 0.285    , 0.285    , 0.142    , 0.285    , 0.285    , 0.428    , 0.571   , 0.285    , 0.142    , 0.285    , 0.285    , 0.285    , 0.142    , 0.285    , 0.285    , 0.285    , 0.142    , 0.285    , 0.285    , 0.428    , 0.571   , 0.285    , 0.142    , 0.285    , 0.285    , 0.428    , 8.0      ]
+    [ [ 1, 14 ], [ 1, 14 ], [ 1, 14 ], [ 1, 28 ], [ 1, 14 ], [ 1, 14 ], [ 3, 28 ], [ 1, 7 ], [ 1, 14 ], [ 1, 28 ], [ 1, 14 ], [ 1, 14 ], [ 1, 14 ], [ 1, 28 ], [ 1, 14 ], [ 1, 14 ], [ 1, 14 ], [ 1, 28 ], [ 1, 14 ], [ 1, 14 ], [ 3, 28 ], [ 1, 7 ], [ 1, 14 ], [ 1, 28 ], [ 1, 14 ], [ 1, 14 ], [ 3, 28 ], [ 2, 1 ] ]
+        */
+    a.add(~vikkuMisraTala)
+    
+    ~myVikkuMisraTala = a.gen.vSarvaPhraseAuto
+    
+    /*vSarvaPhraseLength*gati: oneBeat: 0.75
+    maxBeats: 5.0
+    phraseLength: 4.0
+    28.0
+    oneBeat: 0.75
+    maxBeats: 5.0
+    phraseLength: 4.0
+    partsArray: [ 2, 3, 4, 5, 6, 7 ]
+    Conversion to KonaWords:
+    [ Ta       , Ka       , Ta       , Ta       , Ta       , Ta       , Ka       , Ta       , Ka       , Ta      , Ta       ]
+    [ 0.285    , 0.285    , 0.428    , 0.285    , 0.428    , 0.285    , 0.285    , 0.285    , 0.285    , 0.571   , 0.571    ]
+    
+    combineSimilar:
+    [ Ta       , Ka       , Ta       , Ta       , Ta       , Ta       , Ka       , Di       , Mi       , Ta      , Ta       ]
+    [ 0.285    , 0.285    , 0.428    , 0.285    , 0.428    , 0.285    , 0.285    , 0.285    , 0.285    , 0.571   , 0.571    ]
+    
+    randomMuteJati:
+    
+    [ Ta       , Ka       , Ta       , Ta       , Ta       , Ta       , Ka       , Di       , Mi       , Ta      , -        ]
+    [ 0.285    , 0.285    , 0.428    , 0.285    , 0.428    , 0.285    , 0.285    , 0.285    , 0.285    , 0.571   , 0.571    ]
+    
+    -> KonaTime[ a KonaWord, a KonaWord, a KonaWord, a KonaWord, a KonaWord, a KonaWord, KonaTime[ a KonaWord ] ]*/
+    
+    ~myVikkuMisraTala.postWord
+    /*[ Ta       , Ka       , Ta       , Ta       , Ta       , Ta       , Ka       , Di       , Mi       , Ta      , -        ]
+    [ 0.285    , 0.285    , 0.428    , 0.285    , 0.428    , 0.285    , 0.285    , 0.285    , 0.285    , 0.571   , 0.571    ]
+    [ [ 1, 14 ], [ 1, 14 ], [ 3, 28 ], [ 1, 14 ], [ 3, 28 ], [ 1, 14 ], [ 1, 14 ], [ 1, 14 ], [ 1, 14 ], [ 1, 7 ], [ 1, 7 ] ]*/
+    
+    2.do { |i|
+        a.add(~myVikkuMisraTala);
+        a.add(~myVikkuMisraTala);
+        a.add(KonaWord.new(1,7,56,a))
+    };
+    a.play
+    a.stop
+    
+</code></pre>
+
+</p>
+
+
+<p>
+	
+    //Vikku Khanda Chappu
+    <br><audio controls>
+        <source src="audio/render_code_audio/turing8.mp3" type="audio/mp3">
+    </audio>
+    
+    <pre><code lang="supercollider">
+        //Vikku Khanda Chappu
+        a = KonaTani.new(84, #["U1", "R", "W", "W", "R"], 4, argSynth:\MIDITranscribe);
+                        // init MIDI and set the midi out device
+        MIDIClient.init;
+        a.midiOut = MIDIOut.newByName("loopMIDI Port", "loopMIDI Port");
+        
+        
+        ~vikkuKhanda = KonaTime.new(a);
+        
+        2.do { |i|
+            2.do { |j|
+                ~vikkuKhanda.add(KonaWord.new(2,4,1,a));		//	Ta	ka
+                ~vikkuKhanda.add(KonaWord.new(1,4,2,a));		//	Dim
+                ~vikkuKhanda.add(KonaWord.new(2,4,1,a));		//	Ta	ka
+                ~vikkuKhanda.add(KonaWord.new(2,4,2,a));		//	Dim na
+        
+            };
+            ~vikkuKhanda.add(KonaWord.new(1,4,20,a))
+        };
+        
+        a.add(~vikkuKhanda)
+            ~vikkuKhanda.postWord;
+        
+        /*[ Ta       , Ka       , Ta      , Ta       , Ka       , Ta      , Ka      , Ta       , Ka       , Ta      , Ta       , Ka       , Ta      , Ka      , Ta      , Ta       , Ka       , Ta      , Ta       , Ka       , Ta      , Ka      , Ta       , Ka       , Ta      , Ta       , Ka       , Ta      , Ka      , Ta       ]
+        [ 0.25     , 0.25     , 0.5     , 0.25     , 0.25     , 0.5     , 0.5     , 0.25     , 0.25     , 0.5     , 0.25     , 0.25     , 0.5     , 0.5     , 5.0     , 0.25     , 0.25     , 0.5     , 0.25     , 0.25     , 0.5     , 0.5     , 0.25     , 0.25     , 0.5     , 0.25     , 0.25     , 0.5     , 0.5     , 5.0      ]
+        [ [ 1, 16 ], [ 1, 16 ], [ 1, 8 ], [ 1, 16 ], [ 1, 16 ], [ 1, 8 ], [ 1, 8 ], [ 1, 16 ], [ 1, 16 ], [ 1, 8 ], [ 1, 16 ], [ 1, 16 ], [ 1, 8 ], [ 1, 8 ], [ 5, 4 ], [ 1, 16 ], [ 1, 16 ], [ 1, 8 ], [ 1, 16 ], [ 1, 16 ], [ 1, 8 ], [ 1, 8 ], [ 1, 16 ], [ 1, 16 ], [ 1, 8 ], [ 1, 16 ], [ 1, 16 ], [ 1, 8 ], [ 1, 8 ], [ 5, 4 ] ]*/
+        
+        
+        ~myVikkuKhanda = a.gen.vSarvaPhraseAuto
+        /*vSarvaPhraseLength*gati: oneBeat: 0.71428571428571
+        maxBeats: 5.0
+        phraseLength: 5.0
+        20.0
+        oneBeat: 0.71428571428571
+        maxBeats: 5.0
+        phraseLength: 5.0
+        partsArray: [ 2, 3, 4 ]
+        Conversion to KonaWords:
+        [ Ta      , Ka      , Ta      , Ta      , Ta      , Ka      , Ta      , Ka       ]
+        [ 0.5     , 0.5     , 1.0     , 1.0     , 0.5     , 0.5     , 0.5     , 0.5      ]
+        
+        combineSimilar:
+        [ Ta      , Ka      , Ta      , Ka      , Ta      , Ka      , Di      , Mi       ]
+        [ 0.5     , 0.5     , 1.0     , 1.0     , 0.5     , 0.5     , 0.5     , 0.5      ]
+        
+        randomMuteJati:
+        [ Ta      , Ka      , Ta      , Ka      , Ta      , Ka      , Di      , Mi       ]
+        [ 0.5     , 0.5     , 1.0     , 1.0     , 0.5     , 0.5     , 0.5     , 0.5      ]
+        
+        -> KonaTime[ a KonaWord, a KonaWord, a KonaWord ]*/
+        
+            ~myVikkuKhanda.postWord
+        /*[ Ta      , Ka      , Ta      , Ka      , Ta      , Ka      , Di      , Mi       ]
+        [ 0.5     , 0.5     , 1.0     , 1.0     , 0.5     , 0.5     , 0.5     , 0.5      ]
+        [ [ 1, 8 ], [ 1, 8 ], [ 1, 4 ], [ 1, 4 ], [ 1, 8 ], [ 1, 8 ], [ 1, 8 ], [ 1, 8 ] ]*/
+        
+        
+        2.do { |i|
+            a.add(~myVikkuKhanda);
+            a.add(~myVikkuKhanda);
+            a.add(KonaWord.new(1,4,20,a));
+        };
+        a.play
+        a.stop
+        
+    </code></pre>
+    
+    </p>
+
+  
+
+
+    <p>
+        //Vikku Adi Tala Khanda Gati 8/4 in quintine 
+
+        <br><audio controls>
+            <source src="audio/render_code_audio/turing9.mp3" type="audio/mp3">
+        </audio>
+        
+        <pre><code lang="supercollider">
+            //Vikku Adi Tala Khanda Gati
+
+            a = KonaTani.new(70, #["I4","O","O"], 5, argSynth:\MIDITranscribe);
+                                // init MIDI and set the midi out device
+            MIDIClient.init;
+            a.midiOut = MIDIOut.newByName("loopMIDI Port", "loopMIDI Port");
+            
+            
+            ~vikkuKhandaGati = KonaTime.new(a);
+            
+            2.do { |i|
+                ~vikkuKhandaGati.add(KonaWord.new(0,5,2,a));	//	-	-
+                ~vikkuKhandaGati.add(KonaWord.new(1,5,1,a));	//	Ta
+                ~vikkuKhandaGati.add(KonaWord.new(1,5,2,a));	//	Ta -
+            
+                ~vikkuKhandaGati.add(KonaWord.new(0,5,2,a));	//	-	-
+                ~vikkuKhandaGati.add(KonaWord.new(1,5,1,a));	//	Ta
+                ~vikkuKhandaGati.add(KonaWord.new(1,5,2,a));	//	Ta -
+            
+                ~vikkuKhandaGati.add(KonaWord.new(0,5,2,a));	//	-	-
+                ~vikkuKhandaGati.add(KonaWord.new(1,5,1,a));	//	Ta
+                ~vikkuKhandaGati.add(KonaWord.new(1,5,2,a));	//	Ta -
+            
+                ~vikkuKhandaGati.add(KonaWord.new(0,5,2,a));	//	-	-
+                ~vikkuKhandaGati.add(KonaWord.new(1,5,1,a));	//	Ta
+                ~vikkuKhandaGati.add(KonaWord.new(1,5,2,a));	//	Ta -
+            
+                ~vikkuKhandaGati.add(KonaWord.new(1,5,2,a));	//	Ta	-
+                ~vikkuKhandaGati.add(KonaWord.new(1,5,1,a));	//	Ta
+                ~vikkuKhandaGati.add(KonaWord.new(1,5,2,a));	//	Ta -
+            
+                ~vikkuKhandaGati.add(KonaWord.new(0,5,2,a));	//	-	-
+                ~vikkuKhandaGati.add(KonaWord.new(1,5,1,a));	//	Ta
+                ~vikkuKhandaGati.add(KonaWord.new(1,5,2,a));	//	Ta -
+            
+                ~vikkuKhandaGati.add(KonaWord.new(0,5,2,a));	//	-	-
+                ~vikkuKhandaGati.add(KonaWord.new(1,5,1,a));	//	Ta
+                ~vikkuKhandaGati.add(KonaWord.new(1,5,2,a));	//	Ta -
+            
+                ~vikkuKhandaGati.add(KonaWord.new(0,5,2,a));	//	-	-
+                ~vikkuKhandaGati.add(KonaWord.new(1,5,1,a));	//	Ta
+                ~vikkuKhandaGati.add(KonaWord.new(1,5,2,a));	//	Ta -
+            
+                ~vikkuKhandaGati.add(KonaWord.new(1,5,8*5,a));
+            };
+            
+            a.add(~vikkuKhandaGati);
+            
+            ~vikkuKhandaGati.postWord
+            
+                // [ -        , Ta       , Ta       , -        , Ta       , Ta       , -        , Ta       , Ta       , -        , Ta       , Ta       , Ta       , Ta       , Ta       , -        , Ta       , Ta       , -        , Ta       , Ta       , -        , Ta       , Ta       , Ta      , -        , Ta       , Ta       , -        , Ta       , Ta       , -        , Ta       , Ta       , -        , Ta       , Ta       , Ta       , Ta       , Ta       , -        , Ta       , Ta       , -        , Ta       , Ta       , -    ...etc...
+                // 	[ 0.4      , 0.2      , 0.4      , 0.4      , 0.2      , 0.4      , 0.4      , 0.2      , 0.4      , 0.4      , 0.2      , 0.4      , 0.4      , 0.2      , 0.4      , 0.4      , 0.2      , 0.4      , 0.4      , 0.2      , 0.4      , 0.4      , 0.2      , 0.4      , 8.0     , 0.4      , 0.2      , 0.4      , 0.4      , 0.2      , 0.4      , 0.4      , 0.2      , 0.4      , 0.4      , 0.2      , 0.4      , 0.4      , 0.2      , 0.4      , 0.4      , 0.2      , 0.4      , 0.4      , 0.2      , 0.4      , 0.4  ...etc...
+                // 		[ [ 1, 10 ], [ 1, 20 ], [ 1, 10 ], [ 1, 10 ], [ 1, 20 ], [ 1, 10 ], [ 1, 10 ], [ 1, 20 ], [ 1, 10 ], [ 1, 10 ], [ 1, 20 ], [ 1, 10 ], [ 1, 10 ], [ 1, 20 ], [ 1, 10 ], [ 1, 10 ], [ 1, 20 ], [ 1, 10 ], [ 1, 10 ], [ 1, 20 ], [ 1, 10 ], [ 1, 10 ], [ 1, 20 ], [ 1, 10 ], [ 2, 1 ], [ 1, 10 ], [ 1, 20 ], [ 1, 10 ], [ 1, 10 ], [ 1, 20 ], [ 1, 10 ], [ 1, 10 ], [ 1, 20 ], [ 1, 10 ], [ 1, 10 ], [ 1, 20 ], [ 1, 10 ], [ 1, 10 ], [ 1, 20 ], [ 1, 10 ], [ 1, 10 ], [ 1, 20 ], [ 1, 10 ], [ 1, 10 ], [ 1, 20 ], [ 1, 10 ], [ 1, ...etc...
+            
+            
+            ~myVikkuKhandaGati = a.gen.vSarvaPhraseAuto
+            /*vSarvaPhraseLength*gati: oneBeat: 0.85714285714286
+            maxBeats: 5.0
+            phraseLength: 4.0
+            20.0
+            oneBeat: 0.85714285714286
+            maxBeats: 5.0
+            phraseLength: 4.0
+            partsArray: [ 2, 3, 4, 5 ]
+            Conversion to KonaWords:
+            [ Ta       , Ta       , Ta       , Ta       , Ta       , Ta       , Ta        ]
+            [ 0.6      , 0.6      , 0.6      , 0.6      , 0.4      , 0.6      , 0.6       ]
+            
+            combineSimilar:
+            [ Ta       , Ta       , Ka       , Ta       , Ta       , Ta       , Ka        ]
+            [ 0.6      , 0.6      , 0.6      , 0.6      , 0.4      , 0.6      , 0.6       ]
+            
+            randomMuteJati:
+            
+            
+            [ Ta       , Ta       , Ka       , Ta       , Ta       , -        , -         ]
+            [ 0.6      , 0.6      , 0.6      , 0.6      , 0.4      , 0.6      , 0.6       ]
+            
+            -> KonaTime[ a KonaWord, a KonaWord, a KonaWord, a KonaWord, KonaTime[ a KonaWord, KonaTime[ a KonaWord ] ] ]*/
+            
+            ~myVikkuKhandaGati.postWord
+            
+            /*[ Ta       , Ta       , Ka       , Ta       , Ta       , -        , -         ]
+            [ 0.6      , 0.6      , 0.6      , 0.6      , 0.4      , 0.6      , 0.6       ]
+            [ [ 3, 20 ], [ 3, 20 ], [ 3, 20 ], [ 3, 20 ], [ 1, 10 ], [ 3, 20 ], [ 3, 20 ] ]*/
+            
+            2.do { |i|
+                a.add(~myVikkuKhandaGati);
+                a.add(~myVikkuKhandaGati);
+                a.add(KonaWord.new(1,5,8*5,a))
+            };
+            a.play
+            a.stop
+            
+            
+            
+        </code></pre>
+        </p>
+        
+<p>
+    //Vikku Adi Tala Khanda Gati N°2
+
+    <br><audio controls>
+        <source src="audio/render_code_audio/turing10.mp3" type="audio/mp3">
+    </audio>
+    
+    <pre><code lang="supercollider">
+        a = KonaTani.new(70, #["I4","O","O"], 5, argSynth:\MIDITranscribe);
+        // init MIDI and set the midi out device
+MIDIClient.init;
+a.midiOut = MIDIOut.newByName("loopMIDI Port", "loopMIDI Port");
+
+~vikkuKhandaGati2 = KonaTime.new(a);
+(
+~vikkuKhandaGati2.add(KonaWord.new(1,5,2,a));	//	Ta	-
+~vikkuKhandaGati2.add(KonaWord.new(1,5,1,a));	//	Ta
+~vikkuKhandaGati2.add(KonaWord.new(1,5,2,a));	//	Ta -
+
+~vikkuKhandaGati2.add(KonaWord.new(1,5,2,a));	//	Ta	-
+~vikkuKhandaGati2.add(KonaWord.new(1,5,1,a));	//	Ta
+~vikkuKhandaGati2.add(KonaWord.new(1,5,2,a));	//	Ta -
+
+~vikkuKhandaGati2.add(KonaWord.new(1,5,2,a));	//	Ta	-
+~vikkuKhandaGati2.add(KonaWord.new(1,5,1,a));	//	Ta
+~vikkuKhandaGati2.add(KonaWord.new(1,5,2,a));	//	Ta -
+
+~vikkuKhandaGati2.add(KonaWord.new(1,5,2,a));	//	Ta	-
+~vikkuKhandaGati2.add(KonaWord.new(1,5,1,a));	//	Ta
+~vikkuKhandaGati2.add(KonaWord.new(1,5,2,a));	//	Ta -
+
+~vikkuKhandaGati2.add(KonaWord.new(1,5,2,a));	//	Ta	-
+~vikkuKhandaGati2.add(KonaWord.new(1,5,1,a));	//	Ta
+~vikkuKhandaGati2.add(KonaWord.new(1,5,2,a));	//	Ta -
+
+~vikkuKhandaGati2.add(KonaWord.new(1,5,2,a));	//	Ta	-
+~vikkuKhandaGati2.add(KonaWord.new(1,5,1,a));	//	Ta
+~vikkuKhandaGati2.add(KonaWord.new(1,5,2,a));	//	Ta -
+
+~vikkuKhandaGati2.add(KonaWord.new(1,5,2,a));	//	Ta	-
+~vikkuKhandaGati2.add(KonaWord.new(3,5,1,a));	//	Ta
+~vikkuKhandaGati2.add(KonaWord.new(5,5,1,a));	//	Ta -
+)
+
+~vikkuKhandaGati2.postWord
+/*	[ Ta       , Ta       , Ta       , Ta       , Ta       , Ta       , Ta       , Ta       , Ta       , Ta       , Ta       , Ta       , Ta       , Ta       , Ta       , Ta       , Ta       , Ta       , Ta       , Ta       , Ki       , Tah      , Da       , Di       , Gi       , Na       , Dom       ]
+[ 0.4      , 0.2      , 0.4      , 0.4      , 0.2      , 0.4      , 0.4      , 0.2      , 0.4      , 0.4      , 0.2      , 0.4      , 0.4      , 0.2      , 0.4      , 0.4      , 0.2      , 0.4      , 0.4      , 0.2      , 0.2      , 0.2      , 0.2      , 0.2      , 0.2      , 0.2      , 0.2       ]
+[ [ 1, 10 ], [ 1, 20 ], [ 1, 10 ], [ 1, 10 ], [ 1, 20 ], [ 1, 10 ], [ 1, 10 ], [ 1, 20 ], [ 1, 10 ], [ 1, 10 ], [ 1, 20 ], [ 1, 10 ], [ 1, 10 ], [ 1, 20 ], [ 1, 10 ], [ 1, 10 ], [ 1, 20 ], [ 1, 10 ], [ 1, 10 ], [ 1, 20 ], [ 1, 20 ], [ 1, 20 ], [ 1, 20 ], [ 1, 20 ], [ 1, 20 ], [ 1, 20 ], [ 1, 20 ] ]*/
+
+
+
+a.add(~vikkuKhandaGati2)
+
+~vikkuKhandaGati2 = a.gen.vSarvaPhraseAuto
+
+/*vSarvaPhraseLength*gati: oneBeat: 0.85714285714286
+maxBeats: 5.0
+phraseLength: 4.0
+20.0
+oneBeat: 0.85714285714286
+maxBeats: 5.0
+phraseLength: 4.0
+partsArray: [ 2, 3, 4, 5 ]
+Conversion to KonaWords:
+[ Ta       , Ta       , Ta       , Ka       , Ta       , Ta       , Ta       , Ta       , Ka       , Ta        ]
+[ 0.4      , 0.4      , 0.4      , 0.4      , 0.4      , 0.4      , 0.4      , 0.4      , 0.4      , 0.4       ]
+
+combineSimilar:
+[ Ta       , Ta       , Ta       , Ka       , Ta       , Ka       , Ta       , Ta       , Ka       , Ta        ]
+[ 0.4      , 0.4      , 0.4      , 0.4      , 0.4      , 0.4      , 0.4      , 0.4      , 0.4      , 0.4       ]
+
+randomMuteJati:
+
+[ Ta       , Ta       , Ta       , Ka       , Ta       , Ka       , -        , Ta       , Ka       , Ta        ]
+[ 0.4      , 0.4      , 0.4      , 0.4      , 0.4      , 0.4      , 0.4      , 0.4      , 0.4      , 0.4       ]
+
+-> KonaTime[ a KonaWord, a KonaWord, a KonaWord, a KonaWord, KonaTime[ a KonaWord ], a KonaWord, a KonaWord ]*/
+
+
+2.do { |i|
+a.add(~vikkuKhandaGati2);
+a.add(~vikkuKhandaGati2);
+a.add(KonaWord.new(1,5,8*5,a))
+};
+a.play
+a.stop
+
+
+    </code></pre>
+</p>
+    
+
+    <h1>Phrase development</h1>
+    
+    <p> 
+        //Vikku Khanda Chappu
+        //Also phrase dev;
+        Oltre all'utilizzo del generatore, qui viene utilizzato anche il metodo Phrase development.
+        <br> clear ci serve a pulire il konatani ed a mettere la frase base che verrà variata, infatti troviamo 4 volte l'alternanaza frase/variazione <br>
+
+
+    <br><audio controls>
+        <source src="audio/render_code_audio/turing11.mp3" type="audio/mp3">
+    </audio>
+    
+    <pre><code lang="supercollider">
+    //Vikku Khanda Chappu
+//Also phrase dev;
+a = KonaTani.new(84, #["U1", "R", "W", "W", "R"], 4, argSynth:\MIDITranscribe);
+// init MIDI and set the midi out device
+MIDIClient.init;
+a.midiOut = MIDIOut.newByName("loopMIDI Port", "loopMIDI Port");
+
+~vikkuMisraTala = KonaTime.new(a);
+
+
+~clear = {
+a.clear;
+~vikkuMisraTala = KonaTime.new(a);
+~vikkuMisraTala.add(KonaWord.new(0,4,10,a));
+2.do { |i|
+	~vikkuMisraTala.add(KonaWord.new(2,4,1,a));		//	Ta	ka
+	~vikkuMisraTala.add(KonaWord.new(1,4,2,a));		//	Dim
+	~vikkuMisraTala.add(KonaWord.new(2,4,1,a));		//	Ta	ka
+	~vikkuMisraTala.add(KonaWord.new(2,4,2,a));		//	Dim na
+
+};
+~vikkuMisraTala.add(KonaWord.new(1,4,20,a));
+
+}
+~vikkuMisraTala.play
+
+</code></pre>
+
+<pre><code lang="supercollider">
+    ~original = KonaTime.new(a);
+	~original.add(KonaWord.new(2,4,1,a));		//	Ta	ka
+	~original.add(KonaWord.new(1,4,2,a));		//	Dim
+	~original.add(KonaWord.new(2,4,1,a));		//	Ta	ka
+	~original.add(KonaWord.new(2,4,2,a));		//	Dim na
+
+~original.postWord
+/*	[ Ta       , Ka       , Ta      , Ta       , Ka       , Ta      , Ka       ]
+[ 0.25     , 0.25     , 0.5     , 0.25     , 0.25     , 0.5     , 0.5      ]
+[ [ 1, 16 ], [ 1, 16 ], [ 1, 8 ], [ 1, 16 ], [ 1, 16 ], [ 1, 8 ], [ 1, 8 ] ]*/
+
+~myVikkuMisraTala1 = a.gen.mutatePhrase(~original)
+~myVikkuMisraTala1.postWord
+/*	[ Ta       , Ka       , Di       , Mi       , -       , Ta       , Ka       , Ta      , Ka       ]
+[ 0.125    , 0.125    , 0.125    , 0.125    , 0.5     , 0.25     , 0.25     , 0.5     , 0.5      ]
+[ [ 1, 32 ], [ 1, 32 ], [ 1, 32 ], [ 1, 32 ], [ 1, 8 ], [ 1, 16 ], [ 1, 16 ], [ 1, 8 ], [ 1, 8 ] ]*/
+
+
+~myVikkuMisraTala2 = a.gen.mutatePhrase(~original)
+~myVikkuMisraTala2.postWord
+/*[ Ta       , Ka       , Ta      , Ta       , Ka       , Ta      , Ka       ]
+[ 0.25     , 0.25     , 0.5     , 0.25     , 0.25     , 0.5     , 0.5      ]
+[ [ 1, 16 ], [ 1, 16 ], [ 1, 8 ], [ 1, 16 ], [ 1, 16 ], [ 1, 8 ], [ 1, 8 ] ]*/
+
+
+~myVikkuMisraTala3 = a.gen.mutatePhrase(~original)
+~myVikkuMisraTala3.postWord
+/*	[ Ta      , Ta      , Ta       , -        , Ta       ]
+[ 0.5     , 0.5     , 0.25     , 0.25     , 1.0      ]
+[ [ 1, 8 ], [ 1, 8 ], [ 1, 16 ], [ 1, 16 ], [ 1, 4 ] ]*/
+
+
+~myVikkuMisraTala4 = a.gen.mutatePhrase(~original)
+~myVikkuMisraTala4.postWord
+/*[ -        , Ta       , Ta      , Ta       , Ka       , Ta      , Ka       ]
+[ 0.25     , 0.25     , 0.5     , 0.25     , 0.25     , 0.5     , 0.5      ]
+[ [ 1, 16 ], [ 1, 16 ], [ 1, 8 ], [ 1, 16 ], [ 1, 16 ], [ 1, 8 ], [ 1, 8 ] ]*/
+
+~clear.()
+a.add(~vikkuMisraTala)
+a.add(~myVikkuMisraTala1)
+a.add(KonaWord.new(1,4,20,a));
+
+a.add(~vikkuMisraTala)
+a.add(~myVikkuMisraTala2)
+a.add(KonaWord.new(1,4,20,a));
+	
+	a.add(~vikkuMisraTala)
+a.add(~myVikkuMisraTala3)
+a.add(KonaWord.new(1,4,20,a));
+	
+	a.add(~vikkuMisraTala)
+a.add(~myVikkuMisraTala4)
+a.add(KonaWord.new(1,4,20,a));
+		
+a.play
+a.stop
+   
+</code></pre>
+
+Variazione del precedente, viene sostituita la frase vikkuMisraTala con questa nuova.
+<br><audio controls>
+    <source src="audio/render_code_audio/turing11.1.mp3" type="audio/mp3">
+</audio>
+
+
+<pre><code lang="supercollider">
+    //Phrase Dev;
+~vikkuMisraTala = KonaTime.new(a);
+
+~vikkuMisraTala.add(KonaWord.new(0,4,2,a));		//	-	-
+~vikkuMisraTala.add(KonaWord.new(4,4,1,a));		//	Ki	tah ta ka
+~vikkuMisraTala.add(KonaWord.new(2,4,2,a));		//	Din	na
+
+
+~vikkuMisraTala.add(KonaWord.new(1,4,1,a));		//	Ta
+~vikkuMisraTala.add(KonaWord.new(3,4,1,a));		//	Ta ki tah
+~vikkuMisraTala.add(KonaWord.new(2,4,1,a));		//	Ta	-	ka	-
+~vikkuMisraTala.add(KonaWord.new(2,4,2,a));		//	Din	na
+
+~vikkuMisraTala.add(KonaWord.new(4,4,1,a));		//	Ki	tah ta ka
+~vikkuMisraTala.add(KonaWord.new(4,4,1,a));		//	Ki	tah ta ka
+~vikkuMisraTala.add(KonaWord.new(2,4,1,a));		//	Ta	ka
+
+~vikkuMisraTala.add(KonaWord.new(0,4,2,a));		//	-	-
+~vikkuMisraTala.add(KonaWord.new(2,4,1,a));		//	Ta	ka
+~vikkuMisraTala.add(KonaWord.new(4,4,1,a));		//	Ki	tah ta ka
+~vikkuMisraTala.add(KonaWord.new(2,4,1,a));		//	Ta	ka
+
+
+a.add(~vikkuMisraTala)
+a.add(~myVikkuMisraTala1)
+a.add(KonaWord.new(1,4,20,a));
+
+a.add(~vikkuMisraTala)
+a.add(~myVikkuMisraTala2)
+a.add(KonaWord.new(1,4,20,a));
+
+	a.add(~vikkuMisraTala)
+a.add(~myVikkuMisraTala3)
+a.add(KonaWord.new(1,4,20,a));
+
+	a.add(~vikkuMisraTala)
+a.add(~myVikkuMisraTala4)
+a.add(KonaWord.new(1,4,20,a));
+
+a.play
+a.stop
+
+</code></pre>
+
+</p>
+
+
+<p>
+    Variazione del precedente, viene sostituita la frase vikkuMisraTala con questa nuova.
+<br><audio controls>
+    <source src="audio/render_code_audio/turing12.mp3" type="audio/mp3">
+</audio>
+
+
+<pre><code lang="supercollider">
+    //Vikku Rupaka Tala
+    //Also good for phrase variations.
+    a = KonaTani.new(90, #["U","O"], 4, argSynth:\MIDITranscribe);
+    // init MIDI and set the midi out device
+    MIDIClient.init;
+    a.midiOut = MIDIOut.newByName("loopMIDI Port", "loopMIDI Port");
+    
+    
+    
+    ~fix = {
+    a.clear;
+    ~vikkuRupaka = KonaTime.new(a);
+    2.do { |i|
+        ~vikkuRupaka.add(KonaWord.new(1,4,4,a));		//	Ta
+        ~vikkuRupaka.add(KonaWord.new(2,4,1,a));		//	Ta	ka
+        ~vikkuRupaka.add(KonaWord.new(1,4,2,a));		//	Ta
+        ~vikkuRupaka.add(KonaWord.new(2,4,2,a));		//	Ta	ka
+    
+    };
+    ~vikkuRupaka.add(KonaWord.new(1,4,24,a));
+    
+    }
+    
+    ~original = KonaTime.new(a)
+        ~original.add(KonaWord.new(1,4,4,a));		//	Ta
+        ~original.add(KonaWord.new(2,4,1,a));		//	Ta	ka
+        ~original.add(KonaWord.new(1,4,2,a));		//	Ta
+        ~original.add(KonaWord.new(2,4,2,a));		//	Ta	ka
+    
+    //Variations
+    ~vikkuRupaka.add(KonaWord.new(0,4,2,a));		//	-	-
+    ~vikkuRupaka.add(KonaWord.new(2,4,1,a));		//	Ta	ka
+    ~vikkuRupaka.add(KonaWord.new(2,4,1,a));		//	Ta	ka
+    ~vikkuRupaka.add(KonaWord.new(1,4,2,a));		//	Ta
+    ~vikkuRupaka.add(KonaWord.new(2,4,2,a));		//	Ta	ka
+    
+    
+    ~vikkuRupaka.add(KonaWord.new(4,4,1,a));		//	Ta	ka	di	mi
+    ~vikkuRupaka.add(KonaWord.new(2,4,1,a));		//	Ta	ka
+    ~vikkuRupaka.add(KonaWord.new(1,4,2,a));		//	Ta
+    ~vikkuRupaka.add(KonaWord.new(2,4,2,a));		//	Ta	ka
+    
+    
+    ~vikkuRupaka.add(KonaWord.new(0,4,2,a));		//	-	-
+    ~vikkuRupaka.add(KonaWord.new(4,4,1,a));		//	Ta	ka	di	mi
+    ~vikkuRupaka.add(KonaWord.new(1,4,2,a));		//	Ta
+    ~vikkuRupaka.add(KonaWord.new(2,4,2,a));		//	Ta	ka
+    
+    ~fix.()
+    ~myVikkuRupaka1 = a.gen.mutatePhrase(~original)
+    ~myVikkuRupaka2 = a.gen.mutatePhrase(~original)
+    ~myVikkuRupaka3 = a.gen.mutatePhrase(~original)
+    
+    ~vikkuRupaka.add(~myVikkuRupaka3)
+    
+    ~vikkuRupaka.add(KonaWord.new(1,4,4,a));
+    a.add(~vikkuRupaka)
+    
+    ~vikkuRupaka.add(~myVikkuRupaka2)
+    
+    ~vikkuRupaka.add(KonaWord.new(1,4,4,a));
+    a.add(~vikkuRupaka)
+    
+    
+        ~vikkuRupaka.add(~myVikkuRupaka1)
+    
+    ~vikkuRupaka.add(KonaWord.new(1,4,4,a));
+    a.add(~vikkuRupaka)
+    
+    a.play
+    a.stop
+    
+    
+
+</code></pre>
+
+</p>
+
+
+
+<p>
+    //Trichy Sankaran, Phrase development with suffix
+    <br><audio controls>
+    <source src="audio/render_code_audio/turing12.mp3" type="audio/mp3">
+</audio>
+<pre><code lang="supercollider">
+    //Trichy Sankaran, Phrase development with suffix
+    a = KonaTani.new(90, #["I4", "O", "O"], 4, argSynth:\MIDITranscribe);
+    MIDIClient.init;
+    a.midiOut = MIDIOut.newByName("loopMIDI Port", "loopMIDI Port");
+        
+    a.clear
+    ~trichyDev = KonaTime.new(a);
+    
+    //Original
+    ~trichyDev = KonaTime.new(a);
+    ~original = KonaTime.new(a);
+    4.do { |i|
+    ~trichyDev.add(KonaWord.new(2,4,2,a));			//	Na -	Din -
+                                                    //	Din	-	Na	-
+    ~original.add	(KonaWord.new(2,4,2,a))
+    };
+    ~trichyDev.add(KonaWord.new(1,4,16,a));
+    
+    //Development
+    ~trichyDev.add(KonaWord.new(1,4,2,a));			//	Tam
+    ~trichyDev.add(KonaWord.new(2,4,1,a));			//	Ta	ka
+    ~trichyDev.add(KonaWord.new(2,4,2,a));			//	Din	-	na	-
+    ~trichyDev.add(KonaWord.new(2,4,1,a));			//	Ta	ka
+    ~trichyDev.add(KonaWord.new(1,4,2,a));			//	Din
+    ~trichyDev.add(KonaWord.new(2,4,2,a));			//	Din	-	na	-
+    
+    //With suffix
+    ~trichyDev.add(KonaWord.new(1,4,2,a));			//	Tam
+    ~trichyDev.add(KonaWord.new(2,4,1,a));			//	Ki	Ta
+    ~trichyDev.add(KonaWord.new(2,4,2,a));			//	Din	-	na	-
+    
+    //Suffix 1
+    ~trichyDev.add(KonaWord.new(4,4,1,a));			//	Na	ka	jo	nu
+    ~trichyDev.add(KonaWord.new(4,4,0.5,a));		//	Ta	ka	jo	nu
+    ~trichyDev.add(KonaTime.newFrom([
+        KonaWord.new(1,4,0.5,a),					//	Ta
+        KonaWord.new(1,4,1,a),						//	Lan
+        KonaWord.new(1,4,0.5,a)						//	Gu
+        ],a));
+    ~trichyDev.add(KonaWord.new(1,4,16,a));
+    
+    ~var1 = a.gen.mutatePhrase(~original)
+    ~var2 = a.gen.mutatePhrase(~original)
+    ~var2 = a.gen.addSuffix(~var2)
+    ~var2 = ~var2[0]
+    
+    ~var3 = a.gen.mutatePhrase(~original)
+    ~var4 = a.gen.mutatePhrase(~original)
+    ~var4 = a.gen.addSuffix(~var4)
+    ~var4 = ~var4[0]
+    
+    
+    ~trichyDev.add(~var3)
+    ~trichyDev.add(~var4)
+    ~trichyDev.add(KonaWord.new(1,4,16,a));
+    
+    
+    ~trichyDev.play
+    a.add(~trichyDev)
+    a.play
+    a.stop
+    a.clear
+    ~trichyDev.play
+    //Suffix 2
+    ~trichyDev.add(KonaWord.new(2,4,1,a));			//	Na	ka
+    ~trichyDev.add(KonaWord.new(1,4,1,a));			//	Din
+    ~trichyDev.add(KonaWord.new(2,4,0.5,a));		//	Ki	ta
+    ~trichyDev.add(KonaWord.new(1,4,1,a));			//	Din
+    ~trichyDev.add(KonaWord.new(2,4,0.5,a));		//	Ki	ta
+    ~trichyDev.add(KonaWord.new(1,4,1,a));			//	Din
+    ~trichyDev.add(KonaWord.new(1,4,1,a));			//	Ta
+    
+
+</code></pre>
+
+
+<p>
+  Adi tala - Chatusra gati
+<br><audio controls>
+    <source src="audio/render_code_audio/turing13.mp3" type="audio/mp3">
+</audio>
+<pre><code lang="supercollider">
+
+    //Vellore G. ramabhadran phrase development
+    a = KonaTani.new(95, #["I4", "O", "O"], 4, argSynth:\MIDITranscribe);
+        MIDIClient.init;
+    a.midiOut = MIDIOut.newByName("loopMIDI Port", "loopMIDI Port");
+    
+    ~velloreDev = KonaTime.new(a);
+    
+    //Original
+    ~velloreDev.add(KonaWord.new(2,4,2,a));			//	Na	-	din	-
+    ~velloreDev.add(KonaWord.new(2,4,2,a));			//	Din	-	na	-
+    ~velloreDev.add(KonaWord.new(2,4,2,a));			//	Na	-	din	-
+    ~velloreDev.add(KonaWord.new(2,4,2,a));			//	Din	-	na	-
+        
+        
+    
+    //Development
+    ~velloreDev.add(KonaWord.new(1,4,2,a));			//	Din	-
+    ~velloreDev.add(KonaWord.new(2,4,1,a));			//	jo	nu
+    ~velloreDev.add(KonaWord.new(2,4,2,a));			//	Din	-	na	-
+    ~velloreDev.add(KonaWord.new(4,4,0.5,a));		//	Ta	ri	gi	du
+    ~velloreDev.add(KonaWord.new(1,4,2,a));			//	Din	-
+    ~velloreDev.add(KonaWord.new(2,4,2,a));			//	Din	-	na	-
+    
+    //With suffix
+    ~velloreDev.add(KonaWord.new(2,4,2,a));			//	Na	-	din	-
+    ~velloreDev.add(KonaWord.new(1,4,2,a));			//	Din	-
+    ~velloreDev.add(KonaWord.new(2,4,1,a));			//	na	da
+    ~velloreDev.add(KonaWord.new(1,4,1,a));			//	na
+    ~velloreDev.add(KonaWord.new(1,4,1,a));			//	tom
+    ~velloreDev.add(KonaWord.new(1,4,1,a));			//	tom
+    ~velloreDev.add(KonaWord.new(1,4,1,a));			//	ta
+    ~velloreDev.add(KonaWord.new(1,4,1,a));			//	tom
+    ~velloreDev.add(KonaWord.new(1,4,1,a));			//	tom
+    ~velloreDev.add(KonaWord.new(1,4,1,a));			//	tom
+    ~velloreDev.add(KonaWord.new(1,4,1,a));			//	ta
+    
+    
+    ~velloreDev.play
+        
+        
+</code></pre>
+
+</p>
+
+
+
+<!--Mora-->
+<p>
+    <a href="https://youtu.be/bzf4PbHgBlc" target="_blank" rel="noopener noreferrer">Moras</a>
+    Moras: è una cadenza ritmica, dove una frase viene ripetuta 3 volte, e l'obiettivo è quello di far finire la cadenza sul primo beat al 90%.
+    la più semplice e comune delle frasi è: <br>
+    words[5] = ['Da', 'Di', 'Gi', 'Na', 'Dom']; *3 volte + 1(TA) sul primo beat.<br>
+    L'idea è di pensare la frase partendo da dove finirà e tornando indietro, così sapremo dove deve iniziare, a quale battuta ed in quale beat.
+   <br> In "Adi Tala" si parte dal secondo sedecisimo del 5 beat.
+   <br>Solitamente l'ultima ripetizione(la terza) viene arricchita.
+    <br>E' simile al tihai della musica indostana. 
+    <br>
+
+
+
+
+<br><audio controls>
+    <source src="audio/render_code_audio/Mora0.mp3" type="audio/mp3">
+</audio>
+<pre><code lang="supercollider">
+
+    //Mani short mora
+    a = KonaTani.new(91, #["I4", "O", "O"], 4, argSynth:\MIDITranscribe);
+    MIDIClient.init;
+    a.midiOut = MIDIOut.newByName("loopMIDI Port", "loopMIDI Port");
+    
+    ~maniMora1 = KonaTime.new(a);
+    
+    3.do { |i|
+        ~maniMora1.add(KonaWord.new(1,4,0.5,a));		// Ta
+        ~maniMora1.add(KonaWord.new(6,4,0.25,a));		// Ta ri ki tah ta ka
+        ~maniMora1.add(KonaWord.new(1,4,1,a));			// Ta
+    };
+    
+    a.clear
+    a.add(KonaWord.new(1,4,24,a))
+    a.add(~maniMora1)
+    a.play
+    a.stop
+    
+    ~myManiMora = a.gen.randomMora(8,4,0.5,false,false).play
+    ~myManiMora.matras
+    a.add(KonaWord.new(1,4,24.5,a))
+    a.add(~myManiMora)
+    a.add(KonaWord.new(1,4,26,a))
+    
+    a.play
+    a.stop
+    
+
+</code></pre>
+
+andia mo a generare la frase utilizzando il random, ma rispettando la struttura;
+Ascotiaamone 4 variazioni: 
+<br><audio controls>
+    <source src="audio/render_code_audio/Mora0.1.mp3" type="audio/mp3">
+</audio>
+
+La mora scritta e quella generata.
+<br><audio controls>
+    <source src="audio/render_code_audio/Mora1.mp3" type="audio/mp3">
+</audio>
+
+<pre><code lang="supercollider">
+//	randomMora
+//	Generation of a mora from given parameters;
+//
+//	@aMatras	The duration of the mora in matras
+//	@aGati		The gati of the mora elements
+//	@aGap		Boolean, whether there should be gaps or not
+//	@aOffset	Boolean, whether there should be an offset or not
+randomMora {|aMatras, aGati, aKarve, aGap=true, aOffset=true|
+    var values;
+    var statement, gap, offset;
+
+    values = this.randomMoraValues(aMatras, aGati, aKarve, aGap, aOffset);
+
+
+    //Convert statements/gaps/offset into KonaItems
+
+    statement = this.moraStatement(values[0]*values[3], aGati, values[3]);
+
+
+    gap = this.moraGap(values[1]*values[3], aGati, values[3]);
+    if(gap!=nil) {
+    };
+
+
+    offset = this.moraOffset(values[2]*values[3], aGati, values[3]);
+    if(offset!=nil) {
+    };
+
+
+    ^this.createSimpleMora(statement, gap, offset);
+}
+</code></pre>
+
+
+</p>
+
+
+<p>
+    Trichi big mora 
+<br><audio controls>
+    <source src="audio/render_code_audio/Mora2.mp3" type="audio/mp3">
+</audio>
+<pre><code lang="supercollider">
+
+    //Trichy Big Mora
+
+    a = KonaTani.new(90, #["I4", "O", "O"], 4, argSynth:\MIDIPlay);
+    MIDIClient.init;
+    a.midiOut = MIDIOut.newByName("loopMIDI Port", "loopMIDI Port");
+    //Mora1
+    ~trichyMora = KonaTime.new(a);
+    
+    ~statement = KonaTime.newFrom([
+        KonaWord.new(2,4,0.5,a),				//Ta	ka
+        KonaWord.new(6,4,0.5,a),				//Ta	ri	ki	tah	ta	ka
+        KonaWord.new(2,4,0.5,a),				//Ta	ka
+        KonaWord.new(4,4,0.5,a),				//Ta	ri	ki	tah
+        KonaWord.new(1,4,1,a),					//Tom
+        KonaWord.new(1,4,1,a),					//Tom
+        KonaWord.new(1,4,1,a)					//Ta
+        ],a);
+    
+    ~gap = KonaTime.newFrom([
+        KonaWord.new(1,4,1,a),					//Tom
+        KonaWord.new(4,4,0.5,a)					//Ki	tah	ta	ka
+        ])
+    
+    ~trichyMora.addAll(a.gen.createSimpleMora(~statement,~gap,nil));
+    
+    ~trichyMora.add(KonaWord.new(1,4,4,a))		//Tom
+    
+    ~myTrichyMora = a.gen.randomMora(36,4,0.5,true,false).play
+    ~myTrichyMora.matras
+    16-36%16
+    a.clear
+    a.add(KonaWord.new(1,4,0.5,a))
+    a.add(~myTrichyMora)
+    a.play
+    a.stop
+    
+
+</code></pre>
+
+
+<p>
+    Variazione 
+<br><audio controls>
+    <source src="audio/render_code_audio/Mora5.mp3" type="audio/mp3">
+</audio>
+<pre><code lang="supercollider">
+
+    //Mora2
+    a = KonaTani.new(90, #["I4", "O", "O"], 4, argSynth:\MIDITranscribe);
+    
+    ~trichyMora2 = KonaTime.new(a);
+    
+    ~statement = KonaTime.newFrom([
+        KonaWord.new(1,4,2,a),					//Ta
+        KonaWord.new(2,4,1,a),					//Ki	Ta
+        KonaWord.new(4,4,1,a),					//Ta	ka	di	na
+        KonaWord.new(1,4,1,a),					//Tom
+        KonaWord.new(3,4,1,a),					//Ta	ki	Ta
+        KonaWord.new(4,4,1,a),					//Ta	ka	di	na
+        KonaWord.new(1,4,2,a),					//Tom
+        KonaWord.new(1,4,2,a),					//Ta
+        ],a);
+    
+    ~gap = KonaWord.new(1,4,2,a)					//Tom
+    ~trichyMora2.addAll(a.gen.createSimpleMora(~statement,~gap,nil));
+    ~trichyMora2.add(KonaWord.new(1,4,4,a))		//Ta
+    
+    ~trichyMora2.matras
+    
+    ~myTrichyMora2 = a.gen.randomMora(64,4,1,true,false)
+    ~myTrichyMora2.matras%32
+    a.clear
+    a.add(KonaWord.new(0,4,1,a))
+    a.add(~myTrichyMora2)
+    a.add(KonaWord.new(1,4,1,a))
+
+</code></pre>
+
+</p>
+
+<p>
+    Metodo generativo partendo da materiale scritto.
+<a href="https://books.google.it/books?id=al0yAgAAQBAJ&pg=PA55&lpg=PA55&dq=sama+compound+mora&source=bl&ots=-9E-RxbF6N&sig=ACfU3U3AdxxsTnoWnTCwIzVfT4Gm7RDsdg&hl=en&sa=X&ved=2ahUKEwiMlKOD2c_1AhV3QfEDHf9XCRUQ6AF6BAgeEAM#v=onepage&q=sama%20compound%20mora&f=false" target="_blank" rel="noopener noreferrer">Cosa può essere randomSamaCompoundMora</a>
+<br><audio controls>
+    <source src="audio/render_code_audio/Mora6.mp3" type="audio/mp3">
+</audio>
+
+<pre><code lang="supercollider">
+    //	Generative method to create a mora from a given statement,
+	//		with optional maximum mora size, gap and offset.
+	//	Differs from createSimpleMora in that gaps and offsets will
+	//		be calculated and generated if possible
+	//
+	//	@aStatement		Kona object to use for statement
+	//	@aMoraMatras	Total maximum number of matras, overidden if less
+	//						than sum of aStatement, aGap, aOffset matras
+	//	@aGap			Kona object to use for gap
+	//	@aOffset		Kona object to use for offset
+	moraFrom {|aStatement, aMoraMatras, aGap, aOffset|
+		var statement, gap, offset;
+		var objArray;
+		var objMatras, moraMatras, gapMatras, offsetMatras;
+
+		statement = aStatement;
+		gap = aGap;
+		offset = aOffset;
+
+		objMatras = 0;
+		objArray = [statement,gap,offset];
+		//Calculate total matras of mora sections passed as arguments
+		objArray.do { |item, i|
+			var val;
+			if(item!=nil && (item!=false)) {
+				switch (item)
+					{statement}	{val = 3}
+					{gap}		{val = 2}
+					{offset}	{val = 1};
+
+				objMatras = objMatras + (item.matras*val);
+			};
+		};
+
+		//If no maximum duration has been given
+		if(aMoraMatras==nil || (aMoraMatras ? 0 "<" objMatras) ) {
+
+			//Calculate the new maximum duration
+			moraMatras = objMatras;
+			if(gap==nil || (gap==false)) {
+				gapMatras=0;
+			} {
+				gapMatras=gap.matras
+			};
+			if(offset==nil) {
+				offsetMatras=0;
+			} {
+				offsetMatras = offset.matras;
+			};
+		} {
+			//If a maximum duration has been given
+			moraMatras = aMoraMatras;
+
+			//Calculate the lengths of the various sections.
+			//Various cases of passed in gaps and offset.
+			case
+				{gap==nil && (offset==nil)}	{
+					gapMatras = (0..(moraMatras-objMatras)/2).choose;
+					objMatras = objMatras + (gapMatras*2);
+					offsetMatras = moraMatras - objMatras;
+					objMatras = objMatras + offsetMatras;
+				}
+				{gap==nil && (offset!=nil)}	{
+					offsetMatras = offset.matras;
+					gapMatras = (0..(moraMatras-objMatras)/2);
+					objMatras = objMatras + gapMatras*2;
+				}
+				{gap!=nil && (gap!=false) && (offset==nil)}	{
+					if(gap!=false) {
+						gapMatras = gap.matras;
+					};
+					offsetMatras = moraMatras - objMatras;
+					objMatras = objMatras + offsetMatras;
+				}
+				{gap!=nil && (gap!=false) && (offset!=nil)} {
+					gapMatras = gap.matras;
+					offsetMatras = offset.matras;
+				};
+		};
+
+		//If no gap has been set, create one.
+		gap = gap ?? {this.moraGap(gapMatras, statement.gati, statement.karve)};
+		//If there should be no gap, set it to nil
+		if(gap==false) {
+			gap = nil;
+		};
+
+		//If no offset has been calculate the duration and create one
+		if(offsetMatras==nil) {
+			if(offset==nil) {
+				offsetMatras = moraMatras - objMatras;
+			} {
+				offsetMatras = offset.matras;
+
+			};
+		};
+		offset =  offset ?? {this.moraOffset(offsetMatras, statement.gati, statement.karve)};
+
+		//Construct and return the mora
+		^this.createSimpleMora(statement, gap, offset);
+	}
+
+	//	randomSamaCompoundMora
+	//	Generate a random compound mora with the 'sama' shape
+	//
+	//	@aMatras	Duration in matras
+	//	@aGati		The gati to use
+	//	@aKarve		The karve to use
+	randomSamaCompoundMora {|aMatras, aGati, aKarve|
+		var values;
+		var stateDur, gapDur, offsetDur;
+		var statement, gap, offset;
+
+		values = this.randomMoraValues(aMatras, aGati, aKarve, true, true);
+
+		stateDur = values[0];
+
+		gapDur = values[1];
+
+		statement = this.randomMora(stateDur*values[3], aGati, values[3], true, false);
+
+		if(gapDur==0) {
+			gap = false;
+		} {
+			gap = this.moraGap(gapDur*values[3], aGati, values[3]);
+		};
+
+		^this.moraFrom(statement, aMatras, gap);
+	}
+</code></pre>
+
+Nel codice sopra vediamo che il metodo deve ritornare
+
+<pre><code lang="supercollider">
+^this.moraFrom(statement, aMatras, gap);
+</code></pre>
+e quindi chiamare la funzione generatrice. <br>
+
+
+<pre><code lang="supercollider">
+    //Compound Mora
+    //Not printed, find strokes
+    a = KonaTani.new(90, #["I4", "O", "O"], 4, argSynth:\MIDITranscribe);
+     MIDIClient.init;
+    a.midiOut = MIDIOut.newByName("loopMIDI Port", "loopMIDI Port");
+    
+    ~trichyCompound = KonaTime.new(a);
+    
+    ~statement = KonaTime.newFrom(
+        a.gen.createSimpleMora(
+            //Statement
+            KonaTime.newFrom([
+                KonaWord.new(1,4,0.5,a),				//	Ta
+                KonaWord.new(1,4,1,a),					//	Din
+                KonaWord.new(1,4,0.5,a),				//	Gu
+                KonaWord.new(1,4,1,a)					//	Ta
+                ],a),
+            //Gap
+            KonaTime.newFrom([
+                KonaWord.new(0,4,1,a),					//	-
+                KonaWord.new(1,4,2,a),					//	Din
+                ],a),
+            //Offset
+            nil
+        ),
+        a
+    );
+    
+    ~gap = KonaTime.newFrom([
+            KonaWord.new(2,4,4,a);						// Ta ----	Din ----
+        ],a);
+    
+    
+    ~trichyCompound.addAll(a.gen.createSimpleMora(~statement,~gap,nil));
+    ~trichyCompound.add(KonaWord.new(1,4,4,a))		//Ta
+    
+    ~trichyCompound.matras
+    ~myTrichyCompound = a.gen.randomSamaCompoundMora(65,4,0.5,true,false).stop
+    ~myTrichyCompound.matras
+    
+    a.clear
+    a.add(KonaWord.new(1,4,31,a))
+    a.add(~myTrichyCompound)
+    a.add(KonaWord.new(1,4,15,a))
+    a.play
+    a.stop
+
+</code></pre>
+
+</p>
+
+
+<!--Accompagnamento-->
+
+<p>
+    Genera un acompagnamento ed itera su diesso crenado variazioni infinte in stile. 
+<br><audio controls>
+    <source src="audio/render_code_audio/accompagnamento.0.mp3" type="audio/mp3">
+</audio>
+<pre><code lang="supercollider">
+    a = KonaTani.new(61, #["I4", "O", "O"], 4, argSynth:\MIDITranscribe);
+    // init MIDI and set the midi out device
+    MIDIClient.init;
+    a.midiOut = MIDIOut.newByName("loopMIDI Port", "loopMIDI Port");
+    
+    
+    ~myAccomp = a.gen.vSarvaPhraseAuto
+    ~myAccomp.play
+    a.gen.mutatePhrase(~myAccomp).play
+    
+    q = Routine {
+           inf.do {
+                   a.gen.mutatePhrase(~myAccomp).rout.embedInStream;
+           };
+    };
+    a.stop
+    a.play;
+    q.play(a.clock)
+    a.stop
+    q.stop
+    
+
+</code></pre>
+
+
+<p>
+    Breve accompagnamento  
+<br><audio controls>
+    <source src="audio/render_code_audio/accompagnamento.1.mp3" type="audio/mp3">
+</audio>
+<pre><code lang="supercollider">
+
+    // legge la sequenzìna di KonaWord
+    ~maniAccomp = KonaTime.newFrom([
+    
+        KonaWord.new(1,4,4,a),
+        KonaWord.new(1,4,6,a),
+        KonaWord.new(1,4,2,a),
+        KonaWord.new(1,4,4,a),
+        KonaWord.new(1,4,2,a),
+        KonaWord.new(2,4,1,a),
+        KonaWord.new(1,4,3,a),
+        KonaWord.new(1,4,1,a),
+        KonaWord.new(2,4,2,a),
+        KonaWord.new(2,4,2,a),
+        KonaWord.new(1,4,4,a),
+        KonaWord.new(2,4,2,a),
+        KonaWord.new(1,4,2,a),
+        KonaWord.new(2,4,1,a),
+        KonaWord.new(2,4,2,a),
+        KonaWord.new(1,4,6,a),
+        KonaWord.new(1,4,2,a),
+        KonaWord.new(1,4,2,a),
+        KonaWord.new(2,4,1,a),
+        KonaWord.new(2,4,2,a),
+        KonaWord.new(1,4,2,a),
+        KonaWord.new(2,4,1,a),
+        KonaWord.new(2,4,2,a),
+        KonaWord.new(1,4,2,a),
+        KonaWord.new(2,4,1,a),
+        KonaWord.new(2,4,2,a),
+        KonaWord.new(1,4,2,a),
+        KonaWord.new(2,4,1,a),
+        KonaWord.new(2,4,2,a),
+        KonaWord.new(4,4,1,a),
+        KonaWord.new(2,4,2,a),
+    
+        KonaWord.new(1,4,2,a),
+        KonaWord.new(2,4,1,a),
+        KonaWord.new(2,4,2,a),
+    
+        KonaWord.new(2,4,2,a),
+        KonaWord.new(2,4,2,a),
+        KonaWord.new(2,4,2,a),
+        KonaWord.new(2,4,2,a),
+        KonaWord.new(2,4,1,a),
+        KonaWord.new(2,4,1,a),
+        KonaWord.new(2,4,1,a),
+        KonaWord.new(2,4,1,a),
+        KonaWord.new(2,4,2,a),
+        KonaWord.new(2,4,2,a),
+    
+        KonaWord.new(2,4,2,a),
+        KonaWord.new(2,4,1,a),
+        KonaWord.new(1,4,2,a),
+        KonaWord.new(1,4,3,a),
+        KonaWord.new(1,4,1,a),
+    
+        KonaWord.new(2,4,2,a),
+        KonaTime.newFrom([
+            KonaWord.new(1,4,1,a), KonaWord.new(1,4,2,a), KonaWord.new(1,4,1,a),
+            ],a),
+        KonaWord.new(2,4,2,a),
+        KonaTime.newFrom([
+            KonaWord.new(1,4,1,a), KonaWord.new(1,4,2,a), KonaWord.new(1,4,1,a),
+            ],a),
+        KonaWord.new(2,4,2,a),
+        KonaTime.newFrom([
+            KonaWord.new(1,4,1,a), KonaWord.new(1,4,2,a), KonaWord.new(1,4,1,a),
+            ],a),
+    
+        KonaWord.new(2,4,2,a),
+        KonaWord.new(1,4,3,a),
+        KonaWord.new(1,4,1,a),
+        KonaWord.new(1,4,2,a),
+        KonaWord.new(2,4,1,a),
+        KonaWord.new(1,4,1,a),
+        KonaWord.new(1,4,2,a),
+        KonaWord.new(1,4,1,a),
+        KonaWord.new(4,4,1,a),
+        KonaWord.new(4,4,1,a)
+    ],a)
+    
+    a.add(~maniAccomp)
+    a.add(KonaWord.new(1,4,4,a))
+    
+    a.play
+    a.stop
+
+</code></pre>
+
+</p>
+
+
+<p>
+    Prendi in ingresso il codice precedente e genera materiale da esso con  mutatePhrase
+<br><audio controls>
+    <source src="audio/render_code_audio/accompagnamento.2.mp3" type="audio/mp3">
+</audio>
+<pre><code lang="supercollider">
+    q = Routine {
+        inf.do {
+                a.gen.mutatePhrase(~maniAccomp).rout.embedInStream;
+        };
+ };
+ a.stop
+ a.play;
+ q.play(a.clock)
+ a.stop
+ q.stop
+ 
+ }
+
+</code></pre>
+
+//	mutatePhrase
+//	Method to mutate a given phrase using many possible
+//		combinations of automated manipulation methods
+
+<pre><code lang="supercollider"> 
+
+    //	mutatePhrase
+	//	Method to mutate a given phrase using many possible
+	//		combinations of automated manipulation methods
+	//
+	//	@aKonaItem Item to manipulate;
+	mutatePhrase {|aKonaItem, aChance, aRec=0.75, aNum|
+		var col;		//	Input collection
+		var ret;		//	Output collection
+		var change;		//	The chance an item will be mutated;
+		var min;		//	Minimum value for alteration
+		var max;		//	Maximum value for alteration
+		var val;		//	Variable used to calculate density possibilties
+		var count;		//	Variable used when calculating density possibilities
+		var index;		//	Index of element to mutate
+		var store;		//	Array to store indexes to be removed (atDensity)
+		var num;		//	Index of process to use;
+
+		if(aKonaItem.class==KonaTime) {
+			col = aKonaItem;
+		} {
+			col = KonaTime.newFrom([aKonaItem], tani);
+		};
+
+		change = aChance ?? {(1/col.size)*1.5};
+		if(aNum==nil) {
+			num = {5.rand}
+		} {
+			num = {aNum}
+		};
+		ret = KonaTime.new(tani);
+		col.size.do { |i|
+			if(change.coin,
+				{
+					if(col[i].class==KonaWord) {
+					switch (num.())
+						{0}	{
+								ret.add(this.randomAtDensity(col[i]));
+							}
+						{1}	{
+								ret.add(this.randomExtendJati(col[i]));
+							}
+						{2}	{
+								ret.add(this.randomMuteJati(col[i]));
+							}
+						{3}	{
+								ret.add(this.randomDensityJati(col[i]));
+							}
+						{4}	{
+								ret.add(this.partitionWord(col[i]));
+							};
+					} {
+						ret.add(this.mutatePhrase(col[i], aRec=aRec/4))
+					};
+
+				},
+				{
+					ret.add(col[i])
+				}
+			);
+		};
+
+		//Possible recursion for more mutation.
+		if(aRec.coin) {
+			^this.mutatePhrase(ret, aRec:aRec/2, aNum:aNum)
+		} {
+			^ret
+		};
+	}
+
+
+
+
+</code></pre>
+</p>
+
+
+
+
+
+            </section>
+
+
+
+
+        </article>
+        </main>
+</body>
+</html>

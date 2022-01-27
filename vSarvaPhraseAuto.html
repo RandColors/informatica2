@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Applying Carnatic Music to western culture</title>
+    <link rel="stylesheet" href="style.css">
+
+    <!--MIDI -->
+    <script
+        src="https://cdn.jsdelivr.net/combine/npm/tone@14.7.58,npm/@magenta/music@1.23.1/es6/core.js,npm/focus-visible@5,npm/html-midi-player@1.4.0"></script>
+    <script
+        src="https://cdn.jsdelivr.net/combine/npm/tone@14.7.58,npm/@magenta/music@1.23.1/es6/core.js,npm/focus-visible@5,npm/html-midi-player@1.4.0"></script>
+
+
+    <!-- Code Highlighiting.js for SC-->
+
+    <!--    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/styles/hybrid.min.css" /> -->
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.8/highlight.min.js"></script>
+   <script src="C:\Users\taegg\Desktop\konnakol_Learning\dissertion on Konnakol\BlogKonnakol\Highlighting"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", event => {
+            document.querySelectorAll("pre code").forEach(block => {
+                hljs.highlightBlock(block);
+            });
+        });
+    </script>
+
+    <style>
+        body {
+            background: lightblue;
+            margin: 40px;
+        }
+
+
+        pre code {
+            max-height: fit-content;
+            /* trova il modo di dargli realmente il valore che ti serve*/
+            padding: 10px 20px !important;
+            border-radius: 4px;
+            box-shadow: 0px 0px 13px 0px rgba(0, 0, 0, 0.6);
+        }
+    </style>
+
+</head>
+
+<body>
+    <nav>
+        <ul class="nav__links" >
+            <li><a href="Outputs.html">Code Examples</a></li>
+            <li><a href="index.html">SC Home </a></li>
+            <li><a href="Applying Carnatic.html">Applying Carnatic Music to western culture</a></li>
+            <li><a href="vSarvaPhraseAuto.html">vSarvaPhraseAuto analysis</a></li>
+           
+        </ul>
+
+    </nav>
+    <main>
+        <article class="rapido">
+
+            <!--vSarvaPhraseAuto analysis-->
+            <section>
+                <h1>vSarvaPhraseAuto analysis</h1>
+                <p> </p>
+
+                <br><audio controls>
+                    
+                    <source src="audio/render_code_audio/vSarvaPhraseAuto.0.mp3" type="audio/mp3">
+                </audio>    
+                <p>è stato ripetuto 2 volte per chiarezza nell'ascolto, in realtà genera una sola frase</p>
+ <pre><code lang="supercollider">
+                    // create a piece at 120 bpm, in Adi Thala, with a gati of 4
+
+                    a = KonaTani.new(120, #["I4","O","O"], 4, argSynth:\MIDITranscribe);
+                    
+                    // init MIDI and set the midi out device
+                    MIDIClient.init;
+                    a.midiOut = MIDIOut.newByName("loopMIDI Port", "loopMIDI Port");
+                    // generate a phrase
+                    x = a.gen.vSarvaPhraseAuto
+                    
+                    // play it
+                    x.play;
+                    
+                    
+                    
+                    /*
+                    vSarvaPhraseLength*gati: oneBeat: 0.5
+                    maxBeats: 5.0
+                    phraseLength: 4.0
+                    16.0
+                    oneBeat: 0.5
+                    maxBeats: 5.0
+                    phraseLength: 4.0
+                    partsArray: [ 2, 3, 4 ]
+                    Conversion to KonaWords:
+                    [ Ta      , Ta       , Ta      , Ta      , Ta      , Ta       , Ta       ]
+                    [ 0.5     , 0.75     , 0.5     , 0.5     , 0.5     , 0.75     , 0.5      ]
+                    
+                    combineSimilar:
+                    [ Ta      , Ta       , Ta      , Ta      , Ka      , Ta       , Ta       ]
+                    [ 0.5     , 0.75     , 0.5     , 0.5     , 0.5     , 0.75     , 0.5      ]
+                    
+                    randomMuteJati:
+                    
+                    [ Ta      , Ta       , Ta      , Ta      , Ka      , Ta       , -        ]
+                    [ 0.5     , 0.75     , 0.5     , 0.5     , 0.5     , 0.75     , 0.5      ]
+                    
+                    -> KonaTime[ a KonaWord, a KonaWord, a KonaWord, a KonaWord, a KonaWord, KonaTime[ a KonaWord ] ]
+                    
+                    
+                    
+                    x.postWord
+                    [ Ta      , Ta       , Ta      , Ta      , Ka      , Ta       , -        ]
+                    [ 0.5     , 0.75     , 0.5     , 0.5     , 0.5     , 0.75     , 0.5      ]
+                    [ [ 1, 8 ], [ 3, 16 ], [ 1, 8 ], [ 1, 8 ], [ 1, 8 ], [ 3, 16 ], [ 1, 8 ] ]
+                    
+                    -> [ [ Ta      , Ta       , Ta      , Ta      , Ka      , Ta       , -        ], [ 0.5     , 0.75     , 0.5     , 0.5     , 0.5     , 0.75     , 0.5      ], [ [ 1, 8 ], [ 3, 16 ], [ 1, 8 ], [ 1, 8 ], [ 1, 8 ], [ 3, 16 ], [ 1, 8 ] ] ]
+                    
+                    
+                    Ta 0.5 Ta 0.75 Ta 0.5 Ta 0.5 ka 0.5 Ta 0.75 - 0.5 -> KonaTime[ a KonaWord, a KonaWord, a KonaWord, a KonaWord, a KonaWord, KonaTime[ a KonaWord ] ]
+                    
+                    
+                    */
+
+</code></pre>
+
+        
+
+<h2>Sarvalaghu  Generator</h2>
+
+<p>
+   This project has focused on the vilamba k¯ala sarvalaghu styles of the
+ﬁve tani ¯avartanams in Nelson (1991) <br> 
+Dalle analisi è emerso che esista una frase archetipica che viene rielaborata  ettraverso l'improvvisazione. <br>
+<img src="images/img 5.23.PNG" alt="5.23"> <br>
+
+Alcune volte dalla prima improvvisazione emerge materiale interessante che diventa il nuovo per improvvisare.
+<img src="images/img 5.24.PNG" alt="5.24"> 
+
+
+
+   Kan.akku is used for cadential purposes, and is a broad term
+   for the various loosely deﬁned forms m¯or¯a, arudi, t¯ırm¯anam, k¯orvai, and ta din gi n.a tom (Nelson, 1991,
+   vol.1 p.43). <br>
+   sarvalaghu patterns are the time-keeping structures that reinforce the ﬂow
+of the t¯al.a <br>
+
+Sarvalaghu patterns vary between musicians and contexts. For example, in
+the vilamba kala stages of a tani avartanam the patterns tend to use two m¯atra syllables/strokes with
+accents on the beat or half beat, while in the madhyama k¯ala section one m¯atra syllables/strokes are
+used with accents on any pulse in the beat
+
+</p>
+
+<h2>Phrase Length</h2>
+<p>La durata delle frasi è stata stabilita in base alla capacità della nostra memoria a breve termine between 2 and 3.375 seconds 
+<br>     
+il metodo <h2>vSarvaPhraseLength</h2> 
+è stato scritto per calcolare in beat una durata che postesse rientrare nei parametri.
+then ﬁnd the longest phrase length that ﬁts neatly into the tala once or in multiples of two. <br>
+
+</p>
+
+<pre><code lang="supercollider"> 
+   /* ================= */
+   /* = Music Methods = */
+   /* ================= */
+
+
+//	vSarvaPhraseLength
+//	Method to determine the phrase length (in beats)
+//		for sarvalaghu patterns for the Vilamba Kala section
+//	Uses a tweaked perceptual present model,
+//		currently uses a window of 5 seconds.
+vSarvaPhraseLength {
+var phraseLength;
+var oneBeat;
+var maxBeats;
+var val;
+//Time in seconds for one beat
+oneBeat = 60/laya;
+Post << "oneBeat: " <<  oneBeat << "\n";
+
+//The number of beats that can fit into the maximum perceptual time
+//With a maximum number of beats of 5. Even if perceptual time is 3 seconds,
+//	phrases are not usually longer than this
+maxBeats = (pMax/oneBeat).min(5);
+Post << "maxBeats: " <<  maxBeats << "\n";
+
+//	This algorithm attempts to find that largest phrase length that
+//	fits neatly into a full cycle.
+//	At the moment this only works in terms of half/quarter/eigth cycles etc
+//	Could be adapted to find other durations of phrase that
+//	can fit neatly into a cycle
+//	E.g. a 9 beat tala could be made up of 3 * 3 beat phrases
+//	Not a huge amount of material to support this theory.
+
+phraseLength = 0;
+val = tala.sum;
+
+while({phraseLength==0},
+{
+phraseLength = maxBeats-(maxBeats%val);
+val = val/2;
+}
+);
+
+Post << "phraseLength: " <<  phraseLength << "\n";
+
+^phraseLength
+}
+</code></pre>
+
+<h2>Phrase Generation</h2>
+<p>E' diviso in due metodi,il primo crea frasi in base a una data durata di frase in matras, e il successivo chiama semplicemente vSarvaPhrase passando i risultati del metodo vSarvaPhraseLength moltiplicato per gati.  
+  <br> vSarvaPhrase serve a generrare frasi fondamentali di Sarvalaghu, dalla quale si possono generare nuovi motivi e variazioni. <br>
+  <img src="images/img 5.26.1.PNG" alt="5.26.1"> 
+  <img src="images/img 5.26.2.PNG" alt="5.26.2"> 
+  <img src="images/img 5.26.3.PNG" alt="5.26.3"> 
+  <img src="images/img 5.26.4.PNG" alt="5.26.4"> 
+  <img src="images/img 5.26.6.PNG" alt="5.26.6"> 
+  
+
+
+ <br> In accordo con l'osservazione di Nelson (1991, vol.1 p.37) che i modelli nel
+amba kala usa principalmente parole con due matra jatis, la dimensione minima della parte (per il partizionamento) è impostata su
+Due. Il valore massimo è impostato su gati se la frase è lunga e la durata della frase, in caso contrario, 
+l'array viene creato da questi valori, ad es. [2,3,4,5] per khanda gati. Una serie di pesi per ogni parte
+la dimensione è costruita con pregiudizi per le dimensioni delle parti che sono incluse nella famiglia ritmica del gati. Per
+khanda (cinque) e misra (sette) gati di dimensioni due e tre ricevono un'ulteriore distorsione a causa di 
+la loro idoneità per i gati.
+</p>
+
+
+<pre><code lang="supercollider"> 
+   //	vSarvaPhraseAuto
+   //	Automation of vSarvaPhrase
+   vSarvaPhraseAuto {
+
+       "vSarvaPhraseLength*gati: ".post; (this.vSarvaPhraseLength*gati).postln;
+
+       ^this.vSarvaPhrase(this.vSarvaPhraseLength*gati);
+   }
+</code></pre>
+
+
+<pre><code lang="supercollider"> 
+
+
+   //	vSarvaPhrase
+   //	Method to generate a phrase for the Vilamba section sarvalaghu
+   vSarvaPhrase {|phraseDur, aMin=2|
+           var phraseMatras;
+           var jatiParts;
+           var min;
+           var max;
+           var partsArray, weights, maxW, maxW1, maxW2, maxW1MI;
+           var muteChance;
+           var ret;
+
+           if(phraseDur%1!=0) {
+               ret = KonaTime.new(tani);
+               ret.add(this.vSarvaPhrase(phraseDur.floor, aMin));
+               ret.add(KonaWord.new(1, gati, (phraseDur-phraseDur.floor)));
+               ^ret;
+           };
+
+           phraseMatras = phraseDur;
+
+           if(phraseDur<aMin) {
+               min = phraseDur;
+           } {
+               min = aMin;
+           };
+
+           if(2*gati<=phraseDur) {
+               max = gati;
+           } {
+               max = phraseDur;
+           };
+
+           //Possible part sizes
+           partsArray = (min..max);
+           Post << "partsArray: " <<  partsArray << "\n";
+
+           //Parts 2 to gati. Given heaviest weightings
+           weights = Array.fill(partsArray.size, 0);
+
+           weights.size.do { |i|
+
+               if(this.gatiPowers.includes(partsArray[i]),
+                   {weights[i] = 1.5},
+                   {weights[i] = 0.4}
+               );
+
+               if(partsArray[i]<gati) {
+                 weights[i] = weights[i] + 0.25;
+               } {
+                   if(partsArray[i]!=gati) {
+                         weights[i] = weights[i] - 0.4
+                   };
+               };
+
+               if(gati==5 || (gati==7)) {
+                 if((partsArray[i]== 3) || (partsArray[i]== 2)) {
+                       weights[i] = weights[i] + 0.25;
+                   } {
+                       weights[i] = weights[i] - 0.25
+                   };
+               };
+
+               if(weights[i]<0,
+                   {weights[i] = 0}
+               );
+
+           };
+           //Scale and invert values.
+           weights = (weights/weights.maxItem-1).round(0.01).abs;
+
+           jatiParts = this.allPartitions(phraseMatras.asInteger, aMax: max);
+
+           jatiParts = this.removeGreaterThan(jatiParts, 4);
+
+           jatiParts = this.removeThoseContaining(jatiParts, partsArray, weights);
+
+           jatiParts = jatiParts.choose;
+
+           jatiParts = this.randomPerm(jatiParts);
+
+           ret = KonaTime.new(tani);
+           jatiParts.size.do { |i|
+               if((jatiParts[i].even && (jatiParts[i]>2)) && 0.75.coin ) {
+                   ret.add(KonaWord.new(jatiParts[i]/2, gati, 2, tani))
+               } {
+                   ret.add(KonaWord.new(1, gati, jatiParts[i], tani))
+               };
+           };
+           "Conversion to KonaWords: ".postln;ret.postWord(true, true, false);
+
+           ret = this.combineSimilar(ret, 2, 4, 0.9);
+           "combineSimilar: ".postln; ret.postWord(true, true, false);
+
+           muteChance = 0.75;
+           3.rand.do { |i|
+               if(muteChance.coin) {
+                   ret = this.randomMuteJati(ret);
+               };
+               muteChance = muteChance/2;
+           };
+           "randomMuteJati: ".postln; ret.postWord(true, true, false);
+
+           ^ret;
+
+   }
+
+</code></pre>
+
+<h2>Phrase Matras</h2>
+<p> il metodo vSarvaPhrase viene chiamato in vSarvaPhraseAuto passando come argomento this.vSarvaPhraseLength*gati
+   The phraseMatras value is partitioned with allPartitions (passing in the maximum part size)
+   with any partition with more than four parts being removed by removeGreaterThan. Partitions with
+   particular part sizes are probabilistically removed by passing the array of part sizes and weights to
+   removeThoseContaining. A partition is randomly selected and ﬁnally permuted with randomPerm. A
+   custom transformation from integers to KonaWords then takes place; any even values greater than two
+   are given a 75% chance of being halved in terms of jatis and doubled in terms of karve (e.g. a four m¯atra
+   Ta becomes a two m¯atra per jati Ta ka), all other values become single jati (Ta) KonaWords with the
+   part number used for the karve. Finally the phrase is passed into combineSimilar with a maximum
+   combination size of four and some syllables are probabilistically muted to create variation (see Muting
+   Jatis in Section 5.3.4). 
+  
+
+</p>
+
+   <pre><code lang="supercollider">
+       ^this.vSarvaPhrase(this.vSarvaPhraseLength*gati);
+
+       vSarvaPhrase {|phraseDur, aMin=2|
+           var phraseMatras;
+           var jatiParts;
+           var min;
+           var max;
+           var partsArray, weights, maxW, maxW1, maxW2, maxW1MI;
+           var muteChance;
+           var ret;
+
+           if(phraseDur%1!=0) {
+               ret = KonaTime.new(tani);
+               ret.add(this.vSarvaPhrase(phraseDur.floor, aMin));
+               ret.add(KonaWord.new(1, gati, (phraseDur-phraseDur.floor)));
+               ^ret;
+           };
+
+           phraseMatras = phraseDur;
+
+       
+   </code></pre>
+   
+   <pre><code lang="supercollider">
+       //partitions.scd
+       
+       r =KonaGenerator.new();
+
+KonaTani.new.gen.vSarvaPhraseLength;
+/*
+oneBeat: 1.0
+maxBeats: 5.0
+phraseLength: 4.0
+-> 4.0
+
+*/
+KonaTani.new.gen.vSarvaPhraseAuto;
+
+/*
+vSarvaPhraseLength*gati: oneBeat: 1.0
+maxBeats: 5.0
+phraseLength: 4.0
+16.0
+oneBeat: 1.0
+maxBeats: 5.0
+phraseLength: 4.0
+partsArray: [ 2, 3, 4 ]
+Conversion to KonaWords:
+[ Ta      , Ka      , Ta      , Ta      , Ka      , Ta      , Ka      , Ta       ]
+[ 0.5     , 0.5     , 0.5     , 0.5     , 0.5     , 0.5     , 0.5     , 0.5      ]
+
+combineSimilar:
+[ Ta      , Ka      , Ta      , Ta      , Ka      , Di      , Mi      , Ta       ]
+[ 0.5     , 0.5     , 0.5     , 0.5     , 0.5     , 0.5     , 0.5     , 0.5      ]
+
+randomMuteJati:
+
+
+[ Ta      , Ka      , Ta      , Ta      , -       , Ta      , Ka      , -        ]
+[ 0.5     , 0.5     , 0.5     , 0.5     , 0.5     , 0.5     , 0.5     , 0.5      ]
+
+-> KonaTime[ a KonaWord, a KonaWord, KonaTime[ a KonaWord, a KonaWord, a KonaWord ], KonaTime[ a KonaWord ] ]
+
+*/
+   </code></pre>
+
+
+
+
+            </section>
+
+
+                
+
+
+        </article>
+    </main>
+
+</body>
+
+</html>

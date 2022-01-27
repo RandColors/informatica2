@@ -1,0 +1,1688 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Applying Carnatic Music to western culture</title>
+    <link rel="stylesheet" href="style.css">
+
+    <!--MIDI -->
+    <script
+        src="https://cdn.jsdelivr.net/combine/npm/tone@14.7.58,npm/@magenta/music@1.23.1/es6/core.js,npm/focus-visible@5,npm/html-midi-player@1.4.0"></script>
+    <script
+        src="https://cdn.jsdelivr.net/combine/npm/tone@14.7.58,npm/@magenta/music@1.23.1/es6/core.js,npm/focus-visible@5,npm/html-midi-player@1.4.0"></script>
+
+
+    <!-- Code Highlighiting.js for SC-->
+
+    <!--    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/styles/hybrid.min.css" /> -->
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.8/highlight.min.js"></script>
+   <script src="C:\Users\taegg\Desktop\konnakol_Learning\dissertion on Konnakol\BlogKonnakol\Highlighting"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", event => {
+            document.querySelectorAll("pre code").forEach(block => {
+                hljs.highlightBlock(block);
+            });
+        });
+    </script>
+
+    <style>
+        body {
+            background: lightblue;
+            margin: 40px;
+        }
+
+
+        pre code {
+            max-height: fit-content;
+            /* trova il modo di dargli realmente il valore che ti serve*/
+            padding: 10px 20px !important;
+            border-radius: 4px;
+            box-shadow: 0px 0px 13px 0px rgba(0, 0, 0, 0.6);
+        }
+    </style>
+
+</head>
+
+<body>
+    <nav>
+        <ul class="nav__links" >
+            <li><a href="Outputs.html">Code Examples</a></li>
+            <li><a href="index.html">SC Home </a></li>
+            <li><a href="Applying Carnatic.html">Applying Carnatic Music to western culture</a></li>
+
+        </ul>
+
+    </nav>
+    <main>
+        <article class="rapido">
+
+            <!--KARNATAKA DEF-->
+            <section>
+                <h1>This research addresses ways in which the karnatic rhythmical system can enhance, improve or even
+                    radically change the teaching of rhythmical solfege at a higher-education level </h1>
+
+                <p>
+                    Sono state estratte quei "devices" utili nel nostro ambito musicale
+                    esistono secondo l'autore delle conoscenze locali ed altre universali relative al ritmo,
+                    quindi verrano trattate solo quelle universali e non estremamamente "aesthetically charged"
+                    Ci si concentrerà su tecnichhe che hanno un chiaro set di regole. <br>
+
+                    The role of the percussion in karnatic music is generally very active, providing layers of
+                    polyrhythms and polypulses rather than providing a sort of ‘mattress’ for the melody or outlining
+                    the tala or metre.
+                    that in every concert of karnatic music there is always someone ‘conducting’ (keeping tala) and thus
+                    providing the musicians with a visual reference of the metre.
+                    keeping in mind that any development needs to have a common denominator.
+                    Non esistono altri testi chiari per europei che non abbiano un enorme conoscenza di musica
+                    carnatica. <br>
+
+                    A link to 262 audio tracks and to a ‘karnatic metronome’. (che è una Patch in Max/MSP)
+                    Il libro non prova ad insegnare all'indiana, ma ha un approccio europeo. <br>
+
+                </p>
+                <p>Reading the book without listening to the tracks can result in a drier experience. <br></p>
+
+            </section>
+
+            <!--Description of Karnatic Concepts and Techniques-->
+            <section>
+                <h1>Description of Karnatic Concepts and Techniques </h1>
+                <h2>Chapter 1 The Tala System </h2>
+                <img src="reina-images/reina_01.PNG" alt="reina_01-img">
+
+                <p>
+                    suladi Tale è il più diffuso negli ultimi 6 secoli.
+
+                    tala can be translated as metre.
+                    the tala and tempo in karnatic music never changes in a piece.
+
+                </p>
+
+            </section>
+
+            <!--Suladi talas-->
+            <section>
+                <h1>Suladi Talas</h1>
+                <p>
+                    Si costruisce con la combinzione di 3 angas(Constructions blocks of different size)
+
+                    Anudrutam: 1 beat, può essere utilizzato 1 volta o mai
+                    può essere preceduto o seguito da un DRUTAM e Non può mai essere il primo o l'ultmo anga del
+                    tala.<br>
+
+                    Drutam: 2 beats long, può essere utilizzato una 1 o 2 volte o mai.
+                    deve essere presente un laghu per poter usare un Drutam. <br>
+
+                    Laghu: può ssere di 3,4,5,7,9 beats. può esseree utilizzato 1-2-3 volte.
+                    Il Laghu non cambia durante il Tala. Questo prende il nome di Jati Laghu.
+                    quindi quando decidiamo di usare un laghu in 4 questo NON può coesistere con uno in 3,5,7 o 9!!!
+                    <br>
+
+                </p>
+                <img src="reina-images/reina_02.PNG" alt="reina_02img">
+                <p>
+                    Il tala più breve di tutti teoricamente sarà quello fatto da un solo Laghu di 3 Tisra jati (Una
+                    sorta di 3/4 .. credo)
+                    ed il più lungo, quello fatto da 3 laghus di 9 = 27 + 2 Drutam di 2 =4 + 1 Anudrutam = 1 <br>
+                    -> (27+4+1) = 32/4 <br>
+                    per esempio se vogliamo un Tala in 7 beats lo potremo costruire:
+                    laghu3 + Drutam + Drutam <br>
+                    LAghu4 + Anudrutam + Drutam <br>
+                    LAghu5 + Drutam <br>
+                    LAghu7 <br>
+                    Non vi sono altre combinazioni consentite rispettando le regole date.
+                    Teoricamente quindi combinando gli Angas si potrebbero costruire centinaia di Talas, ma in pratica
+                    non viene fatto nella musica carnatica. <br>
+                </p>
+                <img src="reina-images/reina_03.PNG" alt="reina_03img">
+                <img src="reina-images/reina_03_a.PNG" alt="reina_03_aimg">
+
+
+                <p>
+                    sono State scelte queste categorie che sono quelle accettate dalla storia/teoria.
+                    Quindi in totale utilizziamo 35 talas = 35 Metri diversi <br>
+                    that Purandaradasa invented and which became the system that is now used <br>
+                    Ogni Tala ha un Nome, e Tala con lo steso numero di Beats hannoun nome diverso, perchè costruiti con
+                    una sequenza di angas differente. <br>
+                    Adi Tala (8/4) = Laghu4 + Drutam + Drutam = 4+2+2 è il più comune per noi occidentali.
+                    Chana Tala (8/4) = Laghu5 + Anudrutam + Drutam = 5+1+2 è chiaro che avendo gli accenti sull'1,6,7
+                    non ci risulta confortevole. <br>
+
+
+                </p>
+                <img src="reina-images/reina_04.PNG" alt="reina_04img">
+                <img src="reina-images/reina_04_a.PNG" alt="reina_04_aimg">
+
+                <p>
+                    Sono Esclusi dal Suladi Talas questi:
+                </p>
+                <img src="reina-images/reina_05.PNG" alt="reina_05img">
+
+            </section>
+
+            <!--Come il tala influenza lo sviluppo musicale-->
+            <section>
+                <H1>Come il tala influenza lo sviluppo musicale</H1>
+                <p>fare delle frasi che gravitano attorno ai punti cardien del tala è la tecnica più usata.
+                    Ricerca costante di tensione-rilassamento <br>
+                    tensione = tecniche contro la pulsazione <br>
+                    Rilassamento = frasi costruite attorno al tela e che si appoggiano alla pulsazione. <br>
+                    I musicisti carnatici non hanno la necessità che l'ascoltatore riconosca costantemente il tala
+                    sottostante. <br>
+                </p>
+
+                <p>
+                    TALA SAM = downbeat del tala <br>
+                    Anga SAM = downbeat del tipo di anga quindi Drutam sam, Langhu sam, Anudrutam sam. <br>
+                    Siccome c'è sempre qualcuno che tiene il tala, anche solo visivamente, i musicisti on lo suonano, ma
+                    costruisco intorno ad esso o lo articolano, attraverso linee melodiche. <br>
+                    Ogni volta che si crea una tensione ritmica, anche polypuls o poliritmica, questa risolverà sul Tala
+                    sam o Anga sam. <br>
+                    Una frase non può fermarsi nel mezzo di un anga. <br>
+                </p>
+            </section>
+
+            <!--Tempo  = Laya-->
+
+            <section>
+                <h1> Tempo = Laya</h1>
+                <p>Nel Suladi Talas il tempo va da 20bpm a 130bpm, anche se di media è compreso tra 30-54 bpm <br>
+                    vilamba laya: slow tempo (usually =20–ca. 46) <br>
+                    madhya laya: medium tempo (usually =ca. 48–ca. 66) <br>
+                    druta laya: fast tempo (anything above 70 but rarely going above 130, the exception being with chapu
+                    talas). <br>
+                </p>
+            </section>
+
+            <!--Cycle-->
+            <section>
+                <h1>Concetto di Ciclo = Avartana</h1>
+                <p>Il reale significato di Tala è ciclo, come intendiamo un <a
+                        href="https://it.wikipedia.org/wiki/Blues_in_12_misure" target="_blank">giro di blues </a>,
+                    nelle sue 12 battute
+                    o 32 battute della <a href="https://en.wikipedia.org/wiki/Thirty-two-bar_form" target="_blank">swing
+                        era</a> <br>
+                    A cycle is, somehow, a recurring frame that is born, develops and dies. <br>
+                    ‘larger and recurrent segments of music’. <br>
+                    Brevi tala vengono raggruppati in larghi gruppi nei quali un'idea è esplorata e si risolve. <br>
+                    Tal lunghi più di 10 beats si risolvono al massimo in tre ripetizioni. <br>
+                    La ripetizione NON è una tecnica utilizzata per far percepire un ciclo, e questa è una
+                    caratteristica della musica carnatica, continue variazioni. <br>
+                    The intuitive understanding of the concept of cycle is an empirical process. <br>
+                </p>
+            </section>
+
+            <!--Tala conducting-->
+            <section>
+                <h1>Keeping the Tala</h1>
+                <p>I musicisti tengono il tala costantemente con la mano o con le dita. <br>
+                    Laghu: hand down followed by finger counts. <br>
+                    Anudrutam: hand down;
+                    Drutam: hand down followed by hand up,
+
+
+                </p>
+            </section>
+
+            <!-- Chapu Tala -->
+            <section>
+                <h1>Chapu tala altra MEGA MACRO FAMIGLIA </h1>
+                <p>
+                    Sono talas presi in prestito dalla musica Folk, sono veloci, senza anga, si risolve la tensione sul
+                    tala sam. <br>
+                    For instance, a khanda chapu would have 3 claps while conducting (on the 1st, 3rd and 4th beats),
+                    and the 2nd and 5th beats will be silenced. <br>
+                    Depending on the tempo a khanda chapu tala, for instance, could be notated in western music as 5/8
+                    or 5/16. <br>
+
+                </p>
+                <img src="reina-images/reina_06.PNG" alt="reina_01-img">
+
+            </section>
+
+
+
+            <!--Chapter 2 Gatis -->
+            <section>
+                <h1>Chapter 2 Gatis</h1>
+                <p> Gati = suddivisione di un beat in un numero uguale di unità chiamate MATRAS <br>
+                    Il beat è suddivisibile in 5 gatis differenti: <br>
+                    ad ogni gatis è assegnato un set di sillabe (Solkattu/konnakol)
+                </p>
+                <img src="reina-images/reina_07.PNG" alt="reina_07-img">
+                <p> Le sillabe assegnate ad ogni gati sono:
+
+                </p>
+                <img src="reina-images/reina_08.PNG" alt="reina_08-img">
+                <img src="reina-images/reina_09.PNG" alt="reina_09-img">
+                <pre><code lang="supercollider">
+
+                    
+a = KonaTani.new(argLaya: 60,argTala:  #["I4", "O", "O"],argGati:  4, argSynth:\MIDITranscribe);
+// init MIDI and set the midi out device
+MIDIClient.init;
+a.midiOut = MIDIOut.newByName("loopMIDI Port", "loopMIDI Port");
+
+(
+~tisra = KonaWord(3,3,1,a);
+~chatusra = KonaWord(8,4,1,a);// made of 8 syllables
+~khanda = KonaWord(5,5,1,a);
+~misra = KonaWord(7,7,1,a);
+)
+
+~fraseDeterministica = KonaTime.newFrom([~tisra,~chatusra,~khanda,~misra]);
+a.add(~fraseDeterministica);
+a.play;
+                      
+                  </code></pre>
+           
+                  <audio controls>
+                    <source src="audio/render_code_audio/00_four gatis.mp3"
+                        type="audio/mp3">
+                </audio>
+           
+                </section>
+
+
+
+            <!--Solkattu Syllables -->
+
+            <section>
+                <h1>Solkattu Syllables</h1>
+                <p>
+                    Nascono per foneizzare i suoni che si possono produrre con il Mridangam
+                    <img src="reina-images/reina_10.PNG" alt="reina_10-img">
+                    <audio controls>
+                        <source src="audio/karnatic_examples_1-59/01) solkattu syllables.mp3" type="audio/mp3">
+                    </audio>
+                </p>
+                <p>
+                    Un primo esercizio è quello di internalizzare tuttle le combinazioni di gatis per ogni beat senza
+                    usare pause, legature o note con il punto e senza includere i 32esimi o più piccoli. <br>
+                    Diversamente da noi, ogni nota è pensata come un numero, un ottavo =2, <br> un ottavo puntato = 3
+                    <br> un sedicesimo = 1 <br>
+                    Questo aiuta quando si inizieranno ad usare pause e legature per creare frasi. <br>
+
+
+                </p>
+
+
+                <figure>
+                    <img src="reina-images/reina_11.PNG" alt="reina_11-img">
+                    <figcaption>
+                        <h1> Un beat diviso 4, semplice e con note puntate. </h1>
+                        <p>...</p>
+
+                        <audio controls>
+                            <source src="audio/karnatic_examples_1-59/02) cells in chatusra.mp3" type="audio/mp3">
+                        </audio>
+                    </figcaption>
+
+                    <pre><code lang="supercollider">
+
+                        
+a = KonaTani.new(60,#["I4", "O", "O"],4,argSynth: \MIDITranscribe);
+
+MIDIClient.init;
+a.midiOut = MIDIOut.newByName("loopMIDI Port", "loopMIDI Port");
+
+
+~kT = KonaTime.new(a);
+r = KonaGenerator.new()
+~mykT = r.extendJati(KonaWord(4,4,1,a),0,0)
+a.add(~mykT)
+a.play
+
+"Ta 0.5 Ta 0.25 ka 0.25"
+
+                        // trova il modo di utilizzare un metodo di partizione di un numero 
+
+                        r =KonaGenerator();
+                        r.allPartitions(4.asInteger, aMin:1)
+                        -> [ [ 1, 1, 1, 1 ], [ 2, 1, 1 ], [ 2, 2 ], [ 3, 1 ], [ 4 ] ]
+
+
+t = r.allPartitions(4.asInteger, aMin:1)
+r.allPerms(aCollection: t)
+-> [ [ [ 1, 1, 1, 1 ], [ 2, 1, 1 ], [ 2, 2 ], [ 3, 1 ], [ 4 ] ], [ [ 2, 1, 1 ], [ 1, 1, 1, 1 ], [ 2, 2 ], [ 3, 1 ], [ 4 ] ], [ [ 2, 2 ], [ 2, 1, 1 ], [ 1, 1, 1, 1 ], [ 3, 1 ], [ 4 ] ], [ [ 3, 1 ], [ 2, 1, 1 ], [ 2, 2 ], [ 1, 1, 1, 1 ], [ 4 ] ], [ [ 4 ], [ 2, 1, 1 ], [ 2, 2 ], [ 3, 1 ], [ 1, 1, 1, 1 ] ], [ [ 1, 1, 1, 1 ], [ 2, 2 ], [ 2, 1, 1 ], [ 3, 1 ], [ 4 ] ], [ [ 2, 1, 1 ], [ 2, 2 ], [ 1, 1, 1, 1 ], [ 3, 1 ], [ 4 ] ], [ [ 2, 2 ], [ 1, 1, 1, 1 ], [ 2, 1, 1 ], [ 3, 1 ], [ 4 ] ], [ [ 3, 1 ], [ 2, 2 ], [ 2, 1, ...etc...
+
+
+
+        
+    </code></pre>
+
+                </figure>
+
+
+
+
+
+                <figure>
+                    <img src="reina-images/reina_12_a.PNG" alt="reina_12_a-img">
+                    <img src="reina-images/reina_12.PNG" alt="reina_12-img">
+                    <figcaption>
+                        <h1> Un beat diviso 5, semplice e con note puntate. </h1>
+                        <audio controls>
+                            <source src="audio/karnatic_examples_1-59/03) cells in khanda.mp3" type="audio/mp3">
+                        </audio>
+                    </figcaption>
+
+                    <pre><code lang="supercollider">
+        // Write code here ...
+      </code></pre>
+
+                </figure>
+
+
+
+
+                <figure>
+                    <img src="reina-images/reina_13.PNG" alt="reina_13-img">
+                    <img src="reina-images/reina_13_a.PNG" alt="reina_13_a-img">
+                    <figcaption>
+                        <h1> Un beat diviso 6, semplice e con note puntate. </h1>
+                        <audio controls>
+                            <source src="audio/karnatic_examples_1-59/04) cells in tisra.mp3" type="audio/mp3">
+                        </audio>
+                    </figcaption>
+
+                    <pre><code lang="supercollider">
+            // Write code here ...
+          </code></pre>
+
+                </figure>
+
+
+
+
+                <figure>
+
+                    <img src="reina-images/reina_14.PNG" alt="reina_14-img">
+                    <img src="reina-images/reina_14_a.PNG" alt="reina_14_a-img">
+                    <figcaption>
+                        <h1> Un beat diviso 7, semplice e con note puntate. </h1>
+                        <audio controls>
+                            <source src="audio/karnatic_examples_1-59/05) cells in misra.mp3" type="audio/mp3">
+                        </audio>
+                    </figcaption>
+
+                    <pre><code lang="supercollider">
+        // Write code here ...
+      </code></pre>
+                </figure>
+
+            </section>
+
+            <!--Sviluppo del fraseggio con i gatis-->
+            <section>
+                <h1>Sviluppo del fraseggio con i gatis</h1>
+                <p>
+                    L'approccio di apprendere solo un certo numero di celle e di considerare qualsiasi frase
+                    semplicemente come una combinazione di queste celle mentre, contemporaneamente, trattare le pause e
+                    le legature come note "non attaccate" di una particolare cella
+                    fornisce al musicista un alto senso di sicurezza e precisione senza perdere la sensazione del gati.
+                    <br>
+                    Utilizzando le pause avremo chiaramente frasi differenti. <br>
+                    L'idea è quella di pensare sempre in celle, ma senza suonarle se sono delle pause, questo evita al
+                    musicista di apire la miriade di frasi. <br>
+                    Le legature sono trattate come le pause, andando ad allungare la nota da un beat all'altro. <br>
+                    Per ora i 32 esimi non sono trattati <br>
+                    C'è sempre una consistenza e una coerenza di fondo, indipendentemente da quanto lontana possa essere
+                    la nuova frase. <br>
+                    Le frasi, andando ad utilizzare le pause e legature, suoneranno e saranno cantate con sillabe
+                    differenti per forza di cose. <br>
+                </p>
+
+    
+
+
+
+                <figure>
+
+                    <img src="reina-images/reina_15.PNG" alt="reina_15-img">
+
+                    <figcaption>
+                        <h1> Esempio di frase con gati Khanda(quintuplets = 5 matras) con note puntate, legature e pause
+                        </h1>
+                        <audio controls>
+                            <source src="audio/karnatic_examples_1-59/06) 3 versions phrase khanda.mp3"
+                                type="audio/mp3">
+                        </audio>
+                    </figcaption>
+
+                    <pre><code lang="supercollider">
+        // Write code here ...
+      </code></pre>
+                </figure>
+
+
+                <figure>
+
+                    <img src="reina-images/reina_16.PNG" alt="reina_16-img">
+
+                    <figcaption>
+                        <h1> Esempio di frase con gati Misra(settimina = 7 matras) con note puntate, legature e pause
+                        </h1>
+                        <audio controls>
+                            <source src="audio/karnatic_examples_1-59/07) 3 versions phrase misra.mp3" type="audio/mp3">
+                        </audio>
+                    </figcaption>
+
+                    <pre><code lang="supercollider">
+        // Write code here ... 
+      </code></pre>
+                </figure>
+
+                <p>
+                    In karnatic music a change of gati can occur only on tala sam. Quindi un cambiamento di tuplets può
+                    avvenire solo sul 1 beat. <br>
+                    Detto ciò esistono delle eccezzioni alla regola sopracitata, ognuna delle quali verra trattata
+                    individualmente. <br>
+
+
+                </p>
+
+            </section>
+
+            <!--Utilizzo del Solkattu -->
+            <section>
+                <h1>Utilizzo del Solkattu</h1>
+                <p>
+                    The most commonly used, besides those given as the characteristic syllables of specific gatis, are:
+                    <br>
+                    TA or THA for accents <br>
+                    DHEEM for longer notes <br>
+                    and sometimes also for accents KI, KA, DA, KE, DI, MI, GHI, NA TO(N) for the rest of notes.
+
+                    It is also possible to write the syllables underneath a phrase in order to sing it. <br>
+                    L'essenziale è iniziare con poche sillabe e pian piano aggiungerne altre.
+
+                </p>
+                <h2> A) Gatis</h2>
+                <p>
+                    verranno forniti dei semplici esercizi, rendibili codice di sc.
+                    Primo esercizio: ripeter i gati individulamente a etronomo per 4-5 minuti consecutivamente. <br>
+                    Secondo esercizio: from tisra(3)- to misra(7), salendo e scendendo 4 beats per gati, poi 3 beat, 3
+                    beats 1 beat <br>
+                    Terzo esercizio: from tisra(3)- to misra(7) random sia nell'ordine,sia nel numeor di ripetizioni
+                    dello stesso gati.
+                </p>
+
+
+                <figure>
+                    <img src="reina-images/reina_17.PNG" alt="reina_16-img">
+
+                    <figcaption>
+                        <h1>Secondo esercizio: from tisra(3)- to misra(7), salendo e scendendo 4 beats per gati, poi 3
+                            beat, 3 beats 1 beat
+                            Terzine, quartine, quintine, settimine, quintine, quartine, terzine </h1>
+                        <audio controls>
+                            <source src="audio/karnatic_examples_1-59/08) Gatis 4 beats.mp3" type="audio/mp3">
+                        </audio>
+
+
+                        <h1>Secondo esercizio: from tisra(3)- to misra(7), salendo e scendendo 4-3-2-1 beats per gati
+                        </h1>
+                        <audio controls>
+                            <source src="audio/karnatic_examples_1-59/09) Gatis 1 beat.mp3" type="audio/mp3">
+                        </audio>
+
+                        <h1>Secondo esercizio: from tisra(3)- to misra(7) .random ! </h1>
+                        <audio controls>
+                            <source src="audio/karnatic_examples_1-59/10) Random change of gatis.mp3" type="audio/mp3">
+                        </audio>
+
+                    </figcaption>
+
+                    <pre><code lang="supercollider">
+            // Write code here ... 
+          </code></pre>
+                </figure>
+
+                <h2>B) Phrasing with gatis </h2>
+                <h3>PROMEMORIA IMPORTANTE, SANKIRNA(NONINE) NON VERRANNO TRATTATI IN QUESTO CAPITOLO!!</h3>
+                <p>
+
+                    Prendi gli esercizi precedenti ed utilizza i valori con il punto o quarti al posto di ottavi fallo
+                    per: <br>
+                    Tisra(3) <br> Chatusra(2-4?) <br> Khanda(quintuplets) <br> Misra(septuplets) <br>
+                    Secondo esercizio: applica lo stesso procedimento, andando a mettere pause interne alle celle, poi
+                    utilizza anche le legature. <br>
+
+
+                </p>
+                <figure>
+                    <img src="reina-images/reina_11.PNG" alt="reina_11-img">
+                    <figcaption>
+                        <h1> Un beat diviso 4, semplice e con note puntate.
+                        </h1>
+                        <p>Failo stesso con Tisra(3) <br> Chatusra(2-4?) <br> Khanda(quintuplets) <br> Misra(septuplets)
+                            <br></p>
+
+                        <audio controls>
+                            <source src="audio/karnatic_examples_1-59/02) cells in chatusra.mp3" type="audio/mp3">
+                        </audio>
+                    </figcaption>
+
+                    <pre><code lang="supercollider">
+        
+              // Write code here ...
+                
+            </code></pre>
+
+                </figure>
+
+                <figure>
+                    <img src="reina-images/16th_note_variations_for_guitar_rhythm.jpg" alt="reina_rests-img">
+                    <figcaption>
+                        <h1> prendi l'esercizio presedente ed applica le pause come permutazioni.
+                        </h1>
+                        <p>Fai lo stesso con <br> Tisra(3) <br> Chatusra(2-4?) <br> Khanda(quintuplets) <br>
+                            Misra(septuplets) <br></p>
+                    </figcaption>
+
+
+                    <pre><code lang="supercollider">
+        
+              // Write code here ...
+                
+            </code></pre>
+
+                </figure>
+
+
+
+                <figure>
+                    <img src="reina-images/reina_11.PNG" alt="reina_11-img">
+                    <figcaption>
+                        <h1> Un beat diviso 4, semplice e con note puntate, sostituisci il meccanismo andando ad
+                            utilizzare le legature tra l'ultima nota di una cella conquella successiva
+                            .
+                        </h1>
+                        <p>Failo stesso con Tisra(3) <br> Chatusra(2-4?) <br> Khanda(quintuplets) <br> Misra(septuplets)
+                            <br></p>
+                    </figcaption>
+
+
+                    <pre><code lang="supercollider">
+        
+              // Write code here ...
+                
+            </code></pre>
+                </figure>
+
+            </section>
+
+            <section>
+                <h1>Qualche esempio preparato per gli allievi del corso di Reina, gli esercizi sono sia per musicisti
+                    classici che del dipartimento di Jazz.<br> </h1>
+
+                <figure>
+                    <img src="reina-images/reina_18.PNG" alt="reina_18-img">
+                    <figcaption>
+                        <h1> Prova a trascrivere per SC e rendi generativo con lo stesso set di regole. </h1>
+
+                    </figcaption>
+
+                    <pre><code lang="supercollider">
+        
+              // Write code here ...
+                
+            </code></pre>
+                </figure>
+
+                <figure>
+                    <img src="reina-images/reina_19.PNG" alt="reina_19-img">
+                    <figcaption>
+                        <h1> Prova a trascrivere per SC e rendi generativo con lo stesso set di regole. </h1>
+
+                    </figcaption>
+
+                    <pre><code lang="supercollider">
+            
+                  // Write code here ...
+                    
+                </code></pre>
+                </figure>
+
+                <figure>
+                    <img src="reina-images/reina_20.PNG" alt="reina_20-img">
+                    <figcaption>
+                        <h1> Prova a trascrivere per SC e rendi generativo con lo stesso set di regole. </h1>
+
+                    </figcaption>
+
+                    <pre><code lang="supercollider">
+                
+                      // Write code here ...
+                        
+                    </code></pre>
+                </figure>
+
+                <figure>
+                    <img src="reina-images/reina_21.PNG" alt="reina_21-img">
+                    <figcaption>
+                        <h1> Prova a trascrivere per SC e rendi generativo con lo stesso set di regole. </h1>
+
+                    </figcaption>
+
+                    <pre><code lang="supercollider">
+                    
+                          // Write code here ...
+                            
+                        </code></pre>
+                </figure>
+
+                <figure>
+                    <img src="reina-images/reina_22.PNG" alt="reina_22-img">
+                    <figcaption>
+                        <h1> Prova a trascrivere per SC e rendi generativo con lo stesso set di regole. </h1>
+
+                    </figcaption>
+
+                    <pre><code lang="supercollider">
+                    
+                          // Write code here ...
+                            
+                        </code></pre>
+                </figure>
+
+            </section>
+
+
+
+            <!--Chapter 3 Jathis-->
+
+            <section>
+                <h1>Chapter 3 Jathis</h1>
+
+                <p>
+                    Jathi = accenti sistematici applicati ad un gati, si va a creare una doppia accentazione del beat.
+                    <br>
+                    A jathi can be defined as a systematic accent applied to a gati,producing as a result crossing
+                    accents over the beat. <br>
+                    Ci sono 4 Jathis: 3,4,5,7. <br>
+                    Quindi ogni gati può usare 3 Jathis. <br>
+                    vediamo : <br>
+                    gati Tisra(3) = Jathis: 4,5,7 <br>
+                    gati Chatusra(4) = Jathis: 3,5,7 <br>
+                    gati Khanda(quintuplets) = Jathis: 3,4,7 <br>
+                    gati Misra(septuplets) = Jathis: 3,4,5 <br>
+                    Bisogna essere in grado di sapere quanti beats ed accenti sono necessari per Risovere la
+                    combinazione tra gati/jathis ovver il minimo dei comuni multipli. <br>
+                    o meglio il numero di gati stabilisce il numero di accenti necessari affinché ci si incontri su un
+                    beat. <br>
+                    Il numero di jathi fornirà il numero di battute necessarie per cadere su una battuta (ad esempio,
+                    chatusra jathi 3=4 accenti in 3 battute) <br>
+                    Gati chatusra(4) risolverà sempre dopo 4 accenti, per qualsiasi Jathis si userà! <br>
+
+                </p>
+
+
+             
+
+
+
+
+
+                <h1>TISRA / Jathis </h1>
+                <figure>
+                    <img src="reina-images/reina_25.PNG" alt="reina25-img">
+                    <figcaption>
+                        <h1> gati Tisra(3) = Jathis: 4-5-7 </h1>
+
+                        <audio controls>
+                            <source src="audio/karnatic_examples_1-59/11) Tisra jathis 4, 5 7.mp3" type="audio/mp3">
+                        </audio>
+                        <p>parte con due terzine a vuoto</p>
+                    </figcaption>
+
+                    <pre><code lang="supercollider">
+                
+                      // Write code here ...
+                        
+                    </code></pre>
+                </figure>
+
+
+                <h3>negli esempi utilizzo un metronomo in 4/4 a 120 bpm per chiarezza, anche se aggiunge un'altro layer
+                    ... </h3>
+                <figure>
+                    <img src="reina-images/Ableton_01.PNG" alt="ableton-img">
+                    <figcaption>
+                        <h1> gati Tisra(3) = Jathis: 4 </h1>
+
+                        <audio controls>
+                            <source src="audio/ableton_audio/Gati3_jathis4.mp3" type="audio/mp3">
+                        </audio>
+
+                    </figcaption>
+
+                    <pre><code lang="supercollider">
+            
+                  // Write code here ...
+                    
+                </code></pre>
+                </figure>
+
+
+                <figure>
+                    <img src="reina-images/Ableton_02.PNG" alt="ableton-img">
+                    <figcaption>
+                        <h1>gati Tisra(3) = Jathis: 5 </h1>
+                        <audio controls>
+                            <source src="audio/karnatic_examples_1-59/02) cells in chatusra.mp3" type="audio/mp3">
+                        </audio>
+
+                    </figcaption>
+
+                    <pre><code lang="supercollider">
+            
+                  // Write code here ...
+                    
+                </code></pre>
+                </figure>
+
+
+                <figure>
+                    <img src="reina-images/Ableton_03.PNG" alt="ableton-img">
+                    <figcaption>
+                        <h1>gati Tisra(3) = Jathis: 7</h1>
+                        <audio controls>
+                            <source src="audio/ableton_audio/Gati3_jathis7.mp3" type="audio/mp3">
+                        </audio>
+
+
+                    </figcaption>
+
+                    <pre><code lang="supercollider">
+            
+                  // Write code here ...
+                    
+                </code></pre>
+                </figure>
+
+
+
+
+
+
+
+            </section>
+
+
+            <!--Chatusra Jathi -->
+            <section>
+                <h1>Chatusra / Jathis </h1>
+                <p>Nota bene che se jathi è 3 , vuol dire anche che  i beats saranno 3, stessa cosa con 5 e 7</p>
+
+                <figure>
+                    <img src="reina-images/reina_26.PNG" alt="reina26-img">
+                    <figcaption>
+                        <h1> gati Chatusra(4) = Jathis: 3,5,7 </h1>
+
+                        <audio controls>
+                            <source src="audio/karnatic_examples_1-59/12) chatusra jathis 3, 5, 7.mp3" type="audio/mp3">
+                        </audio>
+                        <p>parte con due quartine a vuoto <br>
+                            quindi abbiamo quartine con accenti: <br>
+                             ogni 3 <br>
+                             ogni 5 <br>
+                             ogni 7 <br>
+                        </p>
+                    </figcaption>
+
+                    <pre><code lang="supercollider">
+        
+              // Write code here ...
+                
+            </code></pre>
+                </figure>
+
+
+                <h3>negli esempi utilizzo un metronomo in 4/4 a 120 bpm per chiarezza, anche se aggiunge un'altro layer
+                    ... </h3>
+                <figure>
+                    <img src="reina-images/Ableton_04.PNG" alt="ableton-img">
+                    <figcaption>
+                        <h1> gati Chatusra(4) = Jathis: 3</h1>
+
+                        <audio controls>
+                            <source src="audio/ableton_audio/Gati4_jathis3.mp3" type="audio/mp3">
+                        </audio>
+
+                    </figcaption>
+
+                    <pre><code lang="supercollider">
+            
+                  // Write code here ...
+                    
+                </code></pre>
+                </figure>
+
+
+                <figure>
+                    <img src="reina-images/Ableton_05.PNG" alt="ableton-img">
+                    <figcaption>
+                        <h1>gati Chatusra(4) = Jathis: 5 </h1>
+                        <audio controls>
+                            <source src="audio/ableton_audio/Gati4_jathis5.mp3" type="audio/mp3">
+                        </audio>
+
+                    </figcaption>
+
+                    <pre><code lang="supercollider">
+            
+                  // Write code here ...
+                    
+                </code></pre>
+                </figure>
+
+
+                <figure>
+                    <img src="reina-images/Ableton_06.PNG" alt="ableton-img">
+                    <figcaption>
+                        <h1>gati Chatusra(4) = Jathis:  7</h1>
+                        <audio controls>
+                            <source src="audio/ableton_audio/Gati4_jathis7.mp3" type="audio/mp3">
+                        </audio>
+
+
+                    </figcaption>
+
+                    <pre><code lang="supercollider">
+            
+                  // Write code here ...
+                    
+                </code></pre>
+                </figure>
+
+            </section>
+
+
+
+
+              <!--Khanda Jathi -->
+              <section>
+                <h1>Khanda / Jathis </h1>
+                <p>Nota bene che se jathi è 3 , vuol dire anche che i beats saranno 3, stessa cosa con 4 e 7</p>
+
+                <figure>
+                    <img src="reina-images/reina_27.PNG" alt="reina26-img">
+                    <figcaption>
+                        <h1> gati Khanda(5) = Jathis: 3,4,7 </h1>
+
+                        <audio controls>
+                            <source src="audio/karnatic_examples_1-59/13) khanda jathis 3, 4, 7.mp3" type="audio/mp3">
+                        </audio>
+                        <p>parte con due quintine a vuoto <br>
+                            quindi abbiamo quinine con accenti: <br>
+                             ogni 3 <br>
+                             ogni 4 <br>
+                             ogni 7 <br>
+                        </p>
+                    </figcaption>
+
+                    <pre><code lang="supercollider">
+        
+              // Write code here ...
+                
+            </code></pre>
+                </figure>
+            
+                <h3>negli esempi utilizzo un metronomo in 4/4 a 90 bpm per chiarezza, anche se aggiunge un'altro layer
+                    ... </h3>
+                <figure>
+                    <img src="reina-images/Ableton_07.PNG" alt="ableton-img">
+                    <figcaption>
+                        <h1> gati  Khanda(5) = Jathis: 3</h1>
+
+                        <audio controls>
+                            <source src="audio/ableton_audio/Gati5_jathis3.mp3" type="audio/mp3">
+                        </audio>
+                        <p>accenti e ghost notes per enfatizzare la quintina e solo accenti </p>
+
+                    </figcaption>
+
+                    <pre><code lang="supercollider">
+            
+                  // Write code here ...
+                    
+                </code></pre>
+                </figure>
+
+
+                <figure>
+                    <img src="reina-images/Ableton_08.PNG" alt="ableton-img">
+                    <figcaption>
+                        <h1>gati  Khanda(5) = Jathis: 4 </h1>
+                        <audio controls>
+                            <source src="audio/ableton_audio/Gati5_jathis4.mp3" type="audio/mp3">
+                        </audio>
+                        <p>accenti e ghost notes per enfatizzare la quintina e solo accenti </p>
+
+                    </figcaption>
+
+                    <pre><code lang="supercollider">
+            
+                  // Write code here ...
+                    
+                </code></pre>
+                </figure>
+
+
+                <figure>
+                    <img src="reina-images/Ableton_09.PNG" alt="ableton-img">
+                    <figcaption>
+                        <h1>gati Khanda(5) = Jathis:  7</h1>
+                        <audio controls>
+                            <source src="audio/ableton_audio/Gati5_jathis7.mp3" type="audio/mp3">
+                        </audio>
+                        <p>accenti e ghost notes per enfatizzare la quintina e solo accenti </p>
+
+                    </figcaption>
+
+                    <pre><code lang="supercollider">
+            
+                  // Write code here ...
+                    
+                </code></pre>
+                </figure>
+
+            
+            
+            </section>
+
+
+                          <!--Misra Jathi -->
+                          <section>
+                            <h1>Misra / Jathis </h1>
+                            <p>Nota bene che se jathi è 3 , vuol dire anche che i beats saranno 3, stessa cosa con 4 e 5</p>
+            
+                            <figure>
+                                <img src="reina-images/reina_28.PNG" alt="reina26-img">
+                                <figcaption>
+                                    <h1> gati Misra(7) = Jathis: 3,4,5 </h1>
+            
+                                    <audio controls>
+                                        <source src="audio/karnatic_examples_1-59/14) misra jathis 3, 4, 5.mp3" type="audio/mp3">
+                                    </audio>
+                                    <p>parte con due settimine a vuoto <br>
+                                        quindi abbiamo settimine  con accenti: <br>
+                                         ogni 3 <br>
+                                         ogni 4 <br>
+                                         ogni 5 <br>
+                                    </p>
+                                </figcaption>
+            
+                                <pre><code lang="supercollider">
+                    
+                          // Write code here ...
+                            
+                        </code></pre>
+                            </figure>
+                        
+                            <h3>Negli esempi utilizzo un metronomo in 4/4 a 60 bpm per chiarezza, anche se aggiunge un'altro layer
+                                ... </h3>
+                            <figure>
+                                <img src="reina-images/Ableton_10.PNG" alt="ableton-img">
+                                <figcaption>
+                                    <h1> gati Misra(7) = Jathis: 3</h1>
+            
+                                    <audio controls>
+                                        <source src="audio/ableton_audio/Gati7_jathis3.mp3" type="audio/mp3">
+                                    </audio>
+                                    <p>accenti e ghost notes per enfatizzare la settimina e solo accenti </p>
+            
+                                </figcaption>
+            
+                                <pre><code lang="supercollider">
+                        
+                              // Write code here ...
+                                
+                            </code></pre>
+                            </figure>
+            
+            
+                            <figure>
+                                <img src="reina-images/Ableton_11.PNG" alt="ableton-img">
+                                <figcaption>
+                                    <h1> gati Misra(7) = Jathis: 4 </h1>
+                                    <audio controls>
+                                        <source src="audio/ableton_audio/Gati7_jathis4.mp3" type="audio/mp3">
+                                    </audio>
+                                    <p>accenti e ghost notes per enfatizzare la settimina e solo accenti </p>
+            
+                                </figcaption>
+            
+                                <pre><code lang="supercollider">
+                        
+                              // Write code here ...
+                                
+                            </code></pre>
+                            </figure>
+            
+            
+                            <figure>
+                                <img src="reina-images/Ableton_12.PNG" alt="ableton-img">
+                                <figcaption>
+                                    <h1>gati Misra(7) = Jathis: 5</h1>
+                                    <audio controls>
+                                        <source src="audio/ableton_audio/Gati7_jathis5.mp3" type="audio/mp3">
+                                    </audio>
+                                    <p>accenti e ghost notes per enfatizzare la settimina e solo accenti </p>
+            
+                                </figcaption>
+            
+                                <pre><code lang="supercollider">
+                        
+                              // Write code here ...
+                                
+                            </code></pre>
+                            </figure>
+            
+                        
+                        
+                        </section>
+
+    <!--Tisra Jathi -->
+    <section>
+        <h1>Tisra(3*2speed) / Jathis </h1>
+        <p>
+            Viene utilizzata una second speed che ci consente di "trasformare" una terzian di ottavi in due terzine di sedicesimi, che sono equivaenti ad una sestina di ottavi.Tisra(3*2 second speed) <br>
+            Altra anomalia, la sestina viene sillabata con 4+2  (Ta-ka-di-mi + ta-ka) <br>
+            Nota bene che se jathi è 4 , vuol dire anche che i beats saranno 4, stessa cosa con 5 e 7</p>
+
+        <figure>
+            <img src="reina-images/reina_29.PNG" alt="reina26-img">
+            <figcaption>
+                <h1> gati Tisra(3*2 second speed)  = Jathis: 4,5,7 </h1>
+
+                <audio controls>
+                    <source src="audio/karnatic_examples_1-59/15) tisra (sextuplets) jat 4, 5, 7.mp3" type="audio/mp3">
+                </audio>
+                <p>parte con due sestine a vuoto (Ta-ka-di-mi + ta-ka) 4+2 = 6  <br>
+                    quindi abbiamo sestine  con accenti: <br>
+                     ogni 4 <br>
+                     ogni 5 <br>
+                     ogni 7 <br>
+                </p>
+            </figcaption>
+
+            <pre><code lang="supercollider">
+
+      // Write code here ...
+        
+    </code></pre>
+        </figure>
+    
+        <h3>Negli esempi utilizzo un metronomo in 4/4 a 60 bpm per chiarezza, anche se aggiungo  un'altro layer che segna il metro.
+            ... </h3>
+        <figure>
+            <img src="reina-images/Ableton_13.PNG" alt="ableton-img">
+            <figcaption>
+                <h1> gati Tisra(3*2 second speed)  = Jathis: 4 </h1>
+
+                <audio controls>
+                    <source src="audio/ableton_audio/Gati6_jathis4.mp3" type="audio/mp3">
+                </audio>
+                <p>accenti e ghost notes per enfatizzare la sestina e solo accenti </p>
+
+            </figcaption>
+
+            <pre><code lang="supercollider">
+    
+          // Write code here ...
+            
+        </code></pre>
+        </figure>
+
+
+        <figure>
+            <img src="reina-images/Ableton_14.PNG" alt="ableton-img">
+            <figcaption>
+                <h1>gati Tisra(3*2 second speed)  = Jathis: 5 </h1>
+                <audio controls>
+                    <source src="audio/ableton_audio/Gati6_jathis5.mp3" type="audio/mp3">
+                </audio>
+                <p>accenti e ghost notes per enfatizzare la sestina e solo accenti </p>
+
+            </figcaption>
+
+            <pre><code lang="supercollider">
+    
+          // Write code here ...
+            
+        </code></pre>
+        </figure>
+
+
+        <figure>
+            <img src="reina-images/Ableton_15.PNG" alt="ableton-img">
+            <figcaption>
+                <h1>gati Tisra(3*2 second speed) = Jathis: 7 </h1>
+                <audio controls>
+                    <source src="audio/ableton_audio/Gati6_jathis7.mp3" type="audio/mp3">
+                </audio>
+                <p>accenti e ghost notes per enfatizzare la sestina e solo accenti </p>
+
+            </figcaption>
+
+            <pre><code lang="supercollider">
+    
+          // Write code here ...
+            
+        </code></pre>
+        </figure>
+
+
+    </section>
+
+    <section>
+        <h1>Solkattu Syllables</h1>
+        <p> The syllables assigned to a jathi will always correspond to the chosen number and will never take the syllables assigned to the gati.
+Quindi il jathi va a sostituire la sillabazione di qiualsivoglia gati sottostante, se siamo in terzine ma con un'accentazione ogni 4, avremo 
+Ta-ke-di-mi, altrimenti non si riuscirebbe a passare all'alscoltatore il feeling di chatusra(4) <br>
+</p>
+
+<figure> 
+
+    <img src="reina-images/reina_30.PNG" alt="reina30-img">    <figcaption>
+        <h1> qui NON riusciamo a percepire il feeling in 4 </h1>
+    </figcaption>
+
+</figure>
+
+<figure> 
+
+    <img src="reina-images/reina_31.PNG" alt="reina31-img">
+    <figcaption>
+     <h1> qui invece riusciamo a percepire il feeling in 4 chatusra(4) </h1>
+    </figcaption>
+
+</figure>
+
+<p>L'unica eccezzione la abbiamo quando usiamo jathi 7, che cambia la sillabazione in base al gati</p>
+
+<figure> 
+
+    <img src="reina-images/reina_32.PNG" alt="reina32-img">
+    <figcaption>
+     <h1> Jath 7 con: <br>  gati Tisra(3)  <br>
+        gati Chatusra(4)  <br>
+        gati Khanda(quintuplets) </h1>
+    </figcaption>
+
+</figure>
+
+
+       
+    </section>
+
+   <!--   Vertical Possibilities with Gati/Jathi Combinations-->
+   <section>
+       <h1>   Vertical Possibilities with Gati/Jathi Combinations   </h1>
+       <p>Se ci sono più layers di musicisti o computatori :)  che hanno lo stesso gati come comune denominatore, ma andando ad utilizzare diversi jathis produrranno diversi "Metri" o "Strutture"<div class=""></div>
+       </p>
+       <p>Esempio: in Chatusra(4) Jathi 3 / Jathi 5 = sedicesimi con accenti ogni 3 per il primo esecutore e sedicesimi con accenti ogni 5 per il secondo: <br>
+    Avremo 2 poliritmi 3 vs 4 e contemporaneamente il 5 vs 4. Questi si incontreranno sul beat dopo: 
+    </p>
+
+    <figure> 
+
+        <img src="reina-images/reina_33.PNG" alt="reina32-img">
+        <figcaption>
+         <h1>Minimo comune multiplo tra i Jathis</h1>
+        </figcaption>
+    
+    </figure>
+
+    <figure>
+        <img src="reina-images/reina_34.PNG" alt="ableton-img">
+        <figcaption>
+            <h1>Chatusra jathi 5 vs. chatusra jathi 7=35 beats </h1>
+
+            <audio controls>
+                <source src="audio/karnatic_examples_1-59/16) ch j5 ch j7.mp3" type="audio/mp3">
+            </audio>
+          
+        </figcaption>
+
+        <pre><code lang="supercollider">
+
+      // Write code here ...
+        
+    </code></pre>
+    </figure>
+
+    <figure>
+        <img src="reina-images/reina_35.PNG" alt="ableton-img">
+        <figcaption>
+            <h1>Khanda jathi 3 vs. khanda jathi 4=12 beats </h1>
+
+            <audio controls>
+                <source src="audio/karnatic_examples_1-59/17) kh j3 kh j4.mp3" type="audio/mp3">
+            </audio>
+          
+        </figcaption>
+
+        <pre><code lang="supercollider">
+
+      // Write code here ...
+        
+    </code></pre>
+    </figure>
+
+
+
+
+<h3>2) Utilizzo di più layers con stesso Jathi(accentazione) ma diverso gati(suddivisione del beat)</h3>
+
+
+
+<figure> 
+
+    <img src="reina-images/reina_36.PNG" alt="reina32-img">
+    <figcaption>
+     <h1>Stessi Jathis su gatis differenti</h1>
+    </figcaption>
+
+</figure>
+
+
+<figure>
+    <img src="reina-images/reina_37.PNG" alt="ableton-img">
+    <figcaption>
+        <h1>Chatusra jathi 5 vs. tisra jathi 5  </h1>
+
+        <audio controls>
+            <source src="audio/karnatic_examples_1-59/18) ch j5 tisra j5.mp3" type="audio/mp3">
+    
+        </audio>
+    </figcaption>
+
+    <pre><code lang="supercollider">
+
+  // Write code here ...
+    
+</code></pre>
+</figure>
+
+
+<figure>
+    <img src="reina-images/reina_38.PNG" alt="ableton-img">
+    <figcaption>
+        <h1>Khanda jathi 4 vs. misra jathi 4 </h1>
+
+        <audio controls>
+            <source src="audio/karnatic_examples_1-59/19) kh j4 misra j4.mp3" type="audio/mp3">
+    
+        </audio>
+    </figcaption>
+
+    <pre><code lang="supercollider">
+
+  // Write code here ...
+    
+</code></pre>
+</figure>
+
+
+
+<h3>3) Utilizzo di più layers con differenti Jathi(accentazione) e gati(suddivisione del beat)</h3>
+<p>come risultato avremo strutture poliritmiche miste con una percezione dei layers su tempi differenti.</p>
+
+<figure> 
+
+    <img src="reina-images/reina_39.PNG" alt="reina32-img">
+    <img src="reina-images/reina_40.PNG" alt="reina32-img">
+    <img src="reina-images/reina_41.PNG" alt="reina32-img">
+    <figcaption>
+     <h1>differenti Jathi(accentazione) e gati(suddivisione del beat)</h1>
+    </figcaption>
+    
+    <pre><code lang="supercollider">
+
+        // Write 42 combinations in  here ... :)
+          
+      </code></pre>
+
+</figure>
+
+
+<figure>
+    <img src="reina-images/reina_42.PNG" alt="reina32-img">
+    <figcaption>
+        <h1>Tisra jathi 4 vs. khanda jathi 3=12 beats </h1>
+
+        <audio controls>
+            <source src="audio/karnatic_examples_1-59/20) tisra j4 khanda j3.mp3" type="audio/mp3">
+    
+        </audio>
+    </figcaption>
+
+    <pre><code lang="supercollider">
+
+  // Write code here ...
+    
+</code></pre>
+</figure>
+
+
+<figure>
+    <img src="reina-images/reina_43.PNG" alt="reina32-img">
+    <figcaption>
+        <h1>Chatusra jathi 3 vs. misra jathi 5=15 beats </h1>
+
+        <audio controls>
+            <source src="audio/karnatic_examples_1-59/21) ch j3 misra j5.mp3" type="audio/mp3">
+    
+        </audio>
+    </figcaption>
+
+    <pre><code lang="supercollider">
+
+  // Write code here ...
+    
+</code></pre>
+</figure>
+
+
+   </section>
+ 
+
+      <!--Relationship of Gati/Jathi Combinations to the Tala -->
+   <section>
+       <h1>Relationship of Gati/Jathi Combinations to the Tala</h1>
+       <p>
+           Ognuna delle 3 combinazioni verticali viste prima, deve risolvere sul Tala Sam(1 beat del tala) o sull'Anga Sam(1 beat di un blocchetto costruttivo Laghu /   Anudrutam / Drutam )!: <br>
+           1) gati fisso 2 jatis <br>
+           2) jati  fisso 2 gatis <br>
+           3) jati/gati differenti <br>
+
+           Se per esempio prendessimo il Chatusra Adi Tala = L4-D-D 1,5,7 sono i punti nei quali si può risolvere la tensione ritmica. 
+           Più il minimo comune multiplo fra le due parti è alto e maggiore sarà la necessità di risolvere sul Tala sam.<br>
+       </p>
+       <h1>Esempio: </h1>
+       <p>
+        <img src="images/L3DD.png" alt="L3DD-img">     
+           Esempio: 
+           gati chatusra(4)/ jathi 3 VS gati chatusra(4)/Jathi 5 = 15 beats.
+           se siamo in Structure of tisra triputa – L3 D D) ovvero 7/4 sono necessari dei calcoli per capire dove inizia il politritmo. <br>
+           Bisogna pensare al contrario, a noi interessa che risolva sul beat 1 Tala sam, quindi se il metro è di 7/4 = partendo dall'ultimo beat del tala,
+           per due cicli = 1(ultimo beat)+7+7 = 15 beats. <br>
+           Se volessimo risolvere sul primo Drutam Sam, il punto di partenza sarebbe sul 3 beat se includiamo lo 0. <br>
+           Se volessimo risolvere sul terzo anga ovvero sul secondo drutam il beat sarebbe il numero 5. This is then 3+7+5=15 beat  <br>
+
+
+       </p>
+
+   </section>
+
+  <!--Strutture individuali di poliritmi  -->
+  <section>
+    <h1>Strutture individuali di poliritmi</h1>
+    <p>
+        In pratica è raro che vengano utilizate  nella musica carnatica. <br>
+        I musicisti della tradizione prediligono un cambiamento costante, rispetto a delle tensioni che si accumulano battuta dopo battuta. <br>
+        Infatti loro trovano noiose queste staticità. <br>
+        Le cose viste fin ora hanno uno scopo puramente pedagogico. <br>
+Farle proprie ed essere in grado di sentire dove gli accenti cadono nel beat, per andare oltre in questa direzione. <br>
+Esplorare le possibilità compositive di layers differenti che risolvono su un dato Tala Sam o Anga sam. <br>
+se facciamo inizaire insieme un poliritmo, poi risolverà dopo tot... <br>
+ma se iniziano in momenti diversi avremo più possibilità
+
+    </p>
+    <h1>serve consapevolezza riguardo agli end points! ed a dove si è ed a dove è l'altro nel beat!</h1>
+    <pre><code lang="supercollider">
+
+        // try here to make some nice polyrhythms the resolve on Tala Sam o Anga sam. hai i 42 gia pronti in precedenza! 
+        /*
+        If jathi 3 against jathi 5 are taken, the layer in jathi 3 could, for instance, simply perform it twice (6 beats) while the 2nd layer could perform it
+        only once (5 beats), starting a beat later than the 1st layer and resolving together on a tala or anga sam.
+    
+        */
+          
+      </code></pre>
+
+</section>
+
+
+
+  <!--Metodo Pratico-->
+  <section>
+<h1>Metodo Pratico</h1>
+
+    <p>Visualizza e memorizza dove gli accenti cadono in relazioe al beat <br>
+        accenta solo i matras che sono accentati dallo Jathi <br>
+        Sullo stesso gati, passa da uno jathi all'latro , incrementando e decrementando, poi in modo randomico. <br>
+    
+    </p>
+
+    
+<figure>
+    <img src="reina-images/reina_44.PNG" alt="reina44-img">
+    <figcaption>
+        <h1>chatusra jathi 3 going to jathi 5 and jathi 7 </h1>
+
+        <audio controls>
+            <source src="audio/karnatic_examples_1-59/22) same gati, changing jathis.mp3" type="audio/mp3">
+    
+        </audio>
+    </figcaption>
+
+    <pre><code lang="supercollider">
+
+  // Write code here ...
+    
+</code></pre>
+</figure>
+
+<p>Tenendo lo stesso Jathi, passa da gati a gati </p>
+
+<figure>
+    <img src="reina-images/reina_45.PNG" alt="reina44-img">
+    <figcaption>
+        <h1>Example: tisra jathi 5 going to chatusra jathi 5 and then misra jathi 5 (track 23)</h1>
+
+        <audio controls>
+            <source src="audio/karnatic_examples_1-59/23) same jathi, changing gatis.mp3" type="audio/mp3">
+    
+        </audio>
+    </figcaption>
+
+    <pre><code lang="supercollider">
+
+  // Write code here ...
+    
+</code></pre>
+</figure>
+
+<p>Pratica le combinazioni verticali spiegate sopra nelle 3 forme. </p>
+<pre><code lang="supercollider">
+
+    // Write code here ...
+      
+  </code></pre>
+
+</section>
+
+<!--Chapter 4 GAti Bhedam ‘change through destruction’. -->
+
+<section>
+    <h1>GAti Bhedam ‘change through destruction’</h1>
+    <p>Gati bhedam is a technique by which the phrasing in a gati/jathi combination is constructed around the jathi rather than the gati. <br>
+        Spostando Gli accenti si crea un'illusione di suonare in un altro tempo, 
+        for example, khanda jathi 3 should sound as if the performer is playing a phrase in tisra.
+        A karnatic musician would never say khanda jathi 3, but rather tisra in khanda, which denotes quite emphatically the notion behind it: to give the impression of being in tisra while the underlying gati is khanda.1    
+    </p>
+
+    <h3>Notation </h3>
+    <img src="reina-images/reina_46.PNG" alt="reina46-img">
+
+    <p>Utilizzando una notazione tradizionale, si riesce a scrivere praticamente tutto tranne il modo di interpretare correttamente
+    il fatto di essere in quintine con accenti ogni 3, nella maniera che farebbe un musicta carnatico. <br>
+    L'idea di "beat-line" che separa un beat dall'altro non funziona bene con quella dei raggruppamenti. <br>
+    When using gati bhedam, phrases are always notated every 3, 4, 5 or 7 matras within any given gati.
+     Ignoring the beat-line that characterises the western notation system, each phrase is separated by the sign . 
+     For instance, the first three beats of the
+     <img src="reina-images/reina_47.PNG" alt="reina47-img">
+    The sign  that signifies the end of a phrase also implies that the first note of the next grouping is to be emphasised.(performed with a downbeat feeling.
+    I decided to find or create a notational device that would enable me to convey the feeling of the jathi.
+     I found that, in most cases, by a. beaming the phrase together every 3, 4, 5 or 7 matras;
+      and b. using an accent on the first note of a grouping of jathi 3, 4, 5 or 7 most western musicians received a clear visual impression
+       that made them understand and try to convey what was meant by beaming the notes together. <br>
+quindi la frase di prima viene scritta im questo modo: 
+</p>
+<figure>
+    <img src="reina-images/reina_48.PNG" alt="reina48-img">
+    <figcaption>
+        <h1>khanda jathi 3 </h1>
+
+        <audio controls>
+            <source src="audio/karnatic_examples_1-59/24) Gati Bhedam khanda jathi 3.mp3" type="audio/mp3">
+    
+        </audio>
+    </figcaption>
+
+    <pre><code lang="supercollider">
+
+  // Write code here ...
+    
+</code></pre>
+</figure>
+
+
+  
+<p>emrgono diversi casi dove la scrittura musicale deve essere estesa.</p>
+
+
+    <figure>
+        <img src="reina-images/reina_49.PNG" alt="reina48-img">
+        <figcaption>
+            <h1>Chatusra Jathi 7</h1>
+    
+            <audio controls>
+                <source src="audio/karnatic_examples_1-59/25) Gati Bhedam chat 7.mp3" type="audio/mp3">
+        
+            </audio>
+        </figcaption>
+    
+        <pre><code lang="supercollider">
+    
+      // Write code here ...
+        
+    </code></pre>
+    </figure>
+
+    <figure>
+        <img src="reina-images/reina_50.PNG" alt="reina50-img">
+        <figcaption>
+            <h1>Gati Bhedam  Tisra jathi 5</h1>
+    
+            <audio controls>
+                <source src="audio/karnatic_examples_1-59/26) Gati Bhedam  Tisra jathi 5.mp3" type="audio/mp3">
+        
+            </audio>
+        </figcaption>
+    
+        <pre><code lang="supercollider">
+    
+      // Write code here ...
+        
+    </code></pre>
+    </figure>
+
+
+    <figure>
+        <img src="reina-images/reina_51.PNG" alt="reina51-img">
+        <figcaption>
+            <h1>Gathi bhedam misra jathi 4</h1>
+    
+            <audio controls>
+                <source src="audio/karnatic_examples_1-59/27) Gathi bhedam misra jathi 4.mp3" type="audio/mp3">
+        
+            </audio>
+        </figcaption>
+    
+        <pre><code lang="supercollider">
+    
+      // Write code here ...
+        
+    </code></pre>
+    </figure>
+</section>
+
+
+
+
+            <!--Creative Apllications -->
+            <section>
+<h1>Creative Apllications</h1>
+
+                <p>
+                    Adesso che abbiamo sia il concetto di verticalità che di Gathi bhedam, contemporaneamente, i ritmi diventano facilmente troppo intricati e poco chiari. <br>
+
+                    Abbiamo bisogno di chiarezza nei momenti di polypulses! <br>
+                    essential purpose is to create an illusion of polypulses or polytempi.
+                    The phrase is always created around the accent provided by the jathi.
+                    accents. When accents are skipped, the feeling of being in a different gati vanishes;
+                    Karnatic musicians clearly state that gati bhedam exists only when all the accents are attacked and the phrase is created around the jathi.
+                    There are only two simple rules to avoid losing the feeling of the jathi: <br>
+                     1. Never skip two accents in a row. <br>
+                    2. Never skip the accent that falls on the beat. <br>
+                    Below is a transcription of part of a piece in 5/8, or khanda chapu, in which the singer is continuously making phrases with jathi 2, 3, 4 and 6. (track 28)
+
+
+
+                </p>
+
+                <figure>
+                    <img src="reina-images/reina_52.PNG" alt="reina52-img">
+                    <figcaption>
+                        <h1>Trascrizione del brano khanda chapu 5/8 </h1>
+                
+                        <audio controls>
+                            <source src="audio/karnatic_examples_1-59/28) (soram kattu 5_8) gati bhedam phrasing.mp3" type="audio/mp3">
+                    
+                        </audio>
+                    </figcaption>
+                
+                    <pre><code lang="supercollider">
+
+
+
+                
+                  // Write code here ...
+                    
+                </code></pre>
+                </figure>
+
+            </section>
+
+           
+   <!-- Tree of Gati Bhedam (Gati Vruksha)-->
+   <section>
+       <h1> Tree of Gati Bhedam (Gati Vruksha)</h1>
+
+    <p></p>
+
+</section>
+
+            <!--KARNATAKA DEF-->
+            <section>
+
+                <p>It is this “dialogue between what is ﬁxed and what is created in the moment [that] is at the
+                    heart of listeners’ enjoyment of Karnatak music.”</p>
+
+            </section>
+
+
+        </article>
+    </main>
+</body>
+
+</html>
