@@ -10,7 +10,8 @@
     <link href="https://unpkg.com/@nextbitlabs/rapido@^3/rapido.css" rel="stylesheet" type="text/css">
     RAPIDO -->
     <link rel="stylesheet" href="style.css">
-    
+ <!--<link href="./normalize.css" rel="stylesheet" type="text/css">
+    -->   
 
     <!-- Code Highlighiting.js for SC-->
 
@@ -37,7 +38,7 @@
 
     <style>
         body {
-            background: lightblue;
+            background: rgb(234, 232, 232);
             margin: 40px;
         }
 
@@ -58,10 +59,9 @@
 <body>
     <nav>
         <ul class="nav__links" >
-            <li><a href="index.html">SC Home </a></li>
-            <li><a href="Applying Carnatic.html">Applying Carnatic Music to western culture</a></li>
             <li><a href="Outputs.html">Code Examples</a></li>
-            <li><a href="vSarvaPhraseAuto.html">vSarvaPhraseAuto analysis</a></li>
+            <li><a href="vSarvaPhraseAuto.html">vSarvaPhraseAuto Analysis</a></li>
+            <li><a href="Applying Carnatic.html">Applying Karnatic Rhythmical Techniques to Western Music</a></li>
         </ul>
 
     </nav>
@@ -79,7 +79,7 @@
           <!-- navbar-->
                
                 <h1>
-                    Karantic music and Konnakol for Sc users
+                Konnakol and Karnatic music in Supercollider 
                 </h1>
                 <h2>Appunti tratti da: <br>
                     Computer Representation and Generation of
@@ -87,29 +87,46 @@
                     <a href="https://www.arthurcarabott.com/assets/projects/konnakkol/dissertation.pdf"
                         target="_blank">Link alla Tesi</a>
 
-                </h2><br>
+                </h2>
 
-                <h4>Names of inﬂuential musicians to listen to: <br>
-                    <a href="https://youtu.be/6jx31BoQ0hg" target="_blank">- Mridangam maestro Guru Kaaraikkudi Mani</a>
-                    <br>
-                    <a href="https://youtu.be/NRc9yvEex2Q" target="_blank">- Vocalist Shri T.M. Krishna</a> <br>
-                    <a href="https://youtu.be/00OGB9BH_Zk" target="_blank">- Violinist H. N. Bhaskar</a> <br>
-                    <a href="https://www.youtube.com/user/AmritKhanjira" target="_blank">- Kanjeera player N.
-                        Amrit</a><br> <br>
-                </h4><br>
-                <h4>
-                    <a href="https://www.arthurcarabott.com/konnakkol/" target="_blank">Grammar Based Konnakol in the
-                        Web - Carabott</a>
-                    <a href="https://github.com/acarabott/ohm-konnakkol" target="_blank"
-                        rel="noopener noreferrer">__________ Github source here</a> <br>
-
-                    <a href="https://carnatic2000.tripod.com/" target="_blank">Carnatic Music Links</a> <br>
-                </h4>
-
-                <a href="https://scsynth.org/t/analysis-of-a-project-with-4-interconnected-classes-oop/5001"
-                    target="_blank">Aiuto da casa SC-USERS</a>
+             
 
             </header>
+
+          <!--LINKS-->
+            <section>
+                <article>
+                    <h4>Names of inﬂuential musicians to listen to: </h4> 
+                    <p>The Gateway To Rhythm - John Mclaughlin - School of Rhythm</p>
+                    <iframe width="560" height="315" src="https://www.youtube.com/embed/xZJua0TyxBQ" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                   <p>Mridangam maestro Guru Kaaraikkudi Mani </p>
+            <iframe width="560" height="315" src="https://www.youtube.com/embed/6jx31BoQ0hg" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen> </iframe> 
+    
+            <h4></h4><br><p>Vocalist Shri T.M. Krishna</p>
+                            <iframe width="560" height="315" src="https://www.youtube.com/embed/NRc9yvEex2Q" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+    
+                            <h4></h4><br><p>Violinist H. N. Bhaskar</p>    
+    <iframe width="560" height="315" src="https://www.youtube.com/embed/00OGB9BH_Zk" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>      
+    
+    <h4></h4><br><p>Kanjeera player N.Amrit</p>
+    <iframe width="560" height="315" src="https://www.youtube.com/embed/09zbZMflMs4" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+    
+                        </article> <br>
+    
+                  <article>
+                      <p>Risorse esterne:</p>
+                        <a href="https://www.arthurcarabott.com/konnakkol/" target="_blank">Grammar Based Konnakol in the
+                            Web - Carabott</a> <br>
+    
+        
+    
+                        <a href="https://carnatic2000.tripod.com/" target="_blank">Carnatic Music Links</a> <br>
+                
+                </article>
+    
+                    <a href="https://scsynth.org/t/analysis-of-a-project-with-4-interconnected-classes-oop/5001"
+                        target="_blank">Aiuto da casa SC-USERS</a>
+            </section>
 
             <!--GLOSSARY-->
             <section>
@@ -123,7 +140,7 @@
                     <tbody>
                         <tr>
                             <td><strong>Tala</strong></td>
-                            <td>metro musicale</td>
+                            <td>"Metro" musicale - ciclo </td>
                         </tr>
                         <tr>
                             <td><strong>Anga</strong></td>
@@ -131,15 +148,15 @@
                         </tr>
                         <tr>
                             <td><strong>Jati</strong></td>
-                            <td>3,4,5,7,9 lunghezza dell'Anga nel Laghu per Tala</td>
+                            <td>Implicito accento dato da raggruppamenti di 3,4,5,7,9 note</td>
                         </tr>
                         <tr>
                             <td><strong>Gati</strong></td>
-                            <td>Suddivisione ritmica </td>
+                            <td>Suddivisione ritmica duiene/terzine/quartine/quintine/sestine/settimine etc </td>
                         </tr>
                         <tr>
                             <td><strong>Karve</strong></td>
-                            <td>Se Karve =1 e gati Trisna(3) -> 1/3= 0.33 per nota </td>
+                            <td>Durata di 1 singola nota in base alla suddivisione es: se sedicesimi 1 di essi</td>
                         </tr>
                         <tr>
                             <td><strong>Laya</strong></td>
@@ -148,11 +165,11 @@
 
                         <tr>
                             <td><strong>Mora</strong></td>
-                            <td>set of percussive-sounding syllables</td>
+                            <td>Forma musicale</td>
                         </tr>
                         <tr>
                             <td><strong>Solkattu</strong></td>
-                            <td>fundamental cadential structure of Karnatak music</td>
+                            <td>Sillabe usate nel Konnakol</td>
                         </tr>
                     </tbody>
                 </table>
@@ -161,7 +178,6 @@
 
 
             </section>
-
 
             <!--KARNATAKA DEF-->
             <section>
@@ -175,9 +191,10 @@
             <section>
                 <p>
                     The method of algorithmic composition used in this project is entirely knowledge based; Karnatak are
-                    analysed for processes which are then turned into explicit algorithms.
+                    analysed for processes which are then turned into explicit algorithms. Questo approccio, richiede molto tempo, perchè bisogna fare analisi
+                     musicale, successivamente astrarla sotto forma di codice, ed infine verificare che abbia la musicalità cercata. 
                 </p>
-                <p>JoshUGens library by Joshua Parmenter is required.</p>
+              
             </section>
 
             <!--TALAS-->
@@ -358,19 +375,16 @@
             <div>
                 <section>
 
-                    <h1>OOP in Sc</h1>
+                    <br><h1>OOP in Sc</h1>
+                    <p>Mi è stato necessario approfondire dei principi di programmazione legata al paradigma degli oggetti, utilizzabili anche nel contesto di Supercollider.
+                        Questa cosa non avviene solitamente, perchè l'environment offre una enorme serie di librerie dedicate a specifiche esigenze musicali o di DSP.
+                        I testi presi in esame sono stati: <br>
                     <a href="https://opencourses.ionio.gr/modules/document/file.php/DAVA257/ProgrammingInSuperCollider.pdf"
-                        target="_blank"> Programming In SC</a> <br>
+                        target="_blank">Programming In SC</a> <br>
 
                         <a href=" https://www.amazon.it/Design-Patterns-Elements-Reusable-Object-Oriented/dp/0201633612"
                         target="_blank"> Design Pattern in OOP</a>
-                       
-<h1>Arrivato qui è necessario capire bene come fare ad analizzare le classi
-    Studia bene coemscrivere classi in SC 
-
-</h1>
-
-
+                    </p>
                 </section>
 
             </div>
@@ -382,13 +396,13 @@
                 <section>
 
                     <h1>Design and Implementation</h1>
-                    <br>
-
+                    
                     <h3>SuperCollider environment for working
                         with Karnatak rhythmic material:</h3>
                     <p>
                         abbiamo 4 classi:
-                        3 representation classes have been built; , and KonaTani which
+                        3 representation classes have been built;<br>
+                        KonaTime and KonaTani which
                         can be considered a complete performance. The class KonaGenerator was built to provide methods
                         for
                     <ul>

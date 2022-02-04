@@ -1,8 +1,11 @@
-/*Aggiungi qui the rules for the navbar*/
+/*Aggiungi qui the rules for the navbar
+https://applecolors.com/palette/26994-grey-palette-color
+*/
 .nav__links{
+    
     box-sizing: border-box;
     margin: 0;
-    background-color: tomato;
+    background-color:rgb(221, 221, 221);
 
     font-weight: 600;
     font-size: 20px;
@@ -76,18 +79,22 @@
 }
 
 
-
 /* GENERAL STYLE RULES*/
 /* all elements */
 *pre {
-    
+   
+ 
     width: 100%;
+  
+  
     }
 
 article.rapido * {
+    
     box-sizing: border-box;
     padding: 0;
     margin: 0;
+
 }
 
 /* end all elements */
@@ -95,11 +102,13 @@ article.rapido * {
 /* address */
 
 article.rapido>header>address {
+  
     display: block;
     margin-bottom: 20px;
     font-style: normal;
     font-size: 18px;
     line-height: 30px;
+ 
 }
 
 /* end address */
@@ -107,6 +116,7 @@ article.rapido>header>address {
 /* article */
 
 article.rapido {
+  
     width: 1024px;
     max-width: 100%;
     box-sizing: border-box;
@@ -116,7 +126,7 @@ article.rapido {
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     -webkit-text-size-adjust: 100%;
-    color: #353839;
+    color: #342b2b;
 }
 
 @media (max-width: 1023px) {
@@ -144,6 +154,8 @@ article.rapido section>aside {
 /* header */
 
 article.rapido>header {
+  
+
     width: 100%;
     margin: 50px 0;
 }
@@ -810,8 +822,8 @@ article.rapido table {
     min-width: 600px;
     padding: 10px;
     border-collapse: collapse;
-    border-top: 1px solid #ededed;
-    border-left: 1px solid #ededed;
+    border-top: 1px solid #bdbdbd;
+    border-left: 1px solid #bdbdbd;
     text-align: left;
     font-family: inherit;
     font-size: 14px;
@@ -819,7 +831,7 @@ article.rapido table {
 }
 
 article.rapido table thead {
-    background-color: #f4f4f4;
+    background-color: #bdbdbd;
 }
 
 article.rapido table td,
@@ -829,16 +841,16 @@ article.rapido table th {
 }
 
 article.rapido table tr {
-    border-bottom: 1px solid #ededed;
+    border-bottom: 1px solid #bdbdbd;
 }
 
 article.rapido table th {
-    border-right: 1px solid #e0e0e0;
+    border-right: 1px solid #bdbdbd;
 }
 
 article.rapido table td,
 article.rapido table th:last-child {
-    border-right: 1px solid #ededed;
+    border-right: 1px solid #bdbdbd;
 }
 
 /* end table */
