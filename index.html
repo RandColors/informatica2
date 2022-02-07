@@ -61,7 +61,9 @@
         <ul class="nav__links" >
             <li><a href="Outputs.html">Code Examples</a></li>
             <li><a href="vSarvaPhraseAuto.html">vSarvaPhraseAuto Analysis</a></li>
+            <li><a href="mora analysis.html">mora analysis</a></li>
             <li><a href="Applying Carnatic.html">Applying Karnatic Rhythmical Techniques to Western Music</a></li>
+       
         </ul>
 
     </nav>
@@ -165,7 +167,7 @@
 
                         <tr>
                             <td><strong>Mora</strong></td>
-                            <td>Forma musicale</td>
+                            <td>the fundamental cadential structure of Karnatak music</td>
                         </tr>
                         <tr>
                             <td><strong>Solkattu</strong></td>
@@ -215,14 +217,13 @@
 
                 <p>
                 <h2> Diversi tipi di tala: </h2>
-                <ol>
-                    <li><a href="#Suladi">Suladi (il più comune)</a></li>
-                    <li><a href="#Chapu">Chapu</a></li>
-                    <li><a href="#Shadanga">Shadanga </a></li>
-                    <li><a href="#Shoshadanga">Shoshadanga</a></li>
-                    <li><a href="#Janaka">Janaka</a></li>
-                    <li><a href="#Dhruvarupaka">Dhruvarupaka</a></li>
-                </ol>
+                Suladi (il più comune) 
+                Chapu
+                Shadanga
+                Shoshadanga
+                Janaka
+                Dhruvarupaka
+
                 </p>
 
 
@@ -230,7 +231,7 @@
 
             <!--first TALA-->
             <section id="Saludi">
-                <h1>Suludi Tala</h1>
+                <h1>Suladi Tala</h1>
                 <p>
                     Suladi talas responds to combinations of three angas. <br>
                     <strong>Anga:</strong> construction blocks of different size
@@ -249,14 +250,14 @@
                         </p>
                     </li>
                     <li>
-                        <p> <strong>Laghu </strong>Its five jatis : 3,4,5,7,9 beats long (una, due, tre volte, il
+                        <p> <strong>Laghu </strong> = Its five jatis : 3,4,5,7,9 beats long (una, due, tre volte, il
                             numero
                             di beat rimane invariato per tutto il Tala)
                     </li>
                 </ol>
                 </p>
 
-                <p> - ogni Jati Laghu ha un nome specifico: </p>
+                <p>Ogni Jati Laghu ha un nome specifico: </p>
                 <p>
                 <table>
                     <thead>
@@ -286,7 +287,7 @@
                             <td>Sankirna jati</td>
                         </tr>
                     </tbody>
-                </table>
+                </table> <br>
                 <p>
                     Ipoteticamente il più corto tala possibile sarebbe di: <br>
                     3 beats long = usando un solo Laghu of 3 <br>
@@ -553,7 +554,7 @@ g.postWord;
                         </tr>
 
                     </tbody>
-                </table>
+                </table> <br>
 
                 <img src="images/img 5.5.PNG" alt="5.5">
                 parole più lunghe di 9 sillabe contengono pause e NON fanno parte
@@ -592,7 +593,7 @@ nell'esempio con (commonly Ta lan - gu)
  Tantomeno a (Da di - gi na dom) con la "di" allungata.
 
 
-ero convinto che si potesse fare in questo modo utilizzando il metodo di KonaGenerator extendJati per andare a modificare il valore di durata di una sillaba, ma non funziona come mi aspettavo. <br>
+Ero convinto che si potesse fare in questo modo utilizzando il metodo di KonaGenerator extendJati per andare a modificare il valore di durata di una sillaba, ma non funziona come mi aspettavo. <br>
 
  <pre><code   lang="supercollider"  >              
  r = KonaGenerator();
@@ -616,33 +617,33 @@ ero convinto che si potesse fare in questo modo utilizzando il metodo di KonaGen
     <img src="images/img 5.9.PNG" alt="5.9"> 
 
     <pre><code   lang="supercollider"  >
-        // Chatusra gati example
-        KonaWord.new(4,4,argKarve: 1).postWord
+// Chatusra gati example
+KonaWord.new(4,4,argKarve: 1).postWord
 
-        [ Ta       , Ka       , Di       , Mi        ]
-        [ 0.25     , 0.25     , 0.25     , 0.25      ]
-        [ [ 1, 16 ], [ 1, 16 ], [ 1, 16 ], [ 1, 16 ] ]
-        
-        
-        KonaWord.new(4,4,argKarve: 2).postWord
-        
-        [ Ta      , Ka      , Di      , Mi       ]
-        [ 0.5     , 0.5     , 0.5     , 0.5      ]
-        [ [ 1, 8 ], [ 1, 8 ], [ 1, 8 ], [ 1, 8 ] ]
-        
-        
-        KonaWord.new(4,4,argKarve: 3).postWord
-        
-        [ Ta       , Ka       , Di       , Mi        ]
-        [ 0.75     , 0.75     , 0.75     , 0.75      ]
-        [ [ 3, 16 ], [ 3, 16 ], [ 3, 16 ], [ 3, 16 ] ]
-        
-        
-        KonaWord.new(4,4,argKarve: 4).postWord
-        
-        [ Ta      , Ka      , Di      , Mi       ]
-        [ 1.0     , 1.0     , 1.0     , 1.0      ]
-        [ [ 1, 4 ], [ 1, 4 ], [ 1, 4 ], [ 1, 4 ] ]    
+[ Ta       , Ka       , Di       , Mi        ]
+[ 0.25     , 0.25     , 0.25     , 0.25      ]
+[ [ 1, 16 ], [ 1, 16 ], [ 1, 16 ], [ 1, 16 ] ]
+
+
+KonaWord.new(4,4,argKarve: 2).postWord
+
+[ Ta      , Ka      , Di      , Mi       ]
+[ 0.5     , 0.5     , 0.5     , 0.5      ]
+[ [ 1, 8 ], [ 1, 8 ], [ 1, 8 ], [ 1, 8 ] ]
+
+
+KonaWord.new(4,4,argKarve: 3).postWord
+
+[ Ta       , Ka       , Di       , Mi        ]
+[ 0.75     , 0.75     , 0.75     , 0.75      ]
+[ [ 3, 16 ], [ 3, 16 ], [ 3, 16 ], [ 3, 16 ] ]
+
+
+KonaWord.new(4,4,argKarve: 4).postWord
+
+[ Ta      , Ka      , Di      , Mi       ]
+[ 1.0     , 1.0     , 1.0     , 1.0      ]
+[ [ 1, 4 ], [ 1, 4 ], [ 1, 4 ], [ 1, 4 ] ]    
 </code></pre>
 </p>
 
@@ -819,39 +820,37 @@ t.jatis // -> 16
                         <img src="images/img 5.12.PNG" alt="5.12"> <br>
                         <pre><code   lang="supercollider"  >
 
-                            // Se volessimo scrivere 1/16 1/8 1/16 con l'accento solo sul primo, dovremmo utilizzare un KonaTime
-    
-                            (
-                            ~talangu = KonaTime.newFrom([
-                                KonaWord.new(1,4,1), // Ta
-                                KonaWord.new(1,4,2), // lan
-                                KonaWord.new(1,4,1)  // gu
-                            ]);
-                            ~talangu.word;
-                            ~talangu.postWord;
-                            
-                            [ Ta       , Ta      , Ta        ]
-                            [ 0.25     , 0.5     , 0.25      ]
-                            [ [ 1, 16 ], [ 1, 8 ], [ 1, 16 ] ]
-                            )
-                            
-                            
-                            (
-                            // 5 come da di gi na dom
-                            ~takatakita = KonaTime.newFrom([
-                                KonaWord.new(2,4,1), // Ta, Ka
-                                KonaWord.new(3,4,1) // Ta, Ki, Tah
-                                ]);
-                            ~takatakita.word;
-                            ~takatakita.postWord;
-                            ~takatakita.jatis // -> 5
-                            
-                            [ Ta       , Ka       , Ta       , Ki       , Tah       ]
-                            [ 0.25     , 0.25     , 0.25     , 0.25     , 0.25      ]
-                            [ [ 1, 16 ], [ 1, 16 ], [ 1, 16 ], [ 1, 16 ], [ 1, 16 ] ]
-                            )
-                            
-    
+// Se volessimo scrivere 1/16 1/8 1/16 con l'accento solo sul primo, dovremmo utilizzare un KonaTime
+
+(
+~talangu = KonaTime.newFrom([
+    KonaWord.new(1,4,1), // Ta
+    KonaWord.new(1,4,2), // lan
+    KonaWord.new(1,4,1)  // gu
+]);
+~talangu.word;
+~talangu.postWord;
+
+[ Ta       , Ta      , Ta        ]
+[ 0.25     , 0.5     , 0.25      ]
+[ [ 1, 16 ], [ 1, 8 ], [ 1, 16 ] ]
+)
+
+
+(
+// 5 come da di gi na dom
+~takatakita = KonaTime.newFrom([
+    KonaWord.new(2,4,1), // Ta, Ka
+    KonaWord.new(3,4,1) // Ta, Ki, Tah
+    ]);
+~takatakita.word;
+~takatakita.postWord;
+~takatakita.jatis // -> 5
+
+[ Ta       , Ka       , Ta       , Ki       , Tah       ]
+[ 0.25     , 0.25     , 0.25     , 0.25     , 0.25      ]
+[ [ 1, 16 ], [ 1, 16 ], [ 1, 16 ], [ 1, 16 ], [ 1, 16 ] ]
+)
     </code></pre>
 
 </p>
@@ -943,7 +942,7 @@ a.stop;
     </p>
 
     <pre><code lang="supercollider">
-        KonaTani.new(argLaya: 60, argTala: [ "I4", "O", "O" ], argGati: 4, argOtherGatis: [ 3 ], argSynth:\MIDITranscribe)
+KonaTani.new(argLaya: 60, argTala: [ "I4", "O", "O" ], argGati: 4, argOtherGatis: [ 3 ], argSynth:\MIDITranscribe)
     </code></pre>
 
 </section>
@@ -993,66 +992,64 @@ a.stop;
     <p>Data una partizione in  ingresso ci restituirà tutte le permutazioni allPerms oppure una permutazione randomPerm</p>
 
     <pre><code lang="supercollider">
-        r =KonaGenerator.new();
+r =KonaGenerator.new();
 
-        t =r.allPartitions(aNum:16, aMin:4, aMax:9)
-        
-        p = r.randomPerm(t,1)
-        /*
+t =r.allPartitions(aNum:16, aMin:4, aMax:9)
+
+p = r.randomPerm(t,1)
+/*
 -> [ [ 4, 4, 4, 4 ], [ 6, 5, 5 ], [ 6, 6, 4 ], [ 7, 5, 4 ], [ 8, 4, 4 ], [ 8, 8 ], [ 9, 7 ] ]
 -> [ [ 4, 4, 4, 4 ], [ 7, 5, 4 ], [ 8, 4, 4 ], [ 9, 7 ], [ 6, 5, 5 ], [ 8, 8 ], [ 6, 6, 4 ] ]
+*/
 
-        
-        */
+// metodi allPerms e randomPerm
+//	allPerms
+//	Method to generate all permutations of a partition
+//
+//	@aCollection	The partition array to generate permutations of
 
-     // metodi allPerms e randomPerm
-     //	allPerms
-     //	Method to generate all permutations of a partition
-     //
-     //	@aCollection	The partition array to generate permutations of
- 
-     allPerms {|aCollection|
-         var col;	//Collection to permute
-         var ret;	//Array to return permutations
-         var perm;	//Temp variable for storing permutation
-         col = aCollection;
-         ret = List[];
- 
-         //If the partition is not just made up of 1 unique number (e.g. [2,2,2])
-         if(col.occurrencesOf(col[0]) != col.size) {
-             //Loop to create all permutations
-             col.size.factorial.asInteger.do { |i|
-                 perm = col.permute(i);
-                 //If ret doesn't already contain the new permutation
-                 if(not(ret.any { |item, i| item.asArray == perm	})) {
-                     //Add it
-                     ret.add(col.permute(i));
-                 };
-             };
-         } {
-             //Else (if the partition IS made up of just 1 unique number)
-             ret.add(col);
-         };
- 
-         //Return all partitions
-         ^ret.asArray;
-     }
- 
-     //	randomPerm
-     //	Method to choose a random permutation
-     //
-     //	@partition 	Partition to generate permutations from
-     //	@seed		seed for random selection
-     randomPerm { |partition, seed|
-         var permutation;
-         if(seed!=nil) {
-             thisThread.randSeed=seed
-         };
- 
-         permutation = (partition.size+1).factorial.asInteger.rand;
- 
-         ^partition.permute(permutation);
-     }
+allPerms {|aCollection|
+    var col;	//Collection to permute
+    var ret;	//Array to return permutations
+    var perm;	//Temp variable for storing permutation
+    col = aCollection;
+    ret = List[];
+
+    //If the partition is not just made up of 1 unique number (e.g. [2,2,2])
+    if(col.occurrencesOf(col[0]) != col.size) {
+        //Loop to create all permutations
+        col.size.factorial.asInteger.do { |i|
+            perm = col.permute(i);
+            //If ret doesn't already contain the new permutation
+            if(not(ret.any { |item, i| item.asArray == perm	})) {
+                //Add it
+                ret.add(col.permute(i));
+            };
+        };
+    } {
+        //Else (if the partition IS made up of just 1 unique number)
+        ret.add(col);
+    };
+
+    //Return all partitions
+    ^ret.asArray;
+}
+
+//	randomPerm
+//	Method to choose a random permutation
+//
+//	@partition 	Partition to generate permutations from
+//	@seed		seed for random selection
+randomPerm { |partition, seed|
+    var permutation;
+    if(seed!=nil) {
+        thisThread.randSeed=seed
+    };
+
+    permutation = (partition.size+1).factorial.asInteger.rand;
+
+    ^partition.permute(permutation);
+}
         
     </code></pre>
 
@@ -1116,7 +1113,7 @@ included with a default of 0.97 to occasionally allow partitions with a high num
 <p>Anche se è stato detto che il tala ed il gati scelto NON portano con loro accenti della "battuta"
 è altrttanto vero che ci sono casi dove è desiderabile evidenziare la struttura dell'environment nel qualse si sta suonando(Tala/gati)
 “phrases are arranged in patterns that bear an
-integral relation with the given aks.ara structure. These patterns are arranged into groups that bear an analogous relationship with the t¯al.a structure.”
+integral relation with the given aksara structure. These patterns are arranged into groups that bear an analogous relationship with the tala structure.”
 Si può ottenere questa relazione andando ad utilizzare raggruppamenti(Jatis) di grandezza fortemente legata alla struttura <br>
 groups of two, four and eight in adi tala (8 beats) caturasra gati.
 <br>
@@ -1131,7 +1128,6 @@ is provided so that each value can be given a probability of removal.
 </p>
 
 <pre><code lang="supercollider">
-
 r = KonaGenerator.new();
 t = r.allPartitions(aNum:16, aMin:4, aMax:9)
 p = r.randomPerm(t,1)
@@ -1141,10 +1137,9 @@ p = r.randomPerm(t,1)
 l = r.removeThoseContaining(p,[ 7, 5])
 -> [ [ 4, 4, 4, 4 ], [ 8, 4, 4 ], [ 8, 8 ], [ 6, 6, 4 ] ]
 
-
- // esempio a mano di quel tipo di raggruppamento poliritmico 
+// esempio a mano di quel tipo di raggruppamento poliritmico 
  
- a= KonaTani.new(argLaya: 240)
+a = KonaTani.new(argLaya: 240)
 k = KonaTime.newFrom([KonaWord(5,4,1),KonaWord(5,4,1),KonaWord(5,4,1),KonaWord(5,4,1)],a)
 k.post
 a.add(k)
@@ -1231,81 +1226,77 @@ primo parametro ci dice se possiamo fare una parola di un singolo Jati, con il K
     
 
  <pre><code lang="supercollider">
-     
-    //	partsToWords
-    //	Method to turn a partition array into KonaWords
-    //
-    //	@aPartitionArray	Partition Array
-    //	@aOne				Boolean; if KonaWords can be 1 syllable
-    //	@aMult				Boolean; if Konawords can have syllables == part size
-    // partsToWords {|aPartitionArray, aKarve, aOne=true, aMult=true|
-    
-    
-    a = KonaTani.new(60,#["I4", "O", "O"],4,argSynth: \MIDITranscribe);
-    MIDIClient.init;
-    a.midiOut = MIDIOut.newByName("loopMIDI Port", "loopMIDI Port");
-    
-    
-    r = KonaGenerator();
-    t = r.allPartitions(4.asInteger, aMin:1)
-    j = t.size.collect({|index| r.allPerms(aCollection:t.at(index)) });
-    j.flatten(1).size
-    /*
-    -> [ [ 1, 1, 1, 1 ], [ 2, 1, 1 ], [ 2, 2 ], [ 3, 1 ], [ 4 ] ]
-    -> [
-        [ [ 1, 1, 1, 1 ] ],
-        [ [ 2, 1, 1 ], [ 1, 2, 1 ], [ 1, 1, 2 ] ],
-        [ [ 2, 2 ] ],
-        [ [ 3, 1 ], [ 1, 3 ] ],
-        [ [ 4 ] ] ]
-    -> 8
-    */
-    
-    
-    t.class // it's our array of partitioned numbers
-    b = KonaGenerator.new
-    
-    // funziona dopo innumerevoli tentativi, quindi se decidei che il primo è vero il secondo deve essere falso altrimenti diventa probabilistico
-    w =b.partsToWords(aPartitionArray:j.asArray, aKarve:1,aOne: false,aMult: true);
-    // -> KonaTime[ a KonaWord, a KonaWord, a KonaWord, a KonaWord, a KonaWord ]
-    w.post
-    w.postWord
-    a.add(w)
-    a.play
-    
-    // NON riesco a farlo funzionare da qui ho le parole immagazzinte nell'array in un formato strambo...
-    
-    
-    [
-        [ [ [ 1, 16 ], [ 1, 16 ], [ 1, 16 ], [ 1, 16 ] ] ],
-        [ [ [ 1, 8 ], [ 1, 16 ], [ 1, 16 ] ], [ [ 1, 16 ], [ 1, 8 ], [ 1, 16 ] ], [ [ 1, 16 ], [ 1, 16 ], [ 1, 8 ] ] ],
-        [ [ [ 1, 8 ], [ 1, 8 ] ] ],
-        [ [ [ 3, 16 ], [ 1, 16 ] ], [ [ 1, 16 ], [ 3, 16 ] ] ],
-        [ [ [ 1, 4 ] ] ]
-    
-    ]
-    
-    o =KonaTime.newFrom(],a)
-    o.postWord
-    
-    
-    a.add(o)
-    a.play
-    a.stop;
-    
-    
-    
+//	partsToWords
+//	Method to turn a partition array into KonaWords
+//
+//	@aPartitionArray	Partition Array
+//	@aOne				Boolean; if KonaWords can be 1 syllable
+//	@aMult				Boolean; if Konawords can have syllables == part size
+// partsToWords {|aPartitionArray, aKarve, aOne=true, aMult=true|
 
+
+a = KonaTani.new(60,#["I4", "O", "O"],4,argSynth: \MIDITranscribe);
+MIDIClient.init;
+a.midiOut = MIDIOut.newByName("loopMIDI Port", "loopMIDI Port");
+
+
+r = KonaGenerator();
+t = r.allPartitions(4.asInteger, aMin:1)
+j = t.size.collect({|index| r.allPerms(aCollection:t.at(index)) });
+j.flatten(1).size
+
+/*
+-> [ [ 1, 1, 1, 1 ], [ 2, 1, 1 ], [ 2, 2 ], [ 3, 1 ], [ 4 ] ]
+-> [
+    [ [ 1, 1, 1, 1 ] ],
+    [ [ 2, 1, 1 ], [ 1, 2, 1 ], [ 1, 1, 2 ] ],
+    [ [ 2, 2 ] ],
+    [ [ 3, 1 ], [ 1, 3 ] ],
+    [ [ 4 ] ] ]
+-> 8
+*/
+
+
+t.class // it's our array of partitioned numbers
+b = KonaGenerator.new
+
+// funziona dopo innumerevoli tentativi, quindi se decidi che il primo è vero il secondo deve essere falso altrimenti diventa probabilistico
+w =b.partsToWords(aPartitionArray:j.asArray, aKarve:1,aOne: false,aMult: true);
+// -> KonaTime[ a KonaWord, a KonaWord, a KonaWord, a KonaWord, a KonaWord ]
+w.post
+w.postWord
+a.add(w)
+a.play
+
+// NON riesco a farlo funzionare da qui ho le parole immagazzinte nell'array in un formato strambo...
+
+/* 
+[
+    [ [ [ 1, 16 ], [ 1, 16 ], [ 1, 16 ], [ 1, 16 ] ] ],
+    [ [ [ 1, 8 ], [ 1, 16 ], [ 1, 16 ] ], [ [ 1, 16 ], [ 1, 8 ], [ 1, 16 ] ], [ [ 1, 16 ], [ 1, 16 ], [ 1, 8 ] ] ],
+    [ [ [ 1, 8 ], [ 1, 8 ] ] ],
+    [ [ [ 3, 16 ], [ 1, 16 ] ], [ [ 1, 16 ], [ 3, 16 ] ] ],
+    [ [ [ 1, 4 ] ] ]
+
+]
+*/
+
+o = KonaTime.newFrom(],a)
+o.postWord
+
+a.add(o)
+a.play
+a.stop;
  </code></pre>
 
  <h2>Combine e combine similar</h2>
- <p>Sono altri 2 metodi studiati per evitare che vi siano inutili ripetizioni di piccole combinaioni di parole come nellesempio:
+ <p>Sono altri due metodi studiati per evitare che vi siano inutili ripetizioni di piccole combinaioni di parole come nell'esempio: </p>
     
     <img src="images/img 5.20.PNG" alt="5.20"> <br>
     <a href="https://www.johnmclaughlin.com/wp-content/uploads/2008/01/konokolchapter5.pdf" target="_blank" rel="noopener noreferrer">Analizza la score ch5 </a><br></p>
 
     <br>
-    To account for this phenomena the method combinewas written to regroup the total number of pulses
+   <p> To account for this phenomena the method combinewas written to regroup the total number of pulses
     in a phrase (KonaTime) into as few KonaWords as possible. Additionally combineSimilar was written to
     combine adjacent identical KonaWords, with arguments for the maximum combination size, the maximum
     number of KonaWords to combine and a probability (default of one) determining combination success. <br>
@@ -1313,7 +1304,6 @@ primo parametro ci dice se possiamo fare una parola di un singolo Jati, con il K
  </p>
 
  <pre><code lang="supercollider">
-
     //	partsToWords
 //	Method to turn a partition array into KonaWords
 //
@@ -1332,6 +1322,7 @@ r = KonaGenerator();
 t = r.allPartitions(4.asInteger, aMin:1)
 j = t.size.collect({|index| r.allPerms(aCollection:t.at(index)) });
 j.flatten(1).size
+
 /*
 -> [ [ 1, 1, 1, 1 ], [ 2, 1, 1 ], [ 2, 2 ], [ 3, 1 ], [ 4 ] ]
 -> [
@@ -1360,25 +1351,24 @@ a.play
 
 // NON riesco a farlo funzionare da qui ho le parole immagazzinte nell'array in un formato strambo...
 
-
+/*
 [
 	[ [ [ 1, 16 ], [ 1, 16 ], [ 1, 16 ], [ 1, 16 ] ] ],
 	[ [ [ 1, 8 ], [ 1, 16 ], [ 1, 16 ] ], [ [ 1, 16 ], [ 1, 8 ], [ 1, 16 ] ], [ [ 1, 16 ], [ 1, 16 ], [ 1, 8 ] ] ],
 	[ [ [ 1, 8 ], [ 1, 8 ] ] ],
 	[ [ [ 3, 16 ], [ 1, 16 ] ], [ [ 1, 16 ], [ 3, 16 ] ] ],
 	[ [ [ 1, 4 ] ] ]
-
 ]
+*/
 
 
 
-
- //	combine
-	//	@aCollection	A collection of KonaItems with a combined desired jati number
-	//
-	//	Method to create a new KonaWord/KonaTime from the number of
-	//		syllables of the given items
-	//	Only used for KonaWords of the same karve
+// combine
+    //	@aCollection	A collection of KonaItems with a combined desired jati number
+    //
+    //	Method to create a new KonaWord/KonaTime from the number of
+    //		syllables of the given items
+    //	Only used for KonaWords of the same karve
 
 c = b.combine(w)
 
@@ -1407,12 +1397,11 @@ g.post
 g.postWord
 
 // [ Ta, Ta , Ta, Ta , Ta ]
-
 a.add(c)
 
 
 // non va ..
-o =KonaTime.newFrom([c],a)
+o = KonaTime.newFrom([c],a)
 o.postWord
 
 
@@ -1423,203 +1412,197 @@ a.stop;
 
 
 
+//	combine
+//	@aCollection	A collection of KonaItems with a combined desired jati number
+//
+//	Method to create a new KonaWord/KonaTime from the number of
+//		syllables of the given items
+//	Only used for KonaWords of the same karve
+
+combine {|aCollection|
+    var dur;		//Desired jatis for output
+    var karve;		//Karve of the input (determines output Karve)
+    var ret;		//KonaItems to return
+    var allRest; 	//Boolean; whether the collection is silent syllables
+    var oneSyl;		//Boolean; if the collection is one syllable.
+
+    dur = 0;
+    ret = KonaTime.new(tani);
+    oneSyl = false;
+    allRest = aCollection.every { |item, i| item.word == ['-']};
+
+    if(aCollection.size>0) {
+        karve = aCollection[0].karve;
+    } {
+    karve = nil;
+    };
+
+    aCollection.size.do { |i|
+        dur = dur + aCollection[i].jatis;
+        if(i==0) {
+            if(aCollection[i].word==['Ta']) {
+                oneSyl = true;
+            };
+        } {
+            if(aCollection[i].word!=['-']) {
+                oneSyl = false;
+            };
+        };
+
+    };
+
+
+    if(oneSyl) {
+        ret = KonaWord.new(1, gati, aCollection.matras, tani);
+    } {
+        while({dur!=0},
+            {
+                if(dur<=9) {
+                    if(allRest) {
+                        ret.add(KonaWord.new(0, gati, dur, tani));
+                    } {
+                        ret.add(KonaWord.new(dur, gati, karve, tani));
+                    };
+
+                    dur = dur - dur;
+                } {
+                    if(allRest) {
+                        ret.add(KonaWord.new(0, gati, dur, tani));
+                    } {
+                        ret.add(KonaWord.new(9, gati, karve, tani));
+                    };
+                    dur = dur - 9;
+                };
+            }
+        );
+    };
+
+    if(ret.size==1) {
+        ^ret[0];
+    } {
+        ^ret;
+    };
+}
 
 
 
+//	combineSimilar
+//	@aCol		A KonaTime containing KonaWords.
+//	@alMax		Maximum number of items to combine
+//	@avMax		The maximum size for a combination
+//	@prob		Probability of combination
+//
+//	Method to combine identical adjacent KonaWords within a KonaTime
+combineSimilar {|aCol, alMax, avMax=9, aProb=1|
+
+    var col;					//	Collecion to modify
+    var lMax;					//	Maximum string length to combine
+    var vMax;					//	Maximum value of a combination
+    var start, middle, newMiddle, end;		//	Temporary storage
+    var n;						//	Item lookahead number
+    var i;						//	Iterator variabale
+    var y;						//	Next Iterator variable value
+    var func;					//	Function to do most of the work
+    var prob;					//	Probability the function will occur
+
+    col = aCol;
+    prob = aProb;
+
+    n=1;
+    i = 0;
+
+    // use argument length if provided
+    lMax = alMax ?? {col.size};
+    // set combo max
+    vMax = avMax;
+
+    func = {
+
+        //Reduce n to the index of the last matching value
+        n = n-1;
+        //If this is not the first item/string to be evaluated
+        if(i>0) {
+            //Store the sub-array that proceeds the string/items
+            start = KonaTime.newFrom(col[0..i-1], tani);
+
+            //Store the next index to evaluate.
+            y = start.size+1;
+        } {
+            //Else, this this is the first item/string to be evaluated
+            //There are no values before the first item
+            start = KonaTime.new(tani);
+            //Store next index to use: 1
+            y = 1;
+        };
+
+        //The string of matching values
+        middle = KonaTime.newFrom(col[i..i+n], tani);
+
+        if(middle.size>4) {
+            prob=1
+        };
+
+        if(prob.coin) {
+            newMiddle = this.combine(middle);
+        } {
+            newMiddle = middle;
+        };
+
+        //If all elements have been evaluated or combined
+        if(middle.includes(col[col.size-1]).not) {
+            //Use all elements after the middle
+            end = KonaTime.newFrom(col[i+n+1..col.size-1], tani);
+        } {
+            //Else. There are no values after the last element
+            end = KonaTime.new(tani);
+
+        };
+
+        //Combine three sections, summing the middle items
+        col = start ++ newMiddle ++ end;
+        //Reset n
+        n = 1;
+        //Set the next index to start as;
+        i = y;
+    };
 
 
-    //	combine
-	//	@aCollection	A collection of KonaItems with a combined desired jati number
-	//
-	//	Method to create a new KonaWord/KonaTime from the number of
-	//		syllables of the given items
-	//	Only used for KonaWords of the same karve
+    //Evaluate the whole collection
+    col.size.do {
+        if(col[i].class==KonaTime) {
+            col[i] = this.combineSimilar(col[i], prob:0.85);
+        } {
 
-	combine {|aCollection|
-		var dur;		//Desired jatis for output
-		var karve;		//Karve of the input (determines output Karve)
-		var ret;		//KonaItems to return
-		var allRest; 	//Boolean; whether the collection is silent syllables
-		var oneSyl;		//Boolean; if the collection is one syllable.
+            //If there are trailing elements
+            if(col[i+n]!=nil) {
+            //If a value is followed by an identical value,
+            //	and current string length is within bounds;
+                if( ( (col[i].val == col[i+n].val) || (col[i].word==['Ta'] && col[i+n].word==['-']) )  && (n"<"lMax) && (col[i..i+n].jatis "<" "= vMax)) {
+                    if(col[i-1]!=nil) {
+                        if(col[i].word==['Ta'] && (col[i-1].word==['-']) ) {
+                            func.();
+                        } {
+                            //Extend string length
+                            n = n+1;
+                        };
+                    } {
+                        func.();
+                    };
+                } {
 
-		dur = 0;
-		ret = KonaTime.new(tani);
-		oneSyl = false;
-		allRest = aCollection.every { |item, i| item.word == ['-']};
+                    //Else combine all identical adjacent items.
+                    func.();
+                }
+            } {
+                //If there are no more trailing items, combine those stored.
+                func.();
+            };
+        };
+    };
 
-		if(aCollection.size>0) {
-		  	karve = aCollection[0].karve;
-		} {
-		  karve = nil;
-		};
-
-		aCollection.size.do { |i|
-			dur = dur + aCollection[i].jatis;
-			if(i==0) {
-				if(aCollection[i].word==['Ta']) {
-					oneSyl = true;
-				};
-			} {
-				if(aCollection[i].word!=['-']) {
-					oneSyl = false;
-				};
-			};
-
-		};
-
-
-		if(oneSyl) {
-			ret = KonaWord.new(1, gati, aCollection.matras, tani);
-		} {
-			while({dur!=0},
-				{
-					if(dur<=9) {
-						if(allRest) {
-							ret.add(KonaWord.new(0, gati, dur, tani));
-						} {
-							ret.add(KonaWord.new(dur, gati, karve, tani));
-						};
-
-						dur = dur - dur;
-					} {
-						if(allRest) {
-							ret.add(KonaWord.new(0, gati, dur, tani));
-						} {
-							ret.add(KonaWord.new(9, gati, karve, tani));
-						};
-						dur = dur - 9;
-					};
-				}
-			);
-		};
-
-		if(ret.size==1) {
-			^ret[0];
-		} {
-			^ret;
-		};
-	}
-
-
-
-    //	combineSimilar
-	//	@aCol		A KonaTime containing KonaWords.
-	//	@alMax		Maximum number of items to combine
-	//	@avMax		The maximum size for a combination
-	//	@prob		Probability of combination
-	//
-	//	Method to combine identical adjacent KonaWords within a KonaTime
-	combineSimilar {|aCol, alMax, avMax=9, aProb=1|
-
-		var col;					//	Collecion to modify
-		var lMax;					//	Maximum string length to combine
-		var vMax;					//	Maximum value of a combination
-		var start, middle, newMiddle, end;		//	Temporary storage
-		var n;						//	Item lookahead number
-		var i;						//	Iterator variabale
-		var y;						//	Next Iterator variable value
-		var func;					//	Function to do most of the work
-		var prob;					//	Probability the function will occur
-
-		col = aCol;
-		prob = aProb;
-
-		n=1;
-		i = 0;
-
-		// use argument length if provided
-		lMax = alMax ?? {col.size};
-		// set combo max
-		vMax = avMax;
-
-		func = {
-
-			//Reduce n to the index of the last matching value
-			n = n-1;
-			//If this is not the first item/string to be evaluated
-			if(i>0) {
-				//Store the sub-array that proceeds the string/items
-				start = KonaTime.newFrom(col[0..i-1], tani);
-
-				//Store the next index to evaluate.
-				y = start.size+1;
-			} {
-				//Else, this this is the first item/string to be evaluated
-				//There are no values before the first item
-				start = KonaTime.new(tani);
-				//Store next index to use: 1
-				y = 1;
-			};
-
-			//The string of matching values
-			middle = KonaTime.newFrom(col[i..i+n], tani);
-
-			if(middle.size>4) {
-				prob=1
-			};
-
-			if(prob.coin) {
-				newMiddle = this.combine(middle);
-			} {
-				newMiddle = middle;
-			};
-
-			//If all elements have been evaluated or combined
-			if(middle.includes(col[col.size-1]).not) {
-				//Use all elements after the middle
-				end = KonaTime.newFrom(col[i+n+1..col.size-1], tani);
-			} {
-				//Else. There are no values after the last element
-				end = KonaTime.new(tani);
-
-			};
-
-			//Combine three sections, summing the middle items
-			col = start ++ newMiddle ++ end;
-			//Reset n
-			n = 1;
-			//Set the next index to start as;
-			i = y;
-		};
-
-
-		//Evaluate the whole collection
-		col.size.do {
-			if(col[i].class==KonaTime) {
-				col[i] = this.combineSimilar(col[i], prob:0.85);
-			} {
-
-				//If there are trailing elements
-				if(col[i+n]!=nil) {
-				//If a value is followed by an identical value,
-				//	and current string length is within bounds;
-					if( ( (col[i].val == col[i+n].val) || (col[i].word==['Ta'] && col[i+n].word==['-']) )  && (n"<"lMax) && (col[i..i+n].jatis "<" "= vMax)) {
-						if(col[i-1]!=nil) {
-							if(col[i].word==['Ta'] && (col[i-1].word==['-']) ) {
-								func.();
-							} {
-								//Extend string length
-								n = n+1;
-							};
-						} {
-							func.();
-						};
-					} {
-
-						//Else combine all identical adjacent items.
-						func.();
-					}
-				} {
-					//If there are no more trailing items, combine those stored.
-					func.();
-				};
-			};
-		};
-
-		^col;
-	}
+    ^col;
+}
  </code></pre>
-
 
 
 </section>

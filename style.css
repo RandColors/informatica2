@@ -6,10 +6,11 @@ https://applecolors.com/palette/26994-grey-palette-color
     box-sizing: border-box;
     margin: 0;
     background-color:rgb(221, 221, 221);
-
+  
     font-weight: 600;
     font-size: 20px;
-    color: seashell;
+
+    color: gray;
     text-decoration: none;
 
  display: flex;

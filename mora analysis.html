@@ -1,0 +1,687 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mora Analysis</title>
+    <link rel="stylesheet" href="style.css">
+
+    <!--MIDI -->
+    <script
+        src="https://cdn.jsdelivr.net/combine/npm/tone@14.7.58,npm/@magenta/music@1.23.1/es6/core.js,npm/focus-visible@5,npm/html-midi-player@1.4.0"></script>
+    <script
+        src="https://cdn.jsdelivr.net/combine/npm/tone@14.7.58,npm/@magenta/music@1.23.1/es6/core.js,npm/focus-visible@5,npm/html-midi-player@1.4.0"></script>
+
+
+    <!-- Code Highlighiting.js for SC-->
+
+    <!--    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/styles/hybrid.min.css" /> -->
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.8/highlight.min.js"></script>
+   <script src="C:\Users\taegg\Desktop\konnakol_Learning\dissertion on Konnakol\BlogKonnakol\Highlighting"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", event => {
+            document.querySelectorAll("pre code").forEach(block => {
+                hljs.highlightBlock(block);
+            });
+        });
+    </script>
+
+    <style>
+        body {
+            background: rgb(234, 232, 232);
+            margin: 40px;
+        }
+
+
+        pre code {
+            max-height: fit-content;
+            /* trova il modo di dargli realmente il valore che ti serve*/
+            padding: 10px 20px !important;
+            border-radius: 4px;
+            box-shadow: 0px 0px 13px 0px rgba(0, 0, 0, 0.6);
+        }
+    </style>
+
+</head>
+
+<body>
+    <nav>
+        <ul class="nav__links" >
+            <li><a href="Outputs.html">Code Examples</a></li>
+            <li><a href="index.html">SC Home </a></li>
+            <li><a href="Applying Carnatic.html">Applying Carnatic Music to western culture</a></li>
+            <li><a href="vSarvaPhraseAuto.html">vSarvaPhraseAuto analysis</a></li>
+         
+        
+        </ul>
+
+    </nav>
+    <main>
+        <article class="rapido">
+
+            <!--vSarvaPhraseAuto analysis-->
+            <section>
+                <h1>Mora Section - Kannaku Generation</h1>
+
+                <p>
+                    A mora is “the fundamental cadential structure of Karnatak music” 
+                    <img src="images/img 5.29.PNG" alt="5.29"></p> <br>
+                    <p>La più semplice formula
+                        “una mora di solito consiste in una frase
+                o affermazione ripetuta tre volte con separazioni che possono essere articolate. La sua struttura prevede una
+                tensione temporanea rispetto al tala che di solito si risolve in un punto strutturale importante nel
+                ciclo." Sebbene sia necessario che lo "statement" abbia una durata di almeno un impulso, il "gap" può essere 0
+                    </p>
+                    <img src="images/img 5.30.PNG" alt="5.30"> <br>
+                    <p>Una mora è difficile da distinguere in certe circostanze siccome risulta simile a 3 statements</p>
+                    <img src="images/img 5.31.PNG" alt="5.31"> <br>
+                
+                </section>
+                <img src="images/img 5.32.PNG" alt="5.31"> <br>
+                
+                    <!---->
+                <section>
+                    <p> moraStatement, moraGap, and
+                        moraOffset for generating their respective parts from a given duration in matras, gati and karve,
+                        createSimpleMora for combining the parts into the mora structure, randomMoraValues for calculating suitable
+                         durations for each section of a mora from a given total duration in matras, randomMora for
+                        generating random moras from a given duration in matras, gati and karve and moraFrom for creating
+                        moras from a given KonaWord/KonaTime instance for the statement and a maximum duration in matras.
+                        moraStatement, moraGap and moraOffset funzionano assieme, ed in maniera simile, dato un numero di pulsazioni, gati e karve, varrà generato un singolo
+                        konaword o poli-jatis konawords potremmo desrcrivere il metodo come "ﬁlling the given duration."
+                    </p>
+                
+                
+                }
+                
+                <p>moraStatement</p> 
+                <pre><code lang="supercollider">
+//	moraStatement
+//	Method to generate a mora statement
+//
+//	@statePulses	Statement jatis
+//	@aGati		Gati of the statement
+//	@aKarve		Karve to use
+moraStatement {|aStateMatras, aGati, aKarve|
+    var statePulses;
+    var statement;
+    var ret;
+    var temp;
+
+
+    statePulses = aStateMatras*(1/aKarve);
+
+    //Turn statements into KonaItems
+    //If the statement duration can be a single word
+    if(statePulses<=9) {
+            statement = KonaWord.new(statePulses, aGati, aKarve, tani);
+    } {
+        //If a statement duration requires more than a single word
+        //Generate a partition
+        statement = this.randomPartition(statePulses.asInteger);
+        //Choose a permutation
+        statement = this.randomPerm(statement);
+
+        //Convert to KonaTime
+        ret = KonaTime.new(tani);
+
+        statement.size.do {|i|
+            //New word jatis equal to part duration
+            temp = KonaWord.new(statement[i], aGati, aKarve, tani);
+            ret.add(temp);
+        };
+        statement = ret;
+    };
+    //statement = this.partitionWord(statement);
+    if(0.5.coin) {
+        statement = this.randomDensityJati(statement);
+    };
+
+    ^statement;
+}
+                </code></pre>
+                
+                <p>moraGap</p> 
+                <pre><code lang="supercollider">
+//	moraGap
+//	Method to generate a mora gap.
+//
+//	@gapPulses		Statement jatis
+//	@aGati		Gati of the statement
+//	@aKarve		Karve to use
+moraGap {|aGapMatras, aGati, aKarve|
+    var gapPulses;
+    var gap;
+    var temp;
+
+    gapPulses = aGapMatras*(1/aKarve);
+
+    if(gapPulses==0) {
+        gap=nil;
+    } {
+        if(gapPulses>4 && 0.95.coin) {
+            gap = this.randomPartition(gapPulses.asInteger, notSize:true);
+            gap = this.randomPerm(gap);
+
+            temp = KonaTime.new(tani);
+            gap.size.do { |i|
+                if(i==0) {
+                    temp.add(KonaWord.new(1, aGati, gap[i]*aKarve, tani))
+                } {
+                    temp.add(KonaWord.new(gap[i], aGati, aKarve, tani));
+                };
+            };
+            //gap = this.mutatePhrase(temp);
+            gap = temp;
+
+        } {
+            //Generate single jati gap with gapPulses duration
+            if(aKarve>=0.25 && (0.5.coin)) {
+                gap = KonaWord.new(0, aGati, gapPulses*aKarve, tani)
+            } {
+                gap = KonaWord.new(1, aGati, gapPulses*aKarve, tani)
+            };
+        };
+    };
+
+    ^gap
+}
+                </code></pre>
+                
+                <p>moraOffset</p> 
+                <pre><code lang="supercollider">
+//	moraOffset
+//	Method to generate a mora offset
+//
+//	@offsetPulses	Offset jatis
+//	@aGati		Gati of the statement
+//	@aKarve		Karve to use
+moraOffset {|aOffsetMatras, aGati, aKarve|
+    var offsetPulses;
+    var offset = nil;
+    var phraseMin;		//Minimum part size if the offset is to be a phrase.
+
+
+    offsetPulses = aOffsetMatras*(1/aKarve);
+
+    if(offsetPulses!=0) {
+        case
+            //If the offset is greater than 2 beats, use a phrase
+            {offsetPulses>(aGati*2)}	{
+                if(offsetPulses>20) {
+                    phraseMin = 4
+                } {
+                    phraseMin = 2;
+                };
+                offset = this.vSarvaPhrase(aOffsetMatras, aMin:phraseMin);
+
+            }
+            //If the offset is less than 2 beats, has a 0.05 chance articulation.
+            {0.05.coin}	{
+                offset = KonaWord.new(offsetPulses, aGati, aKarve, tani)
+            }
+            //Else a single syllable word is used.
+            {true}	{
+                offset = KonaWord.new(1, aGati, aOffsetMatras, tani)
+            };
+
+    } {
+        offset = nil;
+    };
+
+    ^offset
+}
+                </code></pre>
+                
+                <p>createSimpleMora mette assieme lo statement ed il gap, andando a ritornaci una ^mora</p> 
+                <pre><code lang="supercollider">
+//	createSimpleMora
+//	Builds a mora structure from a given statement
+//		with optional gap and offset.
+//
+//	@statement	KonaObject for Statement
+//	@gap		KonaObject for Gap
+//	@offset		KonaObject for Offset
+createSimpleMora {|statement, gap, offset|
+
+    var mora = KonaTime.new(tani);
+
+    if(offset!=nil,
+        {mora.add(offset)}
+    );
+
+    2.do {
+        mora.add(statement);
+        if(gap!=nil,
+            {mora.add(gap)}
+        );
+    };
+    mora.add(statement);
+
+    ^mora
+}
+                </code></pre>
+                
+                <p>randomMoraValues <br> Given a duration in matras, gati and karve, randomMora will randomMoraValues to calculate the
+                    durations for each section of the mora and createSimpleMora with moraStatement, moraGap, and
+                    moraOffset methods to generate a simple mora.</p> 
+                <pre><code lang="supercollider">
+//	randomMoraValues
+//	Calculation of mora values (statement, gap, offset durations).
+//
+//	@aMatras	The duration of the mora in matras
+//	@aGati		The gati of the mora elements
+//	@aGati		The karve of the mora elements
+//	@aGap		Boolean, gaps or not, overridden for certain durations.
+//	@aOffset	Boolean, offset or not
+randomMoraValues {|aMatras, aGati, aKarve, aGap=true, aOffset=true|
+    var pulses;
+    var stateMin, gapMin;
+    var stateMax, gapMax;
+    var gapArray, gapWeights;
+    var stateMatras, gapMatras, offsetMatras;
+    var totalStateMatras, totalGapMatras;
+
+    pulses = aMatras*(1/aKarve);
+
+    //	Nelson 2008 p 23
+    //	'It is a practical fact of Karnatak rhythmic behaviour that if a mora
+    //	statement is shorter than five pulses, its gap will nearly always be
+    //	at least two pulses'.
+    //	This is impossible if a duration of less than 7 is used.
+    //	In this instance a mora with the same duration,
+    //	but using double the jatis and half the karve is returned
+    //	Moras under 2 whole beats are also given a chance of being altered.
+
+    if(pulses<7 || (aMatras/aGati<=2 && 0.25.coin && (aKarve>0.5))) {
+        ^this.randomMoraValues(aMatras, aGati, aKarve/2, aGap, aOffset);
+    };
+
+    //Any duration under 15 will result in statements less than 5 pulses
+    //	so requires a minimum gap of 2
+    if(pulses<15) {
+        gapMin = 2;
+    } {
+        gapMin = 0;
+    };
+
+    //	Calculate the mininum matras for the statements.
+    //	If might be no gap, use a minimum size of 1/4 of the total mora duration
+    if(gapMin==0) {
+        stateMin = (pulses/(3.00, 3.05..4.00).choose).asInteger
+    } {
+        stateMin = (pulses/5).asInteger
+    };
+
+    //Calculate the maximum possible statement size
+    stateMax = (pulses-(gapMin*2)/3).asInteger;
+
+    //Select a statement duration
+    stateMatras = (stateMin..stateMax).choose;
+    totalStateMatras = stateMatras*3;
+
+    if(aGap) {
+        //Calculate the maximum possible gap size.
+        gapMax = (pulses-totalStateMatras)/2;
+
+        gapArray = (gapMin..gapMax);
+
+        //Calculate weights for gap matras selection, with bias for smaller gaps.
+        gapWeights = (gapArray.size..1).normalizeSum;
+
+        //Choose a gap duration
+        gapMatras = gapArray.wchoose(gapWeights);
+    } {
+        gapMatras = 0;
+    };
+    totalGapMatras = gapMatras*2;
+
+    //If there should be an offset, calculate the duration
+    if(aOffset) {
+        offsetMatras = pulses - totalStateMatras - totalGapMatras;
+    } {
+        offsetMatras = 0;
+    };
+    ^[stateMatras, gapMatras, offsetMatras, aKarve];
+}    
+                </code></pre>
+                
+                <p>randomMora</p> 
+                <pre><code lang="supercollider">
+//	randomMora
+//	Generation of a mora from given parameters;
+//
+//	@aMatras	The duration of the mora in matras
+//	@aGati		The gati of the mora elements
+//	@aGap		Boolean, whether there should be gaps or not
+//	@aOffset	Boolean, whether there should be an offset or not
+randomMora {|aMatras, aGati, aKarve, aGap=true, aOffset=true|
+    var values;
+    var statement, gap, offset;
+
+    values = this.randomMoraValues(aMatras, aGati, aKarve, aGap, aOffset);
+
+
+    //Convert statements/gaps/offset into KonaItems
+
+    statement = this.moraStatement(values[0]*values[3], aGati, values[3]);
+
+
+    gap = this.moraGap(values[1]*values[3], aGati, values[3]);
+    if(gap!=nil) {
+    };
+
+
+    offset = this.moraOffset(values[2]*values[3], aGati, values[3]);
+    if(offset!=nil) {
+    };
+
+
+    ^this.createSimpleMora(statement, gap, offset);
+}
+                </code></pre>
+                
+                <p>moraFrom
+                    E' uno dei metodi più interessanti perchè permette di sviluppare una cadenza ritmica da materiale pre-esistente.
+                    The moraFrom method allows moras to be generated using a given phrase, which could for example
+                    be a phrase featured earlier in a composition. This phenomenon is noted by Nelson (1991, vol.1 p.89) in
+                    his discussion of phrase suﬃxes, which “intrdouce rhythmic phrases that always have the potential to
+                    become formal cadences”. The method also has the option of passing in a pre-made gap and/or oﬀset,
+                    any section that is not passed in is generated.
+                
+                </p> 
+
+<pre><code lang="supercollider">
+    
+// Generative method to create a mora from a given statement,
+//		with optional maximum mora size, gap and offset.
+//	Differs from createSimpleMora in that gaps and offsets will
+//		be calculated and generated if possible
+//
+//	@aStatement		Kona object to use for statement
+//	@aMoraMatras	Total maximum number of matras, overidden if less
+//						than sum of aStatement, aGap, aOffset matras
+//	@aGap			Kona object to use for gap
+//	@aOffset		Kona object to use for offset
+moraFrom {|aStatement, aMoraMatras, aGap, aOffset|
+    var statement, gap, offset;
+    var objArray;
+    var objMatras, moraMatras, gapMatras, offsetMatras;
+
+    statement = aStatement;
+    gap = aGap;
+    offset = aOffset;
+
+    objMatras = 0;
+    objArray = [statement,gap,offset];
+    //Calculate total matras of mora sections passed as arguments
+    objArray.do { |item, i|
+        var val;
+        if(item!=nil && (item!=false)) {
+            switch (item)
+                {statement}	{val = 3}
+                {gap}		{val = 2}
+                {offset}	{val = 1};
+
+            objMatras = objMatras + (item.matras*val);
+        };
+    };
+
+    //If no maximum duration has been given
+    if(aMoraMatras==nil || (aMoraMatras ? 0 "<"objMatras) ) {
+
+        //Calculate the new maximum duration
+        moraMatras = objMatras;
+        if(gap==nil || (gap==false)) {
+            gapMatras=0;
+        } {
+            gapMatras=gap.matras
+        };
+        if(offset==nil) {
+            offsetMatras=0;
+        } {
+            offsetMatras = offset.matras;
+        };
+    } {
+        //If a maximum duration has been given
+        moraMatras = aMoraMatras;
+
+        //Calculate the lengths of the various sections.
+        //Various cases of passed in gaps and offset.
+        case
+            {gap==nil && (offset==nil)}	{
+                gapMatras = (0..(moraMatras-objMatras)/2).choose;
+                objMatras = objMatras + (gapMatras*2);
+                offsetMatras = moraMatras - objMatras;
+                objMatras = objMatras + offsetMatras;
+            }
+            {gap==nil && (offset!=nil)}	{
+                offsetMatras = offset.matras;
+                gapMatras = (0..(moraMatras-objMatras)/2);
+                objMatras = objMatras + gapMatras*2;
+            }
+            {gap!=nil && (gap!=false) && (offset==nil)}	{
+                if(gap!=false) {
+                    gapMatras = gap.matras;
+                };
+                offsetMatras = moraMatras - objMatras;
+                objMatras = objMatras + offsetMatras;
+            }
+            {gap!=nil && (gap!=false) && (offset!=nil)} {
+                gapMatras = gap.matras;
+                offsetMatras = offset.matras;
+            };
+    };
+
+    //If no gap has been set, create one.
+    gap = gap ?? {this.moraGap(gapMatras, statement.gati, statement.karve)};
+    //If there should be no gap, set it to nil
+    if(gap==false) {
+        gap = nil;
+    };
+
+    //If no offset has been calculate the duration and create one
+    if(offsetMatras==nil) {
+        if(offset==nil) {
+            offsetMatras = moraMatras - objMatras;
+        } {
+            offsetMatras = offset.matras;
+
+        };
+    };
+    offset =  offset ?? {this.moraOffset(offsetMatras, statement.gati, statement.karve)};
+
+    //Construct and return the mora
+    ^this.createSimpleMora(statement, gap, offset);
+}    
+ </code></pre>
+                
+                
+                <p> 
+                As moras are cadences always resolved with a strong beat (or at least never a rest) the
+                makePostMora method was written to ensure that the material that comes after the mora does not start with a rest; converting rests if necessary.
+                </p>
+                
+                <p>makePostMora</p> 
+                <pre><code lang="supercollider">                
+    //	makePostMora
+    //	Method to convert a phrase so that it's suitable after a mora,
+    //		i.e. that it starts with a strong long beat
+    //
+    //	@aKonaItem		Phrase to be altered
+    makePostMora {|aKonaItem|
+        var phrase;				//Phrase being altered
+        var sectionMatras;		//Matras in the section being overridden
+        var i;					//Iterator
+        var index;				//Index used when calculating makeup Matras
+        var hitMatras;			//Duration of the initial beat in matras
+        var makeupMatras;		//Duration of the material being made up for
+        var hit;				//KonaWord for the initial beat
+        var makeup;				//KonaWord for the makeup
+        var ret;				//KonaTime to return the phrase
+
+        //If phrase is a KonaWord, convert it to a KonaTime
+        if(aKonaItem.class==KonaTime) {
+            phrase = aKonaItem.deepCopy;
+        } {
+            phrase = KonaTime.newFrom([aKonaItem], tani);
+        };
+
+        sectionMatras = 0;
+        i = 0;
+        //Create initial hit
+        hitMatras = aKonaItem.gati;
+        hit = KonaWord.new(1, phrase.gati, hitMatras, tani);
+
+        //Count how many parts of the phrase will be overridden
+        while({sectionMatras"<"hitMatras}, {
+            sectionMatras =  sectionMatras + phrase[i].matras;
+            i = i + 1;
+        });
+        //Calculate the duration of the overridden section that needs to be recreated
+        makeupMatras = sectionMatras - hitMatras;
+        //Generate makeup material.
+        if(makeupMatras!=0) {
+
+            if(phrase.size==1) {
+                index = 0
+            } {
+                index = i-1;
+            };
+            makeup = this.vSarvaPhrase(makeupMatras)
+        };
+        //Add and return all items
+        ret = KonaTime.newFrom([hit], tani);
+        if(makeup!=nil) {ret.add(makeup)};
+        if(phrase.size>1) {
+            ret.addAll(phrase[i..phrase.size-1]);
+        };
+
+        ^ret;
+    }
+}
+                </code></pre>
+                
+<h1>Compound Mora(mora di more)</h1>
+<p>A compound mora is a mora in which the statements themselves are also of the mora form</p>
+
+<p>The randomSamaCompoundMora method was written to generate compound moras with a sama (equal)
+    yati (shape); where all three statements are identical (there are other shapes such as gopucca– ‘cow’s
+    tail’ which contracts with increasingly smaller statements and srotovaha– ‘river-mouth’ the opposite of
+    gopucca). 
+    This method uses the randomMoraValues method to determine section values, randomMora to
+    create the simple mora that will comprise the statements of the compound mora and moraFrom to create
+    the missing parts (oﬀset and gaps if necessary) and build the mora structure.
+</p> 
+
+<pre><code lang="supercollider">
+//	randomSamaCompoundMora
+//	Generate a random compound mora with the 'sama' shape
+//
+//	@aMatras	Duration in matras
+//	@aGati		The gati to use
+//	@aKarve		The karve to use
+randomSamaCompoundMora {|aMatras, aGati, aKarve|
+    var values;
+    var stateDur, gapDur, offsetDur;
+    var statement, gap, offset;
+
+    values = this.randomMoraValues(aMatras, aGati, aKarve, true, true);
+
+    stateDur = values[0];
+
+    gapDur = values[1];
+
+    statement = this.randomMora(stateDur*values[3], aGati, values[3], true, false);
+
+    if(gapDur==0) {
+        gap = false;
+    } {
+        gap = this.moraGap(gapDur*values[3], aGati, values[3]);
+    };
+
+    ^this.moraFrom(statement, aMatras, gap);
+}            
+</code></pre>           
+
+<h2>Gati changes</h2>
+<p>Nel contesto del Tani avartanam un campio di gati(terzine/quartine/etc..) 
+    intere Korvai vengono trasposte in un altro gati. es: una composizione di 180 pulsazioni,
+    in chatusra(quartine), khanda(5ine) e tisra(3ine)
+</p>
+<img src="images/img 5.33.PNG" alt="5.33"></p> <br>
+
+<p>La modellazione di questo processo è resa possibile dai metodi: wordAtGati e phraseAtGati </p>
+
+  
+<p>wordAtGati:  takes an existing
+    KonaWord and desired gati and karve, from which it returns a new KonaWord equal in jatis but with
+    altered gati and karve. </p> 
+    
+<pre><code lang="supercollider">
+/* ================================================================================ */
+/* =                          Manipulation Methods                                = */
+/* ================================================================================ */
+
+//	wordAtGati
+//	@argWord		Word to manipulate
+//	@argGati		New Gati
+//	@argKarve		Number of gati divisions each jati should occupy
+//
+//Method to return a word  at a new Gati, including double tempo etc
+//The gati and karve arguments are taken absolutely
+//For 4-->G3E1 A word with Gati 4, Karve 2, [0.125, 0.125], would be [0.33, 0.33]
+
+wordAtGati { |argWord, argGati, argKarve|
+    ^KonaWord.new(argWord.jatis, argGati, argKarve, tani)
+}
+</code></pre>  
+
+<p>As phraseAtGati has to keep relative the karves of multiple KonaWords it takes a
+    gati parameter and an expansion parameter instead of karve. A distinction is made between KonaWords
+    and KonaTimes, the former returns a new KonaWord with the input object’s karve multiplied by the
+    expansion value, the later results in a recursive call on all contained objects until a KonaWord is being
+    dealt with. </p> 
+
+<pre><code lang="supercollider">
+//	phraseAtGati
+//	@argObj					KonaTime (or word) to manipulate
+//	@argGati				New Gati
+//	@argGatiExpansion		Karve multiple.
+//
+//	Method to return a phrase at a new Gati, including double tempo etc
+//	The expansion value is relative to the input objects expansion,
+//		so that phrases maintain their relative values
+
+
+phraseAtGati {|argObj, argGati, argGatiExp|
+    var temp = KonaTime.new(tani);
+
+    if(argObj.class==KonaWord) {
+        ^KonaWord.new(argObj.jatis, argGati, argObj.karve*argGatiExp, tani)
+    } {
+        argObj.do{ |item, i|
+            temp.add(this.phraseAtGati(item, argGati, argGatiExp));
+        }
+        ^temp;
+    };
+}
+</code></pre>  
+    
+<h1>Micro Mutazioni</h1>
+<p>Numerosi metodi sono stati scritti a questo scopo; modificare  gli jatis di konawords</p>
+<h2>Cambiare la densità degli Jatis</h2>
+
+<p>increase the ‘density’ of one or more of the jatis</p>
+<img src="images/img 5.34.PNG" alt="5.34"></p> <br>
+
+
+</section>
+</article>
+</main>
+
+</body>
+
+</html>
