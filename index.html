@@ -83,6 +83,7 @@
                 <h1>
                 Konnakol and Karnatic music in Supercollider 
                 </h1>
+        
                 <h2>Appunti tratti da: <br>
                     Computer Representation and Generation of
                     Karnatak Rhythms
@@ -94,7 +95,7 @@
              
 
             </header>
-
+            <hr>
           <!--LINKS-->
             <section>
                 <article>
@@ -129,9 +130,10 @@
                     <a href="https://scsynth.org/t/analysis-of-a-project-with-4-interconnected-classes-oop/5001"
                         target="_blank">Aiuto da casa SC-USERS</a>
             </section>
-
+         
             <!--GLOSSARY-->
             <section>
+                <h1>Glossario</h1>   <hr><br>
 
                 <table>
                     <thead>
@@ -201,8 +203,8 @@
 
             <!--TALAS-->
             <section>
-                <h1></h1>
-                <h3>Tala</h3>
+                <h1>Talas</h1>
+                
                 <p>Tala can be translated as metre. The main (and far-reaching) difference with western metre is
                     that karnatic talas are constructed following specific and strict rules,
                     and that the inner construction derived from these rules really do have a decisive effect on
@@ -215,23 +217,22 @@
                 </ol>
                 </p>
 
-                <p>
-                <h2> Diversi tipi di tala: </h2>
-                Suladi (il più comune) 
-                Chapu
-                Shadanga
-                Shoshadanga
-                Janaka
-                Dhruvarupaka
-
+            
+              <p>Esistono diversi tipi di tala: 
+                Suladi (il più comune),
+                Chapu,
+                Shadanga,
+                Shoshadanga,
+                Janaka,
+                Dhruvarupaka.
                 </p>
 
 
             </section>
-
+           
             <!--first TALA-->
             <section id="Saludi">
-                <h1>Suladi Tala</h1>
+                <h1>Suladi Tala</h1>   <hr>
                 <p>
                     Suladi talas responds to combinations of three angas. <br>
                     <strong>Anga:</strong> construction blocks of different size
@@ -306,13 +307,13 @@
 
 
             </section>
-
+      
             <!--Solkattu-->
             <div>
                 <section>
 
                     <div></div>
-                    <h1>Solkattu</h1>
+                    <h1>Solkattu</h1>   <hr>
                     <p>
                         The South Indian system of spoken syllables and tala hand gestures.
                         Every gati has an assigned set of syllables (called solkattu or konnakkol)
@@ -371,12 +372,12 @@
 
 
             </div>
-
+        
             <!--Programming In SC-->
             <div>
                 <section>
 
-                    <br><h1>OOP in Sc</h1>
+                    <br><h1>OOP in Sc</h1>   <hr>
                     <p>Mi è stato necessario approfondire dei principi di programmazione legata al paradigma degli oggetti, utilizzabili anche nel contesto di Supercollider.
                         Questa cosa non avviene solitamente, perchè l'environment offre una enorme serie di librerie dedicate a specifiche esigenze musicali o di DSP.
                         I testi presi in esame sono stati: <br>
@@ -396,7 +397,7 @@
             <div>
                 <section>
 
-                    <h1>Design and Implementation</h1>
+                    <h1>Design and Implementation</h1>   <hr>
                     
                     <h3>SuperCollider environment for working
                         with Karnatak rhythmic material:</h3>
@@ -450,24 +451,27 @@
 </code></pre>
 
                 <p>
-                    Il materiale ritmico può essere composto a mano con KonaWord e KonaTime, oppure potremo
+                    Il materiale ritmico può essere composto a mano con KonaWords e KonaTime, oppure potremmo
                     automatizzare il tutto
-                    con i metodi "mutation methods" forniti dalla classe KonaGenerator. <br>
-                    KonaWord e KonaTani, possono essere suonate direttamente o aggiunte ad un KonaTani, per essere
-                    suonate con l'accompagnamento del Tala battutto dalle mani.
+                    con i metodi generativi forniti dalla classe KonaGenerator. <br>
+                    KonaWord e KonaTani, possono essere suonate direttamente o aggiunte ad un altro KonaTani,  
+                   esiste inoltre l'opzione di attivare l'accompagnamento del Tala battutto dalle "mani".
                 </p>
 
 
 
                 </section>
 
-                <p>Ogni KonaWord rappresenta una singola unità di un ritmo carnatico, costituito da
-                    un numero di pulsazioni/sillabe raggruppate a formare una singola word.
+
+
+                <h1>KonaWord</h1> <hr>
+                <p>Ogni KonaWord rappresenta una singola unità di un ritmo, costituito da
+                    un numero di pulsazioni/sillabe raggruppate a formare una singola word, il numero varia da 0 a 9
 
                     Ogni istanza include delle specifiche:
                 <ul>
                     <li>numero di Jatis(sillabe)</li>
-                    <li>Karve(durata di tutti gli Jatis(sillaba) ovvero la somma dei matras)</li>
+                    <li>Karve(durata di tutti gli Jatis(sillaba) ovvero la somma dei matras</li>
                     <li>Gati(come è suddiviso il beat) Gatis = Tuplets = gruppi Irregolari <br>
                         Gati is the name given to the subdivision of the beat into an equal number of units called
                         matras.
@@ -488,7 +492,7 @@
                 <p>Ogni Prima pulsazione di una frase è sempre accentata, ed ogni accento implica l'inizio di un
                     raggruppamento</p>
 
-                    <p>Questa è un primo scottante problema nella creazione di KonaWords, con durate di es: sedicesimi e ottavi, 
+                    <p>Questo è un primo scottante problema nella creazione di KonaWords, con durate di es: sedicesimi e ottavi, 
                         perchè siccome è possibile cambiare il Karve(1/16) solo per ogni parola, anche sequenze semplicissime, risulteranno
                         come Ta-- ta-ka , ovvero con due accenti forti ... ed ovviamente queste devono essere messe in un KonaTime
                     </p>
@@ -509,16 +513,16 @@ g.postWord;
 
 <p>Continuiamo ad analizzare il problema dell'accentazione / sillabazione <br> </p>
 
-                <img src="images/img 5.1.PNG" alt="5.1">
+                <img src="images/img 5.1.PNG" alt="5.1" >
                 <p>Tala in 3, prima battuta e seconda con accentazione diversa, perchè le KonaWord sono diverse </p>
                 <p>Nel nostro contesto del KonaWord è essenziale essere chiari nella sillabazione, soprattutto per i
                     gruppi che consentono diverse opzioni. Anche i percussionisiti di Mridangan hanno la stessa
-                    necessità, ad ogni sillaba corisponde un colpo diverso sul tamburo.
-                    Se si può evitare di concatenare word, è preferibile, infatti è melgio utilizzare quelle decise
+                    necessità, ad ogni sillaba corrisponde un colpo diverso sul tamburo.
+                    Se si può evitare di concatenare KonaWords, è preferibile, infatti è melgio utilizzare quelle decise
                     nell'array del KonaWord.
                     Questo serve a mettere un pò di chiarezza in questa gray area della differenziazione tra word e
                     phrases.
-                    Quindi in questa tesi, verrà utilizzato, l'allargamento della durata di una notain questo modo:
+                    Quindi in questa tesi, verrà utilizzato, l'allargamento della durata di una nota in questo modo:
                 </p>
 
                 <p>
@@ -556,40 +560,39 @@ g.postWord;
                     </tbody>
                 </table> <br>
 
-                <img src="images/img 5.5.PNG" alt="5.5">
-                parole più lunghe di 9 sillabe contengono pause e NON fanno parte
-                della Classe KonaWord.
-            Il problema è che non è charo come fare ad ottenere questa cosa. 
+                <img  src="images/img 5.5.PNG" alt="5.5"> <br>
+
+              <p>  Parole più lunghe di 9 sillabe contengono pause e non fanno parte  della Classe KonaWord.
             </p>
-            <p>A battuta 17 troviamo una permutazione, che sarà una tecnica fondamentale che andremo ad utilizzare sistematicamente. 
-                possiamo vedere come qui vengano utilizzati gruppi di 2 KonaWords Ta-ka come entità separate, e non  raggruppate a 4 secondo la sillaazione Ta-ka-di-mi,
+            <p>A battuta 17 troviamo una permutazione, che sarà una tecnica utilizzata sistematicamente. <br>
+                Possiamo vedere come qui vengano utilizzati gruppi di 2 KonaWords Ta-ka come entità separate, e non  raggruppate a 4 secondo la sillabazione Ta-ka-di-mi,
                 questo serve a capire che si può separare a gruppi minimi di 2 anche se vi è prossimità. 
                 Per chiarezza  una frase di 5 come da-di-gi-na-dom ha solo un accento, mentre una frase di 5 come ta-ki-ta ta-ka ha un accento sull'1 sul 3.
-            Per i suonatori di Mridangam ta-ka e ju-na corrispondono a due suoni differenti, quindi una frase di 4 sillabe deve essere fatta con la scelta delle sillabe corretta, nel nostro caso, potrebbe essere meno rilevante.
+            Per i suonatori di Mridangam ta-ka e ju-na corrispondono a due suoni differenti, quindi una frase di 4 sillabe deve essere fatta con la scelta delle sillabica corretta, anche se nel nostro caso  potrebbe essere meno rilevante.
                 <a href="https://www.johnmclaughlin.com/wp-content/uploads/2008/01/konokolchapter3.pdf" target="_blank" rel="noopener noreferrer"> Battuta 17 permutazione</a><br></p>
            
                 <img src="images/img 5.3.PNG" alt="5.3"> <br>
 
                 <h2>Variation</h2>
-<p>Variazioni e difficoltà iniziano ad arrivare con parole più grandi di 5 sillabe, perchè già in partenza offrono combinazioni di più gruppi sillabici.
-   <br> Ta-ka Ta-ki-ta(2+3)  o  Ta-ki-ta  Ta-ka(3+2), applicando la partizione del numero 5 otteniamo tutti i possibili gruppi, che possono anche essere permutati ottenedo
-   -> [ [ 3, 2 ], [ 2, 3 ], [ 5 ] ] <br>
+<p>Variazioni e difficoltà iniziano ad emergere con parole più grandi di 5 sillabe, perchè già in partenza offrono combinazioni di più gruppi sillabici.
+   <br> Ta-ka Ta-ki-ta(2+3)  o  Ta-ki-ta  Ta-ka(3+2) <br> Applicando la partizione del numero 5 otteniamo tutti i possibili gruppi, che possono anche essere permutati ottenedo
+  <br> -> [ [ 3, 2 ], [ 2, 3 ], [ 5 ] ] <br>
    per il numero 6 -> [ [ 2, 2, 2 ], [ 3, 3 ], [ 4, 2 ], [ 2, 4 ], [ 6 ] ] <br>
    per il 7 -> [ [ 3, 2, 2 ], [ 2, 3, 2 ], [ 2, 2, 3 ], [ 4, 3 ], [ 3, 4 ], [ 5, 2 ], [ 2, 5 ], [ 7 ] ] <br>
-La soluzione è generare le parole lunghe andando a concatenare parole brevi, andando poi ad aggiungere l'accento sull'1. <br>
+La soluzione è generare le parole lunghe andando a concatenare parole brevi, successivamente aggiungendo l'accento sull'1. <br>
 Però c'è da tenere in considerazione che da nessuna parte viene usata una frasi così Ta ka ta ka ta ka ta ki t.a (2 + 2 + 2 + 3) or similar,
 perchè verrebbe considerata come una sequenza di frasi separate ed in fila. <br>
 Una soluzione ad una frase lunga può essere quella di estendere il valore di una frase di 5 fatta da 5 matras ad una frase di 9 matras con 5 sillabe.
 Quindi rimane da-di-gi-na-dom ma con 4 jatis estesi di 2 matras per jati. <br>
 
-<img src="images/img 5.3.PNG" alt="5.3"> <br>
-Nelle  trascrizioni e nelle analisi ovviamente troviamo delle diversità, quando però vogliamo in un gruppo quadripartito <br>
-es: quartina di sedicesimi come struttura mentale sottostante,  vogliamo far capire che una nota è di un otavo allora utilizziamo un'altra sillaba che risulta più luna come:
-nell'esempio con (commonly Ta lan - gu)
+<img src="images/img 5.3.PNG" alt="5.3"  > <br>
+Tra  trascrizioni ed  analisi ovviamente troviamo delle diversità, quando però vogliamo in un gruppo quadripartito far capire che una nota è di un ottavo allora utilizziamo un'altra sillaba che risulta più lunga. <br>
+es: quartina di sedicesimi come suddivisione sottostante.  
 
-<img src="images/img 5.6.PNG" alt="5.6"> <br>
+
+<img  src="images/img 5.6.PNG" alt="5.6"> <br>
  La soluzione adottata per questa implementazione è di utilizzare una pulsazione a parola(se 60 BPM = 60 Pulsazioni al minuto)
- Per numeri superiori a 6 la concatenazione è SEMPRE utilizzata, anche se noi mentalmente andremo a pensare a 7 e non a 4+3 o 3+4 etc.. <br>
+ Per numeri superiori a 6 la concatenazione è sempre utilizzata, anche se noi mentalmente andremo a pensare a 7 e non a 4+3 o 3+4 etc.. <br>
  Tantomeno a (Da di - gi na dom) con la "di" allungata.
 
 
@@ -606,15 +609,11 @@ Ero convinto che si potesse fare in questo modo utilizzando il metodo di KonaGen
 </code></pre>
 </p>
 
-        
-<h1>Come si fa@@@@@@@???????????? <br></h1>
-<p>???? </p>
-
-
+    
 <p>
-    Karve è il valore che mettiamo nela KonaWord ed è il numero di Matras occupato da ogni Jati(sillaba)
+    Karve è il valore che mettiamo nella KonaWord ed è il numero di Matras occupato da ogni Jati(sillaba)
     <br> Quanti sedicesimi occupa la nostra sillaba? (semplificando molto)
-    <img src="images/img 5.9.PNG" alt="5.9"> 
+    <img src="images/img 5.9.PNG" alt="5.9" > 
 
     <pre><code   lang="supercollider"  >
 // Chatusra gati example
@@ -648,7 +647,7 @@ KonaWord.new(4,4,argKarve: 4).postWord
 </p>
 
 
-<p>Ogni KonaWord ha internamente una Routine ed una serie di metodi per utilizzare synths interni o MIDI esterno e per printare le words e durate</p>
+<p>Ogni KonaWord ha internamente una Routine ed una serie di metodi per utilizzare synths interni o MIDI esterno e per printare le words e durate.</p>
 
 
         <section>
@@ -658,48 +657,12 @@ KonaWord.new(4,4,argKarve: 4).postWord
 
 
 </section>
-                <p>
-                    Each KonaWord instance contains an array of jatis (syllables, stored as symbols) which are combined
-                    to form a word.
-                </p>
-
-                <pre><code   lang="supercollider"  >
              
-                  
-                 KonaWord( 
-                           argSyls: 7, // the syllables
-                           argGati: 3, // tuplets only 3,4,5,7,9
-                           argKarve: 1).postWord;
-                
-                    
-
-                   /*  this is the word with times  
-                    [Ta       , Ka       , Di       , Mi       , Ta       , Ki       , Tah       ]
-                    [ 0.333    , 0.333    , 0.333    , 0.333    , 0.333    , 0.333    , 0.333     ]
-                    [ [ 1, 12 ], [ 1, 12 ], [ 1, 12 ], [ 1, 12 ], [ 1, 12 ], [ 1, 12 ], [ 1, 12 ] ]
-                    -> [ [ Ta       , Ka       , Di       , Mi       , Ta       , Ki       , Tah       ], 
-                    [ 0.333    , 0.333    , 0.333    , 0.333    , 0.333    , 0.333    , 0.333     ],
-                    [ [ 1, 12 ], [ 1, 12 ], [ 1, 12 ], [ 1, 12 ], [ 1, 12 ], [ 1, 12 ], [ 1, 12 ] ] ]
-                     */
-</code></pre>
 
 
-
-
-                <p>Crea i buffers
-                    The instantiation method new has an argument for deﬁning the number of syllables, which
-                    determines which the of syllables and ultimately the word to be used.
-                </p>
-
-                <pre><code   lang="supercollider"  >
- //Syllables Array
- syls = ['Tam', 'Ta', 'Ka', 'Ki', 'Tah', 'Di', 'Mi', 'Da', 'Gi', 'Na',
- 'Dom', '-', 'Ju', 'Lan', 'Gu', 'Tom', 'Nam', 'Ri', 'Du', 'Din'];
-
- 
-</code></pre>
                 <!-- Analisi FFT dei file audio e loro trasformazione in analisi -->
                 <section>
+                    <h1>FFT audio files</h1> <hr>
                     <p>Per creare i File di analsi utili nel contesto dell' FFT hai bisogno
                         di renderli .scpv, questo ti consentirà di fare Pitch Shifting correttamente.
                     </p>
@@ -860,10 +823,7 @@ t.jatis // -> 16
 
     <img src="images/img 5.13.PNG" alt="5.13"> <br>
 
-    <audio controls>
-        <source src="audio/render_code_audio/dissertation_5.13.mp3"
-            type="audio/mp3">
-    </audio>
+   
 
     <pre><code   lang="supercollider"  >
 // create a piece at 60 bpm, in Misra Capu 7/4, with a gati of 4
@@ -927,7 +887,7 @@ a.stop;
             </div>
    <!--KonaTani-->        
 <section>
-    <h1>KonaTani</h1>
+    <h1>KonaTani</h1> <hr>
     <p>Il KonaTani rappresenta un intero pezzo meusicale, solitamente composto da diversi KonaTime con al loro interno le KonaWords
         gli attributi sono:
         argLaya: (bpm) <br>
@@ -949,13 +909,13 @@ KonaTani.new(argLaya: 60, argTala: [ "I4", "O", "O" ], argGati: 4, argOtherGatis
 
    <!--KonaGenerator-->        
    <section>
-    <h1>KonaGenerator</h1>
+    <h1>KonaGenerator</h1>  <hr>
     <p>The KonaGenerator class was built to handle all of the generation and manipulation requirements of the
         system. Il sistema è costruito analizzando trascrizioni nelle quali sono state individuate regole compositive, 
-        rese sotto forma di software.
-        abbiamo 2 funzioni principali: <br>
+        rese sotto forma di software. <br>
+        Abbiamo 2 funzioni principali: <br>
         1) metodi per la generazione <br>
-        2) metodi per la mutare materiale preesistente (Konatime)<br> 
+        2) metodi per mutare materiale pre-esistente (Konatime)<br> 
 
         Però è anche vero che i metodi di generazione utilizzano quelli di mutazione.
         Creating an archetypal phrase and altering it rather than continuously
@@ -963,7 +923,7 @@ KonaTani.new(argLaya: 60, argTala: [ "I4", "O", "O" ], argGati: 4, argOtherGatis
         Tutte le tecniche richiedono delle specifiche che l'utente deve immettere, oltre a quelle, però abbiamo 
         additional probabilistic method for automation. 
     </p>
-    <h2>Generation Overview</h2>
+    <h1>Generation Overview</h1>  <hr>
     
     <h2>Integer Partitioning </h2>
     <a href="https://it.wikipedia.org/wiki/Partizione_di_un_intero" target="_blank" rel="Partizione_di_un_intero">wikipedia</a>
@@ -975,12 +935,11 @@ KonaTani.new(argLaya: 60, argTala: [ "I4", "O", "O" ], argGati: 4, argOtherGatis
         160/4 = 40 accenti (raggruppamenti ovvero ta - ka - di - mi su quintine)
     </p>
 
-    <p>partendo da un esempio più semplice vediamo come funziona se abbiamo una battuta di 4/4 = 16 matras in Chatusra (sedicesimi): 
+    <p>Partendo da un esempio più semplice vediamo come funziona se abbiamo una battuta di 4/4 = 16 matras in Chatusra (sedicesimi): 
         <img src="images/img 5.14.PNG" alt="5.14"> <br>
-        Non è ancora chiaro, comunque si possono formare delle konawords di 3 o 2 sillabe con matra = 2(ottavi)... 
-        emergerà il come fare ..
+        NonDevo chiedere conferma all'autore, comunque si possono formare delle konawords di 3 o 2 sillabe con matra = 2(ottavi)... 
         <br>
-        oppure si possono raggruppare 6 sedicsimi() fino ad avere un quarto puntato
+        Oppure si possono raggruppare 6 sedicsimi() fino ad avere un quarto puntato
         <img src="images/img 5.15.PNG" alt="5.15"> <br>
 
     </p>
@@ -1055,9 +1014,9 @@ randomPerm { |partition, seed|
 
     <h2>Pruning =  "Potatura"</h2>
     <p>
-Utilizzare i metodi come fatto sopra, ci danno matematicamente il risultao che cerchiamo, esteticamente invece no.
+Utilizzare i metodi come fatto sopra, ci danno matematicamente il risultato che cerchiamo, esteticamente invece no.
 Siccome ci interessa non perdere di identità ma mantenere ciò che è stato analizzato, bisogna scegliere cosa ci interessa.
-typically no more than three unique part sizes were used
+Typically no more than three unique part sizes were used
 <a href="https://www.johnmclaughlin.com/wp-content/uploads/2008/01/konokolchapter6.pdf" target="_blank" rel="noopener noreferrer">Analizza la score</a><br></p>
 
 <img src="images/img 5.13.PNG" alt="5.13"> <br>
@@ -1110,8 +1069,8 @@ included with a default of 0.97 to occasionally allow partitions with a high num
 
 <h2>Part sizes</h2>
 
-<p>Anche se è stato detto che il tala ed il gati scelto NON portano con loro accenti della "battuta"
-è altrttanto vero che ci sono casi dove è desiderabile evidenziare la struttura dell'environment nel qualse si sta suonando(Tala/gati)
+<p>Anche se è stato detto che il tala ed il gati scelto non portano con loro accenti della "battuta"
+è altrettanto vero che ci sono casi dove è desiderabile evidenziare la struttura dell'environment nel quale si sta suonando(Tala/gati)
 “phrases are arranged in patterns that bear an
 integral relation with the given aksara structure. These patterns are arranged into groups that bear an analogous relationship with the tala structure.”
 Si può ottenere questa relazione andando ad utilizzare raggruppamenti(Jatis) di grandezza fortemente legata alla struttura <br>
@@ -1268,7 +1227,7 @@ w.postWord
 a.add(w)
 a.play
 
-// NON riesco a farlo funzionare da qui ho le parole immagazzinte nell'array in un formato strambo...
+// NON riesco a farlo funzionare da qui ho le parole immagazzinte nell'array in un formato poco chiaro...
 
 /* 
 [
@@ -1290,7 +1249,7 @@ a.stop;
  </code></pre>
 
  <h2>Combine e combine similar</h2>
- <p>Sono altri due metodi studiati per evitare che vi siano inutili ripetizioni di piccole combinaioni di parole come nell'esempio: </p>
+ <p>Sono altri due metodi studiati per evitare che vi siano inutili ripetizioni di piccole combinazioni di parole come nell'esempio: </p>
     
     <img src="images/img 5.20.PNG" alt="5.20"> <br>
     <a href="https://www.johnmclaughlin.com/wp-content/uploads/2008/01/konokolchapter5.pdf" target="_blank" rel="noopener noreferrer">Analizza la score ch5 </a><br></p>
@@ -1304,65 +1263,6 @@ a.stop;
  </p>
 
  <pre><code lang="supercollider">
-    //	partsToWords
-//	Method to turn a partition array into KonaWords
-//
-//	@aPartitionArray	Partition Array
-//	@aOne				Boolean; if KonaWords can be 1 syllable
-//	@aMult				Boolean; if Konawords can have syllables == part size
-// partsToWords {|aPartitionArray, aKarve, aOne=true, aMult=true|
-
-
-a = KonaTani.new(60,#["I4", "O", "O"],4,argSynth: \MIDITranscribe);
-MIDIClient.init;
-a.midiOut = MIDIOut.newByName("loopMIDI Port", "loopMIDI Port");
-
-
-r = KonaGenerator();
-t = r.allPartitions(4.asInteger, aMin:1)
-j = t.size.collect({|index| r.allPerms(aCollection:t.at(index)) });
-j.flatten(1).size
-
-/*
--> [ [ 1, 1, 1, 1 ], [ 2, 1, 1 ], [ 2, 2 ], [ 3, 1 ], [ 4 ] ]
--> [
-	[ [ 1, 1, 1, 1 ] ],
-	[ [ 2, 1, 1 ], [ 1, 2, 1 ], [ 1, 1, 2 ] ],
-	[ [ 2, 2 ] ],
-	[ [ 3, 1 ], [ 1, 3 ] ],
-	[ [ 4 ] ] ]
--> 8
-*/
-
-
-t.class // it's our array of partitioned numbers
-b = KonaGenerator.new
-
-// funziona dopo innumerevoli tentativi, quindi se decidei che il primo è vero il secondo deve essere falso altrimenti diventa probabilistico
-w =b.partsToWords(aPartitionArray:j.asArray, aKarve:1,aOne: false,aMult: true);
-// -> KonaTime[ a KonaWord, a KonaWord, a KonaWord, a KonaWord, a KonaWord ]
-w.post
-w.postWord
-
-
-
-a.add(w)
-a.play
-
-// NON riesco a farlo funzionare da qui ho le parole immagazzinte nell'array in un formato strambo...
-
-/*
-[
-	[ [ [ 1, 16 ], [ 1, 16 ], [ 1, 16 ], [ 1, 16 ] ] ],
-	[ [ [ 1, 8 ], [ 1, 16 ], [ 1, 16 ] ], [ [ 1, 16 ], [ 1, 8 ], [ 1, 16 ] ], [ [ 1, 16 ], [ 1, 16 ], [ 1, 8 ] ] ],
-	[ [ [ 1, 8 ], [ 1, 8 ] ] ],
-	[ [ [ 3, 16 ], [ 1, 16 ] ], [ [ 1, 16 ], [ 3, 16 ] ] ],
-	[ [ [ 1, 4 ] ] ]
-]
-*/
-
-
-
 // combine
     //	@aCollection	A collection of KonaItems with a combined desired jati number
     //

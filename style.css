@@ -132,7 +132,7 @@ article.rapido {
 
 @media (max-width: 1023px) {
     article.rapido {
-        width: 600px;
+        width: 900px;
         padding: 0 20px 0 20px;
     }
 }
@@ -142,7 +142,7 @@ article.rapido {
 /* aside */
 
 article.rapido section>aside {
-    width: 600px;
+    width: 900px;
     max-width: 100%;
     border-top: 2px solid #353839;
     border-bottom: 2px solid #353839;
@@ -182,7 +182,7 @@ article.rapido>footer {
 /* h1 */
 
 article.rapido section>h1 {
-    width: 600px;
+    width: 900px;
     max-width: 100%;
     margin: 0 0 30px 0;
     font-size: 30px;
@@ -260,7 +260,7 @@ article.rapido>footer figure>figcaption>h1 {
 /* h2 */
 
 article.rapido section>h2 {
-    width: 600px;
+    width: 900px;
     max-width: 100%;
     margin: 0 0 20px 0;
     font-size: 20px;
@@ -288,7 +288,7 @@ article.rapido>footer>section>h2 {
 /* h3 */
 
 article.rapido section>h3 {
-    width: 600px;
+    width: 900px;
     max-width: 100%;
     margin: 0 0 20px 0;
     font-size: 18px;
@@ -320,7 +320,7 @@ article.rapido>footer>section {
 /* blockquote */
 
 article.rapido section>blockquote {
-    width: 600px;
+    width: 900px;
     max-width: 100%;
     padding: 20px 40px 0 40px;
 }
@@ -345,7 +345,7 @@ article.rapido div {
 }
 
 article.rapido>section div {
-    width: 600px;
+    width: 900px;
 }
 
 article.rapido>section>div {
@@ -426,7 +426,7 @@ article.rapido>footer li {
 
 article.rapido ol,
 article.rapido ul {
-    width: 600px;
+    width: 900px;
     max-width: 100%;
     margin: 0 0 20px 0;
     list-style-position: inside;
@@ -461,7 +461,7 @@ article.rapido>footer ol {
 article.rapido p,
 article.rapido section p {
     position: relative;
-    width: 600px;
+    width: 900px;
     max-width: 100%;
     margin: 0 0 20px 0;
     font-size: 18px;
@@ -584,7 +584,7 @@ article.rapido>footer pre {
 }
 
 article.rapido>header pre {
-    width: 600px;
+    width: 900px;
 }
 
 article.rapido>header>pre {
@@ -632,7 +632,7 @@ article.rapido cite {
 article.rapido section>cite {
     display: block;
     width: 100%;
-    max-width: 600px;
+    max-width: 900px;
     margin: 0 0 20px 0;
     text-align: right;
     font-size: 16px;
@@ -772,7 +772,7 @@ article.rapido small>img {
 
 article.rapido>section img,
 article.rapido>section video {
-    width: 600px;
+    width: 900px;
 }
 
 article.rapido>section>img,
@@ -820,7 +820,7 @@ article.rapido>header>address>img {
 /* table */
 
 article.rapido table {
-    min-width: 600px;
+    min-width: 900px;
     padding: 10px;
     border-collapse: collapse;
     border-top: 1px solid #bdbdbd;
