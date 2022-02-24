@@ -258,8 +258,7 @@
                 <img src="reina-images/reina_08.PNG" alt="reina_08-img">
                 <img src="reina-images/reina_09.PNG" alt="reina_09-img">
                 <pre><code lang="supercollider">
-
-                    
+// Semplice implementazione esplicativa                   
 a = KonaTani.new(argLaya: 60,argTala:  #["I4", "O", "O"],argGati:  4, argSynth:\MIDITranscribe);
 // init MIDI and set the midi out device
 MIDIClient.init;
@@ -274,9 +273,8 @@ a.midiOut = MIDIOut.newByName("loopMIDI Port", "loopMIDI Port");
 
 ~fraseDeterministica = KonaTime.newFrom([~tisra,~chatusra,~khanda,~misra]);
 a.add(~fraseDeterministica);
-a.play;
-                      
-                  </code></pre>
+a.play;          
+</code></pre>
            
                   <audio controls>
                     <source src="audio/render_code_audio/00_four gatis.mp3"
@@ -288,7 +286,6 @@ a.play;
 
 
             <!--Solkattu Syllables -->
-
             <section>
                 <h1>Solkattu Syllables</h1>
                 <p>
@@ -304,10 +301,99 @@ a.play;
                     Diversamente da noi, ogni nota è pensata come un numero, un ottavo =2, <br> un ottavo puntato = 3
                     <br> un sedicesimo = 1 <br>
                     Questo aiuta quando si inizieranno ad usare pause e legature per creare frasi. <br>
-
-
                 </p>
 
+                <p>Con questo scopo in mente ho deciso di iniziare a generalizzare il problema con questo codice che ci fornisce 
+                    Tisra,Chatusra,Khanda,TisraSext,Misra
+                </p>
+
+                <pre><code lang="supercollider">
+// PARTIZIONA E PERMUTA UN GATI
+
+(
+// from SC list
+~findSimilar = { |arr|
+    var sizes = arr.separate { |a, b| a.first != b.first }.collect { |a| a.size };
+    var indices = [0] ++ sizes.integrate.drop(-1);
+    var values = arr[indices];
+    var ret = [indices, sizes, values].flop { |a| a[1] > 1 };
+    ret;
+};
+)
+
+(
+// Prepara tutte le possibili permutazioni di un Gati dato 
+
+// init gati, tani e kona generator
+~kGati = 4;
+~kTani = KonaTani.new(60,#["I4", "O", "O"], ~kGati, argSynth: \MIDITranscribe);
+
+MIDIClient.init;
+~kTani.midiOut = MIDIOut.newByName("loopMIDI Port", "loopMIDI Port");
+
+~kGen = KonaGenerator();
+
+// trova tutte le partizioni possibili
+~part = ~kGen.allPartitions(~kGati.asInteger, aMin:1);
+
+// trova tutte le permutazioni possibili
+~perms = ~part.size.collect({|index| ~kGen.allPerms(aCollection: ~part.at(index)) });
+~perms = ~perms.flatten(1);
+
+// inizializza un dizionario in base al numero massimo di permutazioni possibili
+// N.B. -> il nome del dizionario per il momento deve essere definito manualmente.
+// Ovviamente può essere automatizzato in base al numero di gati/suddivisioni.
+
+switch (~kGati)
+{3} { ~tisra = Dictionary.new(~perms.size) }
+{4} { ~chatusra = Dictionary.new(~perms.size) }
+{5} { ~khanda = Dictionary.new(~perms.size) }
+{6} { ~tisraSextu = Dictionary.new(~perms.size) }
+{7} { ~misra = Dictionary.new(~perms.size) }
+)
+
+// Genera le KonaWords e riempi il dizionario
+(
+~perms.do{arg item, index;
+    var size, list, counter, words;
+
+    // prepara la lista per una permutazione
+    list = ~findSimilar.(item);
+    // [[index, repetations, value], ...]
+
+    // genera la corrispettiva serie di KonaWord partendo dalla lista
+    words = Array.fill(list.size, {arg index;
+        var nSyllables = list[index][1];
+        var dur = list[index][2];
+        KonaWord.new(nSyllables, ~kGati, dur, ~kTani)
+    });
+
+    // infine riempi il dizionario
+    //~chatusra.add(item.asString -> KonaTime.newFrom(words, ~kTani))
+
+
+switch (~kGati)
+{3} { ~tisra.add(item.asString -> KonaTime.newFrom(words, ~kTani)) }
+{4} { ~chatusra.add(item.asString -> KonaTime.newFrom(words, ~kTani))}
+{5} { ~khanda.add(item.asString -> KonaTime.newFrom(words, ~kTani))}
+{6} { ~tisraSextu.add(item.asString -> KonaTime.newFrom(words, ~kTani)) }
+{7} { ~misra.add(item.asString -> KonaTime.newFrom(words, ~kTani))};
+
+}
+)
+
+///////////
+// contralla se c'é tutto
+(
+switch (~kGati)
+{3} { ~tisra.keysValuesDo{arg key, value; key.warn; value.postWord} }
+{4} { ~chatusra.keysValuesDo{arg key, value; key.warn; value.postWord} }
+{5} { ~khanda.keysValuesDo{arg key, value; key.warn; value.postWord} }
+{6} { ~tisraSextu.keysValuesDo{arg key, value; key.warn; value.postWord} }
+{7} { ~misra.keysValuesDo{arg key, value; key.warn; value.postWord} };
+)
+
+</code></pre>
 
                 <figure>
                     <img src="reina-images/reina_11.PNG" alt="reina_11-img">
@@ -321,37 +407,76 @@ a.play;
                     </figcaption>
 
                     <pre><code lang="supercollider">
+// Quartine(Chatusra) con ottavi, ottavi puntati e sedicesimi
 
-                        
-a = KonaTani.new(60,#["I4", "O", "O"],4,argSynth: \MIDITranscribe);
+/*
+WARNING: [ 2, 1, 1 ]
+[ Ta      , Ta       , Ka        ]
+[ 0.5     , 0.25     , 0.25      ]
+[ [ 1, 8 ], [ 1, 16 ], [ 1, 16 ] ]
 
-MIDIClient.init;
-a.midiOut = MIDIOut.newByName("loopMIDI Port", "loopMIDI Port");
+WARNING: [ 2, 2 ]
+[ Ta      , Ka       ]
+[ 0.5     , 0.5      ]
+[ [ 1, 8 ], [ 1, 8 ] ]
+
+WARNING: [ 3, 1 ]
+[ Ta       , Ta        ]
+[ 0.75     , 0.25      ]
+[ [ 3, 16 ], [ 1, 16 ] ]
+
+WARNING: [ 4 ]
+[ Ta       ]
+[ 1.0      ]
+[ [ 1, 4 ] ]
+
+WARNING: [ 1, 2, 1 ]
+[ Ta       , Ta      , Ta        ]
+[ 0.25     , 0.5     , 0.25      ]
+[ [ 1, 16 ], [ 1, 8 ], [ 1, 16 ] ]
+
+WARNING: [ 1, 1, 2 ]
+[ Ta       , Ka       , Ta       ]
+[ 0.25     , 0.25     , 0.5      ]
+[ [ 1, 16 ], [ 1, 16 ], [ 1, 8 ] ]
+
+WARNING: [ 1, 1, 1, 1 ]
+[ Ta       , Ka       , Di       , Mi        ]
+[ 0.25     , 0.25     , 0.25     , 0.25      ]
+[ [ 1, 16 ], [ 1, 16 ], [ 1, 16 ], [ 1, 16 ] ]
+
+WARNING: [ 1, 3 ]
+[ Ta       , Ta        ]
+[ 0.25     , 0.75      ]
+[ [ 1, 16 ], [ 3, 16 ] ]
+*/
+
+Make a phrase deterministic
+(
+var nTimes = 2;
+~ph1_chatusra.clear;
+~ph1_chatusra = KonaTime.new(~kTani);
+
+nTimes.do{ ~ph1_chatusra.add(~chatusra["[ 1, 1, 1, 1 ]"]) };
+nTimes.do{ ~ph1_chatusra.add(~chatusra["[ 2, 1, 1 ]"]) };
+nTimes.do{ ~ph1_chatusra.add(~chatusra["[ 1, 2, 1 ]"]) };
+nTimes.do{ ~ph1_chatusra.add(~chatusra["[ 1, 1, 2 ]"]) };
+nTimes.do{ ~ph1_chatusra.add(~chatusra["[ 3, 1 ]"]) };
+nTimes.do{ ~ph1_chatusra.add(~chatusra["[ 2, 2 ]"]) };
+nTimes.do{ ~ph1_chatusra.add(~chatusra["[ 1, 3 ]"]) };
+
+)
+~kTani.add(~ph1_chatusra);
+~kTani.play(~kTani.clock)
+
+~kTani.clear; // to erase well from the beginning
 
 
-~kT = KonaTime.new(a);
-r = KonaGenerator.new()
-~mykT = r.extendJati(KonaWord(4,4,1,a),0,0)
-a.add(~mykT)
-a.play
 
-"Ta 0.5 Ta 0.25 ka 0.25"
-
-                        // trova il modo di utilizzare un metodo di partizione di un numero 
-
-                        r =KonaGenerator();
-                        r.allPartitions(4.asInteger, aMin:1)
-                        -> [ [ 1, 1, 1, 1 ], [ 2, 1, 1 ], [ 2, 2 ], [ 3, 1 ], [ 4 ] ]
-
-
-t = r.allPartitions(4.asInteger, aMin:1)
-r.allPerms(aCollection: t)
--> [ [ [ 1, 1, 1, 1 ], [ 2, 1, 1 ], [ 2, 2 ], [ 3, 1 ], [ 4 ] ], [ [ 2, 1, 1 ], [ 1, 1, 1, 1 ], [ 2, 2 ], [ 3, 1 ], [ 4 ] ], [ [ 2, 2 ], [ 2, 1, 1 ], [ 1, 1, 1, 1 ], [ 3, 1 ], [ 4 ] ], [ [ 3, 1 ], [ 2, 1, 1 ], [ 2, 2 ], [ 1, 1, 1, 1 ], [ 4 ] ], [ [ 4 ], [ 2, 1, 1 ], [ 2, 2 ], [ 3, 1 ], [ 1, 1, 1, 1 ] ], [ [ 1, 1, 1, 1 ], [ 2, 2 ], [ 2, 1, 1 ], [ 3, 1 ], [ 4 ] ], [ [ 2, 1, 1 ], [ 2, 2 ], [ 1, 1, 1, 1 ], [ 3, 1 ], [ 4 ] ], [ [ 2, 2 ], [ 1, 1, 1, 1 ], [ 2, 1, 1 ], [ 3, 1 ], [ 4 ] ], [ [ 3, 1 ], [ 2, 2 ], [ 2, 1, ...etc...
+</code></pre>
 
 
 
-        
-    </code></pre>
 
                 </figure>
 
@@ -369,9 +494,119 @@ r.allPerms(aCollection: t)
                         </audio>
                     </figcaption>
 
-                    <pre><code lang="supercollider">
-        // Write code here ...
-      </code></pre>
+<pre><code lang="supercollider">
+
+
+WARNING: [ 2, 2, 1 ]
+[ Ta       , Ka       , Ta        ]
+[ 0.4      , 0.4      , 0.2       ]
+[ [ 1, 10 ], [ 1, 10 ], [ 1, 20 ] ]
+
+WARNING: [ 1, 2, 1, 1 ]
+[ Ta       , Ta       , Ta       , Ka        ]
+[ 0.2      , 0.4      , 0.2      , 0.2       ]
+[ [ 1, 20 ], [ 1, 10 ], [ 1, 20 ], [ 1, 20 ] ]
+
+WARNING: [ 1, 1, 1, 1, 1 ]
+[ Da       , Di       , Gi       , Na       , Dom       ]
+[ 0.2      , 0.2      , 0.2      , 0.2      , 0.2       ]
+[ [ 1, 20 ], [ 1, 20 ], [ 1, 20 ], [ 1, 20 ], [ 1, 20 ] ]
+
+WARNING: [ 3, 2 ]
+[ Ta       , Ta        ]
+[ 0.6      , 0.4       ]
+[ [ 3, 20 ], [ 1, 10 ] ]
+
+WARNING: [ 1, 4 ]
+[ Ta       , Ta       ]
+[ 0.2      , 0.8      ]
+[ [ 1, 20 ], [ 1, 5 ] ]
+
+WARNING: [ 2, 1, 2 ]
+[ Ta       , Ta       , Ta        ]
+[ 0.4      , 0.2      , 0.4       ]
+[ [ 1, 10 ], [ 1, 20 ], [ 1, 10 ] ]
+
+WARNING: [ 1, 3, 1 ]
+[ Ta       , Ta       , Ta        ]
+[ 0.2      , 0.6      , 0.2       ]
+[ [ 1, 20 ], [ 3, 20 ], [ 1, 20 ] ]
+
+WARNING: [ 2, 1, 1, 1 ]
+[ Ta       , Ta       , Ki       , Tah       ]
+[ 0.4      , 0.2      , 0.2      , 0.2       ]
+[ [ 1, 10 ], [ 1, 20 ], [ 1, 20 ], [ 1, 20 ] ]
+
+WARNING: [ 1, 1, 3 ]
+[ Ta       , Ka       , Ta        ]
+[ 0.2      , 0.2      , 0.6       ]
+[ [ 1, 20 ], [ 1, 20 ], [ 3, 20 ] ]
+
+WARNING: [ 4, 1 ]
+[ Ta      , Ta        ]
+[ 0.8     , 0.2       ]
+[ [ 1, 5 ], [ 1, 20 ] ]
+
+WARNING: [ 1, 1, 2, 1 ]
+[ Ta       , Ka       , Ta       , Ta        ]
+[ 0.2      , 0.2      , 0.4      , 0.2       ]
+[ [ 1, 20 ], [ 1, 20 ], [ 1, 10 ], [ 1, 20 ] ]
+
+WARNING: [ 1, 2, 2 ]
+[ Ta       , Ta       , Ka        ]
+[ 0.2      , 0.4      , 0.4       ]
+[ [ 1, 20 ], [ 1, 10 ], [ 1, 10 ] ]
+
+WARNING: [ 3, 1, 1 ]
+[ Ta       , Ta       , Ka        ]
+[ 0.6      , 0.2      , 0.2       ]
+[ [ 3, 20 ], [ 1, 20 ], [ 1, 20 ] ]
+
+WARNING: [ 2, 3 ]
+[ Ta       , Ta        ]
+[ 0.4      , 0.6       ]
+[ [ 1, 10 ], [ 3, 20 ] ]
+
+WARNING: [ 1, 1, 1, 2 ]
+[ Ta       , Ki       , Tah      , Ta        ]
+[ 0.2      , 0.2      , 0.2      , 0.4       ]
+[ [ 1, 20 ], [ 1, 20 ], [ 1, 20 ], [ 1, 10 ] ]
+
+WARNING: [ 5 ]
+[ Ta       ]
+[ 1.0      ]
+[ [ 1, 4 ] ]
+
+
+(
+var nTimes = 2;
+
+~ph1_khanda.clear;
+~ph1_khanda = KonaTime.new(~kTani);
+		nTimes.do{ ~ph1_khanda.add( ~khanda["[ 1, 1, 1, 1, 1 ]"]) };
+		nTimes.do{ ~ph1_khanda.add( ~khanda["[ 2, 1, 1, 1 ]"]) };
+		nTimes.do{ ~ph1_khanda.add( ~khanda["[ 1, 2, 1, 1 ]"]) };
+		nTimes.do{ ~ph1_khanda.add( ~khanda["[ 1, 1, 2, 1 ]"]) };
+		nTimes.do{ ~ph1_khanda.add( ~khanda["[ 1, 1, 1, 2 ]"]) };
+		nTimes.do{ ~ph1_khanda.add( ~khanda["[ 3, 1, 1 ]"]) };
+		nTimes.do{ ~ph1_khanda.add( ~khanda["[ 1, 3, 1 ]"]) };
+		nTimes.do{ ~ph1_khanda.add( ~khanda["[ 1, 1, 3 ]"]) };
+		nTimes.do{ ~ph1_khanda.add( ~khanda["[ 2, 2, 1 ]"]) };
+		nTimes.do{ ~ph1_khanda.add( ~khanda["[ 2, 1, 2 ]"]) };
+		nTimes.do{ ~ph1_khanda.add( ~khanda["[ 1, 2, 2 ]"]) };
+		nTimes.do{ ~ph1_khanda.add( ~khanda["[ 4, 1 ]"]) };			
+		nTimes.do{ ~ph1_khanda.add( ~khanda["[ 1, 4 ]"]) };
+		nTimes.do{ ~ph1_khanda.add( ~khanda["[ 3, 2 ]"]) };
+		nTimes.do{ ~ph1_khanda.add( ~khanda["[ 2, 3 ]"]) };
+		nTimes.do{ ~ph1_khanda.add( ~khanda["[ 5 ]"]) };	
+)
+
+~kTani.add(~ph1_khanda);
+~kTani.play(~kTani.clock);
+
+~kTani.clear; // to erase well from the beginning
+
+</code></pre>
 
                 </figure>
 
@@ -409,7 +644,328 @@ r.allPerms(aCollection: t)
                     </figcaption>
 
                     <pre><code lang="supercollider">
-        // Write code here ...
+/*
+WARNING: [ 2, 2, 1, 1, 1 ]
+[ Ta       , Ka       , Ta       , Ki       , Tah       ]
+[ 0.285    , 0.285    , 0.142    , 0.142    , 0.142     ]
+[ [ 1, 14 ], [ 1, 14 ], [ 1, 28 ], [ 1, 28 ], [ 1, 28 ] ]
+
+WARNING: [ 1, 1, 1, 1, 1, 1, 1 ]
+[ Ta       , Ka       , Di       , Mi       , Ta       , Ki       , Tah       ]
+[ 0.142    , 0.142    , 0.142    , 0.142    , 0.142    , 0.142    , 0.142     ]
+[ [ 1, 28 ], [ 1, 28 ], [ 1, 28 ], [ 1, 28 ], [ 1, 28 ], [ 1, 28 ], [ 1, 28 ] ]
+
+WARNING: [ 1, 3, 1, 2 ]
+[ Ta       , Ta       , Ta       , Ta        ]
+[ 0.142    , 0.428    , 0.142    , 0.285     ]
+[ [ 1, 28 ], [ 3, 28 ], [ 1, 28 ], [ 1, 14 ] ]
+
+WARNING: [ 1, 3, 3 ]
+[ Ta       , Ta       , Ka        ]
+[ 0.142    , 0.428    , 0.428     ]
+[ [ 1, 28 ], [ 3, 28 ], [ 3, 28 ] ]
+
+WARNING: [ 1, 1, 1, 2, 2 ]
+[ Ta       , Ki       , Tah      , Ta       , Ka        ]
+[ 0.142    , 0.142    , 0.142    , 0.285    , 0.285     ]
+[ [ 1, 28 ], [ 1, 28 ], [ 1, 28 ], [ 1, 14 ], [ 1, 14 ] ]
+
+WARNING: [ 1, 2, 1, 1, 2 ]
+[ Ta       , Ta       , Ta       , Ka       , Ta        ]
+[ 0.142    , 0.285    , 0.142    , 0.142    , 0.285     ]
+[ [ 1, 28 ], [ 1, 14 ], [ 1, 28 ], [ 1, 28 ], [ 1, 14 ] ]
+
+WARNING: [ 4, 3 ]
+[ Ta      , Ta        ]
+[ 0.571   , 0.428     ]
+[ [ 1, 7 ], [ 3, 28 ] ]
+
+WARNING: [ 2, 3, 1, 1 ]
+[ Ta       , Ta       , Ta       , Ka        ]
+[ 0.285    , 0.428    , 0.142    , 0.142     ]
+[ [ 1, 14 ], [ 3, 28 ], [ 1, 28 ], [ 1, 28 ] ]
+
+WARNING: [ 7 ]
+[ Ta       ]
+[ 1.0      ]
+[ [ 1, 4 ] ]
+
+WARNING: [ 2, 2, 1, 2 ]
+[ Ta       , Ka       , Ta       , Ta        ]
+[ 0.285    , 0.285    , 0.142    , 0.285     ]
+[ [ 1, 14 ], [ 1, 14 ], [ 1, 28 ], [ 1, 14 ] ]
+
+WARNING: [ 1, 4, 1, 1 ]
+[ Ta       , Ta      , Ta       , Ka        ]
+[ 0.142    , 0.571   , 0.142    , 0.142     ]
+[ [ 1, 28 ], [ 1, 7 ], [ 1, 28 ], [ 1, 28 ] ]
+
+WARNING: [ 2, 1, 1, 1, 2 ]
+[ Ta       , Ta       , Ki       , Tah      , Ta        ]
+[ 0.285    , 0.142    , 0.142    , 0.142    , 0.285     ]
+[ [ 1, 14 ], [ 1, 28 ], [ 1, 28 ], [ 1, 28 ], [ 1, 14 ] ]
+
+WARNING: [ 1, 1, 1, 4 ]
+[ Ta       , Ki       , Tah      , Ta       ]
+[ 0.142    , 0.142    , 0.142    , 0.571    ]
+[ [ 1, 28 ], [ 1, 28 ], [ 1, 28 ], [ 1, 7 ] ]
+
+WARNING: [ 1, 1, 3, 1, 1 ]
+[ Ta       , Ka       , Ta       , Ta       , Ka        ]
+[ 0.142    , 0.142    , 0.428    , 0.142    , 0.142     ]
+[ [ 1, 28 ], [ 1, 28 ], [ 3, 28 ], [ 1, 28 ], [ 1, 28 ] ]
+
+WARNING: [ 1, 2, 3, 1 ]
+[ Ta       , Ta       , Ta       , Ta        ]
+[ 0.142    , 0.285    , 0.428    , 0.142     ]
+[ [ 1, 28 ], [ 1, 14 ], [ 3, 28 ], [ 1, 28 ] ]
+
+WARNING: [ 2, 1, 1, 1, 1, 1 ]
+[ Ta       , Da       , Di       , Gi       , Na       , Dom       ]
+[ 0.285    , 0.142    , 0.142    , 0.142    , 0.142    , 0.142     ]
+[ [ 1, 14 ], [ 1, 28 ], [ 1, 28 ], [ 1, 28 ], [ 1, 28 ], [ 1, 28 ] ]
+
+WARNING: [ 2, 1, 2, 2 ]
+[ Ta       , Ta       , Ta       , Ka        ]
+[ 0.285    , 0.142    , 0.285    , 0.285     ]
+[ [ 1, 14 ], [ 1, 28 ], [ 1, 14 ], [ 1, 14 ] ]
+
+WARNING: [ 1, 1, 1, 1, 1, 2 ]
+[ Da       , Di       , Gi       , Na       , Dom      , Ta        ]
+[ 0.142    , 0.142    , 0.142    , 0.142    , 0.142    , 0.285     ]
+[ [ 1, 28 ], [ 1, 28 ], [ 1, 28 ], [ 1, 28 ], [ 1, 28 ], [ 1, 14 ] ]
+
+WARNING: [ 2, 1, 1, 2, 1 ]
+[ Ta       , Ta       , Ka       , Ta       , Ta        ]
+[ 0.285    , 0.142    , 0.142    , 0.285    , 0.142     ]
+[ [ 1, 14 ], [ 1, 28 ], [ 1, 28 ], [ 1, 14 ], [ 1, 28 ] ]
+
+WARNING: [ 1, 1, 2, 1, 2 ]
+[ Ta       , Ka       , Ta       , Ta       , Ta        ]
+[ 0.142    , 0.142    , 0.285    , 0.142    , 0.285     ]
+[ [ 1, 28 ], [ 1, 28 ], [ 1, 14 ], [ 1, 28 ], [ 1, 14 ] ]
+
+WARNING: [ 3, 3, 1 ]
+[ Ta       , Ka       , Ta        ]
+[ 0.428    , 0.428    , 0.142     ]
+[ [ 3, 28 ], [ 3, 28 ], [ 1, 28 ] ]
+
+WARNING: [ 3, 4 ]
+[ Ta       , Ta       ]
+[ 0.428    , 0.571    ]
+[ [ 3, 28 ], [ 1, 7 ] ]
+
+WARNING: [ 5, 2 ]
+[ Ta       , Ta        ]
+[ 0.714    , 0.285     ]
+[ [ 5, 28 ], [ 1, 14 ] ]
+
+WARNING: [ 1, 2, 1, 3 ]
+[ Ta       , Ta       , Ta       , Ta        ]
+[ 0.142    , 0.285    , 0.142    , 0.428     ]
+[ [ 1, 28 ], [ 1, 14 ], [ 1, 28 ], [ 3, 28 ] ]
+
+WARNING: [ 4, 1, 1, 1 ]
+[ Ta      , Ta       , Ki       , Tah       ]
+[ 0.571   , 0.142    , 0.142    , 0.142     ]
+[ [ 1, 7 ], [ 1, 28 ], [ 1, 28 ], [ 1, 28 ] ]
+
+WARNING: [ 1, 1, 1, 2, 1, 1 ]
+[ Ta       , Ki       , Tah      , Ta       , Ta       , Ka        ]
+[ 0.142    , 0.142    , 0.142    , 0.285    , 0.142    , 0.142     ]
+[ [ 1, 28 ], [ 1, 28 ], [ 1, 28 ], [ 1, 14 ], [ 1, 28 ], [ 1, 28 ] ]
+
+WARNING: [ 2, 1, 2, 1, 1 ]
+[ Ta       , Ta       , Ta       , Ta       , Ka        ]
+[ 0.285    , 0.142    , 0.285    , 0.142    , 0.142     ]
+[ [ 1, 14 ], [ 1, 28 ], [ 1, 14 ], [ 1, 28 ], [ 1, 28 ] ]
+
+WARNING: [ 1, 2, 1, 1, 1, 1 ]
+[ Ta       , Ta       , Ta       , Ka       , Di       , Mi        ]
+[ 0.142    , 0.285    , 0.142    , 0.142    , 0.142    , 0.142     ]
+[ [ 1, 28 ], [ 1, 14 ], [ 1, 28 ], [ 1, 28 ], [ 1, 28 ], [ 1, 28 ] ]
+
+WARNING: [ 3, 1, 1, 2 ]
+[ Ta       , Ta       , Ka       , Ta        ]
+[ 0.428    , 0.142    , 0.142    , 0.285     ]
+[ [ 3, 28 ], [ 1, 28 ], [ 1, 28 ], [ 1, 14 ] ]
+
+WARNING: [ 1, 1, 1, 3, 1 ]
+[ Ta       , Ki       , Tah      , Ta       , Ta        ]
+[ 0.142    , 0.142    , 0.142    , 0.428    , 0.142     ]
+[ [ 1, 28 ], [ 1, 28 ], [ 1, 28 ], [ 3, 28 ], [ 1, 28 ] ]
+
+WARNING: [ 1, 2, 1, 2, 1 ]
+[ Ta       , Ta       , Ta       , Ta       , Ta        ]
+[ 0.142    , 0.285    , 0.142    , 0.285    , 0.142     ]
+[ [ 1, 28 ], [ 1, 14 ], [ 1, 28 ], [ 1, 14 ], [ 1, 28 ] ]
+
+WARNING: [ 2, 2, 3 ]
+[ Ta       , Ka       , Ta        ]
+[ 0.285    , 0.285    , 0.428     ]
+[ [ 1, 14 ], [ 1, 14 ], [ 3, 28 ] ]
+
+WARNING: [ 3, 1, 1, 1, 1 ]
+[ Ta       , Ta       , Ka       , Di       , Mi        ]
+[ 0.428    , 0.142    , 0.142    , 0.142    , 0.142     ]
+[ [ 3, 28 ], [ 1, 28 ], [ 1, 28 ], [ 1, 28 ], [ 1, 28 ] ]
+
+WARNING: [ 2, 3, 2 ]
+[ Ta       , Ta       , Ta        ]
+[ 0.285    , 0.428    , 0.285     ]
+[ [ 1, 14 ], [ 3, 28 ], [ 1, 14 ] ]
+
+WARNING: [ 1, 1, 4, 1 ]
+[ Ta       , Ka       , Ta      , Ta        ]
+[ 0.142    , 0.142    , 0.571   , 0.142     ]
+[ [ 1, 28 ], [ 1, 28 ], [ 1, 7 ], [ 1, 28 ] ]
+
+WARNING: [ 1, 1, 2, 1, 1, 1 ]
+[ Ta       , Ka       , Ta       , Ta       , Ki       , Tah       ]
+[ 0.142    , 0.142    , 0.285    , 0.142    , 0.142    , 0.142     ]
+[ [ 1, 28 ], [ 1, 28 ], [ 1, 14 ], [ 1, 28 ], [ 1, 28 ], [ 1, 28 ] ]
+
+WARNING: [ 2, 4, 1 ]
+[ Ta       , Ta      , Ta        ]
+[ 0.285    , 0.571   , 0.142     ]
+[ [ 1, 14 ], [ 1, 7 ], [ 1, 28 ] ]
+
+WARNING: [ 4, 1, 2 ]
+[ Ta      , Ta       , Ta        ]
+[ 0.571   , 0.142    , 0.285     ]
+[ [ 1, 7 ], [ 1, 28 ], [ 1, 14 ] ]
+
+WARNING: [ 1, 3, 2, 1 ]
+[ Ta       , Ta       , Ta       , Ta        ]
+[ 0.142    , 0.428    , 0.285    , 0.142     ]
+[ [ 1, 28 ], [ 3, 28 ], [ 1, 14 ], [ 1, 28 ] ]
+
+WARNING: [ 2, 1, 4 ]
+[ Ta       , Ta       , Ta       ]
+[ 0.285    , 0.142    , 0.571    ]
+[ [ 1, 14 ], [ 1, 28 ], [ 1, 7 ] ]
+
+WARNING: [ 4, 2, 1 ]
+[ Ta      , Ta       , Ta        ]
+[ 0.571   , 0.285    , 0.142     ]
+[ [ 1, 7 ], [ 1, 14 ], [ 1, 28 ] ]
+
+WARNING: [ 5, 1, 1 ]
+[ Ta       , Ta       , Ka        ]
+[ 0.714    , 0.142    , 0.142     ]
+[ [ 5, 28 ], [ 1, 28 ], [ 1, 28 ] ]
+
+WARNING: [ 2, 5 ]
+[ Ta       , Ta        ]
+[ 0.285    , 0.714     ]
+[ [ 1, 14 ], [ 5, 28 ] ]
+
+WARNING: [ 1, 1, 5 ]
+[ Ta       , Ka       , Ta        ]
+[ 0.142    , 0.142    , 0.714     ]
+[ [ 1, 28 ], [ 1, 28 ], [ 5, 28 ] ]
+
+WARNING: [ 1, 4, 2 ]
+[ Ta       , Ta      , Ta        ]
+[ 0.142    , 0.571   , 0.285     ]
+[ [ 1, 28 ], [ 1, 7 ], [ 1, 14 ] ]
+
+WARNING: [ 1, 1, 1, 1, 2, 1 ]
+[ Ta       , Ka       , Di       , Mi       , Ta       , Ta        ]
+[ 0.142    , 0.142    , 0.142    , 0.142    , 0.285    , 0.142     ]
+[ [ 1, 28 ], [ 1, 28 ], [ 1, 28 ], [ 1, 28 ], [ 1, 14 ], [ 1, 28 ] ]
+
+WARNING: [ 1, 1, 2, 3 ]
+[ Ta       , Ka       , Ta       , Ta        ]
+[ 0.142    , 0.142    , 0.285    , 0.428     ]
+[ [ 1, 28 ], [ 1, 28 ], [ 1, 14 ], [ 3, 28 ] ]
+
+WARNING: [ 3, 2, 2 ]
+[ Ta       , Ta       , Ka        ]
+[ 0.428    , 0.285    , 0.285     ]
+[ [ 3, 28 ], [ 1, 14 ], [ 1, 14 ] ]
+
+WARNING: [ 2, 1, 1, 3 ]
+[ Ta       , Ta       , Ka       , Ta        ]
+[ 0.285    , 0.142    , 0.142    , 0.428     ]
+[ [ 1, 14 ], [ 1, 28 ], [ 1, 28 ], [ 3, 28 ] ]
+
+WARNING: [ 2, 2, 2, 1 ]
+[ Ta       , Ki       , Tah      , Ta        ]
+[ 0.285    , 0.285    , 0.285    , 0.142     ]
+[ [ 1, 14 ], [ 1, 14 ], [ 1, 14 ], [ 1, 28 ] ]
+
+WARNING: [ 1, 1, 3, 2 ]
+[ Ta       , Ka       , Ta       , Ta        ]
+[ 0.142    , 0.142    , 0.428    , 0.285     ]
+[ [ 1, 28 ], [ 1, 28 ], [ 3, 28 ], [ 1, 14 ] ]
+
+WARNING: [ 1, 2, 2, 2 ]
+[ Ta       , Ta       , Ki       , Tah       ]
+[ 0.142    , 0.285    , 0.285    , 0.285     ]
+[ [ 1, 28 ], [ 1, 14 ], [ 1, 14 ], [ 1, 14 ] ]
+
+WARNING: [ 1, 2, 2, 1, 1 ]
+[ Ta       , Ta       , Ka       , Ta       , Ka        ]
+[ 0.142    , 0.285    , 0.285    , 0.142    , 0.142     ]
+[ [ 1, 28 ], [ 1, 14 ], [ 1, 14 ], [ 1, 28 ], [ 1, 28 ] ]
+
+WARNING: [ 1, 2, 4 ]
+[ Ta       , Ta       , Ta       ]
+[ 0.142    , 0.285    , 0.571    ]
+[ [ 1, 28 ], [ 1, 14 ], [ 1, 7 ] ]
+
+WARNING: [ 3, 1, 2, 1 ]
+[ Ta       , Ta       , Ta       , Ta        ]
+[ 0.428    , 0.142    , 0.285    , 0.142     ]
+[ [ 3, 28 ], [ 1, 28 ], [ 1, 14 ], [ 1, 28 ] ]
+
+WARNING: [ 1, 3, 1, 1, 1 ]
+[ Ta       , Ta       , Ta       , Ki       , Tah       ]
+[ 0.142    , 0.428    , 0.142    , 0.142    , 0.142     ]
+[ [ 1, 28 ], [ 3, 28 ], [ 1, 28 ], [ 1, 28 ], [ 1, 28 ] ]
+
+WARNING: [ 1, 5, 1 ]
+[ Ta       , Ta       , Ta        ]
+[ 0.142    , 0.714    , 0.142     ]
+[ [ 1, 28 ], [ 5, 28 ], [ 1, 28 ] ]
+
+WARNING: [ 1, 1, 2, 2, 1 ]
+[ Ta       , Ka       , Ta       , Ka       , Ta        ]
+[ 0.142    , 0.142    , 0.285    , 0.285    , 0.142     ]
+[ [ 1, 28 ], [ 1, 28 ], [ 1, 14 ], [ 1, 14 ], [ 1, 28 ] ]
+
+WARNING: [ 1, 1, 1, 1, 3 ]
+[ Ta       , Ka       , Di       , Mi       , Ta        ]
+[ 0.142    , 0.142    , 0.142    , 0.142    , 0.428     ]
+[ [ 1, 28 ], [ 1, 28 ], [ 1, 28 ], [ 1, 28 ], [ 3, 28 ] ]
+
+WARNING: [ 3, 2, 1, 1 ]
+[ Ta       , Ta       , Ta       , Ka        ]
+[ 0.428    , 0.285    , 0.142    , 0.142     ]
+[ [ 3, 28 ], [ 1, 14 ], [ 1, 28 ], [ 1, 28 ] ]
+
+WARNING: [ 3, 1, 3 ]
+[ Ta       , Ta       , Ta        ]
+[ 0.428    , 0.142    , 0.428     ]
+[ [ 3, 28 ], [ 1, 28 ], [ 3, 28 ] ]
+
+WARNING: [ 6, 1 ]
+[ Ta       , Ta        ]
+[ 0.857    , 0.142     ]
+[ [ 3, 14 ], [ 1, 28 ] ]
+
+WARNING: [ 1, 6 ]
+[ Ta       , Ta        ]
+[ 0.142    , 0.857     ]
+[ [ 1, 28 ], [ 3, 14 ] ]
+
+WARNING: [ 2, 1, 3, 1 ]
+[ Ta       , Ta       , Ta       , Ta        ]
+[ 0.285    , 0.142    , 0.428    , 0.142     ]
+[ [ 1, 14 ], [ 1, 28 ], [ 3, 28 ], [ 1, 28 ] ]
+*/
+
       </code></pre>
                 </figure>
 
