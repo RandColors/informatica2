@@ -1,0 +1,556 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Karnatak-rhythms per la Multimedialità</title>
+    <!-- 
+    <link href="https://unpkg.com/@nextbitlabs/rapido@^3/rapido.css" rel="stylesheet" type="text/css">
+    RAPIDO -->
+    <link rel="stylesheet" href="style.css">
+ <!--<link href="./normalize.css" rel="stylesheet" type="text/css">
+    -->   
+
+    <!-- Code Highlighiting.js for SC-->
+
+    <!--    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/styles/hybrid.min.css" /> -->
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.8/highlight.min.js"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", event => {
+            document.querySelectorAll("pre code").forEach(block => {
+                hljs.highlightBlock(block);
+            });
+        });
+    </script>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function(event) { 
+        var scrollpos = localStorage.getItem('scrollpos');
+        if (scrollpos) window.scrollTo(0, scrollpos);
+    });
+
+    window.onbeforeunload = function(e) {
+        localStorage.setItem('scrollpos', window.scrollY);
+    };
+</script>
+
+    <style>
+        body {
+            background: rgb(234, 232, 232);
+            margin: 40px;
+        }
+
+
+        pre code {
+            max-height: fit-content;
+            /* trova il modo di dargli realmente il valore che ti serve*/
+            padding: 10px 20px !important;
+            border-radius: 4px;
+            box-shadow: 0px 0px 13px 0px rgba(0, 0, 0, 0.6);
+        }
+    </style>
+
+
+</head>
+
+
+<body>
+    <nav>
+        <ul class="nav__links" >
+            <li><a href="index.html">SC Home </a></li>
+            <li><a href="Outputs.html">Code Examples</a></li>
+            <li><a href="mora analysis.html">mora analysis</a></li>
+            <li><a href="vSarvaPhraseAuto.html">vSarvaPhraseAuto Analysis</a></li>
+            <li><a href="Applying Carnatic.html">Applying Karnatic Rhythmical Techniques to Western Music</a></li>
+    
+        </ul>
+
+    </nav>
+
+
+    <main>
+
+
+        <article class="rapido">
+
+            <!--HEADER-->
+            <header>
+          <!-- navbar-->
+               
+                <h1> Karnatak-rhythms per progetti multimediali(video-luci-attuatori) </h1>
+                <h2> Mappare i ritmi su Altezze "note MIDI" </h2>
+
+           
+            </header>
+
+            
+<section>
+  <p>
+    Uno dei problemi ricorrenti nei lavori multimediali è la strutturazione del tempo dal macro al micro livello. 
+    Infatti se la musica offre un insieme di possibili soluzioni ed opzioni, ben codificate e consolidate nei secoli, 
+    non possiamo dire che questo avvenga per altre forme espressive come il video(video arte) o le installazioni multimediali e cinetiche. 
+    E' altresi vero però che nel cinema è solitamente la musica ad adattarsi alla struttura imposta dal montaggio, che solitamente ha come scopo principale quello di aiutare la narrazione.
+    E' a mio avviso interessante prendere la musica come modello non narrativo da utilizzare per altre forme espressive. 
+    Utilizzeremo il lavoro fatto fin qui, per mappare i dati ritmici su paramentri non musicali. 
+    Tutto sommato è una forma di visual music ritmica estesa ad altre categorie artistiche.
+ </p>
+
+ <p>Inizialmente andremo semplicemente ad abbinare ad uno specifico ritmo scritto in maniera deterministica, una sequenza di Pitch midi utilizzati per il controllo di un DMX con NoteOn e NoteOFF.</p>
+ <p>In seconda istanza  sfrutteremo i metodi offertici dalla classe degli Array per applicare variazioni algoritmiche alle altezze che risulteranno in sequenze luminose con comportamenti differenti. </p>
+
+    
+
+    <p> Questo è il codice Processing per mappare i dati da Supercollider al DMX </p>
+
+    <pre><code lang="java">
+                
+        /*
+        Receiving MIDI messages in processing.
+        1) Select MIDI device you want to receive from.
+            - Run the sketch and check console for list of available devices
+            - change line 30 of this sketch with the number of device ou want to select:
+              e.g. mymididevice = RWMidi.getInputDevices()[0].createInput(this); // listen to device number 1
+              e.g. mymididevice = RWMidi.getInputDevices()[1].createInput(this); // listen to device number 0
+        
+        2) Play any MIDI message from you device and see the console output
+        */
+        
+        import rwmidi.*;  
+        //import dmxP512.*;
+        import processing.serial.*;
+        
+        MidiInput mymididevice; 
+        //DmxP512 dmxOutput;
+        
+          // Define color stato like global variable
+          color[] stato = {
+          color(255, 255, 255, 255),
+          color(255, 255, 255, 255),
+          color(255, 255, 255, 255),
+          color(255, 255, 255, 255),
+          color(255, 255, 255, 255),
+          color(255, 255, 255, 255),
+          color(255, 255, 255, 255),
+          color(255, 255, 255, 255),
+          color(255, 255, 255, 255),
+          color(255, 255, 255, 255),
+          color(255, 255, 255, 255),
+          color(255, 255, 255, 255)
+        };
+        
+        int[] lightpos = {0,50,100,150,200,250,300,350,400,450,500,550} ;
+        
+        
+        //int universeSize=128;
+        
+        //boolean LANBOX=false;
+        //String LANBOX_IP="192.168.1.77";
+        
+        //boolean DMXPRO=true;
+        //String DMXPRO_PORT="COM5";//case matters ! on windows port must be upper cased.
+        //int DMXPRO_BAUDRATE=115000;
+        
+        
+        void setup() { 
+            //fullScreen();
+             surface.setAlwaysOnTop(true);
+          
+          size(600 , 100); 
+          smooth(); 
+          background(70); 
+         
+        // Show available MIDI input devices in console 
+          MidiInputDevice devices[] = RWMidi.getInputDevices();
+          
+            for (int i = 0; i "<" devices.length; i++) { 
+              println(i + ": " + devices[i].getName()); 
+            } 
+        
+        // Currently we assume the first device (#0) is the one we want 
+          mymididevice = RWMidi.getInputDevices()[0].createInput(this); 
+        
+        //dmxOutput=new DmxP512(this,universeSize,false);
+          
+        //  if(LANBOX){
+        //    dmxOutput.setupLanbox(LANBOX_IP);
+        //  }
+          
+        //  if(DMXPRO){
+        //    dmxOutput.setupDmxPro(DMXPRO_PORT,DMXPRO_BAUDRATE);
+        //  }
+           
+        } 
+         
+        void draw(){ 
+         
+        noStroke();  // Don't draw a stroke around shapes
+        for(int i = 0; i "<"12; i++){
+        fill(stato[i]);  // Use color variable 'c' as fill color
+        rect(lightpos[i],0,50, height);
+        }
+          
+        } 
+        
+        //Note ON recieved 
+        void noteOnReceived(Note myreceivednote) {
+          println("note on " + myreceivednote.getChannel() + "  " + myreceivednote.getPitch()+ "  " + myreceivednote.getVelocity());
+        
+          switch(int(myreceivednote.getPitch())) {
+          case 0: 
+            //dmxOutput.set(1, int(myreceivednote.getVelocity()));
+            stato[0]= color(255, 204, 0, 255); 
+            break;
+          case 1: 
+            //dmxOutput.set(2, int(myreceivednote.getVelocity()));
+             stato[1]= color(255, 204, 0, 255); 
+            break;
+          case 2: 
+            //dmxOutput.set(3, int(myreceivednote.getVelocity()));
+             stato[2]= color(255, 204, 0, 255); 
+            break;
+          case 3: 
+            //dmxOutput.set(4, int(myreceivednote.getVelocity()));
+             stato[3]= color(255, 204, 0, 255); 
+            break;   
+          case 4: 
+            //dmxOutput.set(5, int(myreceivednote.getVelocity()));
+             stato[4]= color(255, 204, 0, 255); 
+            break;
+          case 5: 
+            //dmxOutput.set(6, int(myreceivednote.getVelocity()));
+             stato[5]= color(255, 204, 0, 255); 
+            break;
+          case 6: 
+            //dmxOutput.set(7, int(myreceivednote.getVelocity()));
+             stato[6]= color(255, 204, 0, 255); 
+            break;
+          case 7: 
+            //dmxOutput.set(8, int(myreceivednote.getVelocity()));
+             stato[7]= color(255, 204, 0, 255); 
+            break; 
+          case 8: 
+            //dmxOutput.set(9, int(myreceivednote.getVelocity()));
+             stato[8]= color(255, 204, 0, 255); 
+            break;
+          case 9: 
+            //dmxOutput.set(10, int(myreceivednote.getVelocity()));
+             stato[9]= color(255, 204, 0, 255); 
+            break;
+          case 10: 
+            //dmxOutput.set(11, int(myreceivednote.getVelocity()));
+             stato[10]= color(255, 204, 0, 255); 
+            break;
+          case 11: 
+            //dmxOutput.set(12, int(myreceivednote.getVelocity()));
+             stato[11]= color(255, 204, 0, 255); 
+            break;     
+        }
+        
+            
+        }
+        
+        // Note Off recieved 
+        void noteOffReceived(Note myreceivednote) {
+            println("note off " + myreceivednote.getChannel() + "  " + myreceivednote.getPitch()+ "  " + myreceivednote.getVelocity());
+            switch(int(myreceivednote.getPitch())){
+          case 0: 
+            //dmxOutput.set(1, 0);
+            stato[0] = color(120); 
+            break;
+          case 1: 
+            //dmxOutput.set(2, 0);
+            stato[1] = color(120); 
+            break;
+          case 2: 
+            //dmxOutput.set(3, 0);
+            stato[2] = color(120); 
+            break;
+          case 3: 
+            //dmxOutput.set(4, 0);
+            stato[3] = color(120); 
+            break;   
+          case 4: 
+            //dmxOutput.set(5, 0);
+            stato[4] = color(120); 
+            break;
+          case 5: 
+            //dmxOutput.set(6, 0);
+            stato[5] = color(120); 
+            break;
+          case 6: 
+            //dmxOutput.set(7, 0);
+            stato[6] = color(120); 
+            break;
+          case 7: 
+            //dmxOutput.set(8, 0);
+            stato[7] = color(120); 
+            break; 
+          case 8: 
+            //dmxOutput.set(9, 0);
+            stato[8] = color(120); 
+            break;
+          case 9: 
+            //dmxOutput.set(10, 0);
+            stato[9] = color(120); 
+            break;
+          case 10: 
+            //dmxOutput.set(11, 0);
+            stato[10] = color(120); 
+            break;
+          case 11: 
+            //dmxOutput.set(12, 0);
+            stato[11] = color(120); 
+            break;     
+        }
+        }
+        
+        //// Program Change recieved  
+        //void programChangeReceived(ProgramChange pc) {
+        //    println("note off " + pc.getChannel() + "  " + pc.getNumber());
+        //  }
+        
+        //// Control Change recieved 
+        //void controllerChangeReceived(Controller cc) {
+        //  println("cc channell is: " + cc.getChannel() + "  " + "cc number is: " + cc.getCC() + "  " + "cc value is:  " + cc.getValue() );
+        //}
+        
+        //// System Exclusive recieved 
+        //void sysexReceived(SysexMessage msg) {
+        //  println("sysex " + msg);
+        //}
+          
+      </code></pre>
+
+</section>
+
+ <!-- Regole Luci -->
+
+<section>
+
+  <h1>Regole Luci </h1>  
+
+<p>  
+    Abbiamo 12 Luci disposte su una circonferenza equidistanziate come le ore su un orologio.
+    Numeri delle luci e corrispondenti note midi
+</p>
+
+<img src="images/arrangiamento luci/cerchioluci.png" alt="cerchioluci" > <br>
+<p>
+Tutte le luci sono direzionate verso il centro del cerchio, dove vi sono 3 damigiane le quali vengono illuminate. 
+<img src="images/arrangiamento luci/REGOLE LUCI (1).docx" alt="cerchioluci" > <br>
+
+
+L’intero lavoro sulle luci si basa sul far muovere le ombre o traslucenza delle damigiane che vengono proiettate sui muri della stanza, simulando un movimento di quest’ultima.
+Inizialmemte avevo usato sc che leggendo il file MIDI di questa trascrizione mi dava la possibilità di applicare a determinate sezioni un relativo “arrangiamento per le luci”
+<a href="https://github.com/RandColors/project-guidance/blob/master/Drums/Konnakol/Konnakol_etude_01.scd" target="_blank" rel="noopener noreferrer">Konnakol_etude_01.scd</a> 
+Essendo estremamente laborioso, è diventato più agevole farlo a mano.
+Qui il video dell’arrangiamento a mano delle luci,midi da ableton a processing  per DMX
+<iframe width="560" height="315" src="https://www.youtube.com/embed/ToO88orqzj0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+<img src="images/arrangiamento luci/arr luci.PNG" alt="arr" > <br>
+</p>
+
+<p> 
+viene usato Processing  tramite il MIDI per accedere al DMX tramite la scheda Enntec DMX USB <a href="https://www.enttec.com/product/lighting-communication-protocols/dmx512/dmx-usb-interface/" target="_blank" rel="noopener noreferrer"></a> 
+ che controlla 2 dimmer pack da 6 canali <a href="https://www.arenaluci.it/media/files/manuali/CO670L%20EN-R0.pdf" target="_blank" rel="noopener noreferrer"></a>
+Ho utilizzato dei suoni di campana tibetana campionati per sonificare le sequenze.
+</p>
+Risultato estetico -> 
+<blockquote class="instagram-media" data-instgrm-captioned data-instgrm-permalink="https://www.instagram.com/p/CUSfnLAAM2x/?utm_source=ig_embed&amp;utm_campaign=loading" data-instgrm-version="14" style=" background:#FFF; border:0; border-radius:3px; box-shadow:0 0 1px 0 rgba(0,0,0,0.5),0 1px 10px 0 rgba(0,0,0,0.15); margin: 1px; max-width:540px; min-width:326px; padding:0; width:99.375%; width:-webkit-calc(100% - 2px); width:calc(100% - 2px);"><div style="padding:16px;"> <a href="https://www.instagram.com/p/CUSfnLAAM2x/?utm_source=ig_embed&amp;utm_campaign=loading" style=" background:#FFFFFF; line-height:0; padding:0 0; text-align:center; text-decoration:none; width:100%;" target="_blank"> <div style=" display: flex; flex-direction: row; align-items: center;"> <div style="background-color: #F4F4F4; border-radius: 50%; flex-grow: 0; height: 40px; margin-right: 14px; width: 40px;"></div> <div style="display: flex; flex-direction: column; flex-grow: 1; justify-content: center;"> <div style=" background-color: #F4F4F4; border-radius: 4px; flex-grow: 0; height: 14px; margin-bottom: 6px; width: 100px;"></div> <div style=" background-color: #F4F4F4; border-radius: 4px; flex-grow: 0; height: 14px; width: 60px;"></div></div></div><div style="padding: 19% 0;"></div> <div style="display:block; height:50px; margin:0 auto 12px; width:50px;"><svg width="50px" height="50px" viewBox="0 0 60 60" version="1.1" xmlns="https://www.w3.org/2000/svg" xmlns:xlink="https://www.w3.org/1999/xlink"><g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd"><g transform="translate(-511.000000, -20.000000)" fill="#000000"><g><path d="M556.869,30.41 C554.814,30.41 553.148,32.076 553.148,34.131 C553.148,36.186 554.814,37.852 556.869,37.852 C558.924,37.852 560.59,36.186 560.59,34.131 C560.59,32.076 558.924,30.41 556.869,30.41 M541,60.657 C535.114,60.657 530.342,55.887 530.342,50 C530.342,44.114 535.114,39.342 541,39.342 C546.887,39.342 551.658,44.114 551.658,50 C551.658,55.887 546.887,60.657 541,60.657 M541,33.886 C532.1,33.886 524.886,41.1 524.886,50 C524.886,58.899 532.1,66.113 541,66.113 C549.9,66.113 557.115,58.899 557.115,50 C557.115,41.1 549.9,33.886 541,33.886 M565.378,62.101 C565.244,65.022 564.756,66.606 564.346,67.663 C563.803,69.06 563.154,70.057 562.106,71.106 C561.058,72.155 560.06,72.803 558.662,73.347 C557.607,73.757 556.021,74.244 553.102,74.378 C549.944,74.521 548.997,74.552 541,74.552 C533.003,74.552 532.056,74.521 528.898,74.378 C525.979,74.244 524.393,73.757 523.338,73.347 C521.94,72.803 520.942,72.155 519.894,71.106 C518.846,70.057 518.197,69.06 517.654,67.663 C517.244,66.606 516.755,65.022 516.623,62.101 C516.479,58.943 516.448,57.996 516.448,50 C516.448,42.003 516.479,41.056 516.623,37.899 C516.755,34.978 517.244,33.391 517.654,32.338 C518.197,30.938 518.846,29.942 519.894,28.894 C520.942,27.846 521.94,27.196 523.338,26.654 C524.393,26.244 525.979,25.756 528.898,25.623 C532.057,25.479 533.004,25.448 541,25.448 C548.997,25.448 549.943,25.479 553.102,25.623 C556.021,25.756 557.607,26.244 558.662,26.654 C560.06,27.196 561.058,27.846 562.106,28.894 C563.154,29.942 563.803,30.938 564.346,32.338 C564.756,33.391 565.244,34.978 565.378,37.899 C565.522,41.056 565.552,42.003 565.552,50 C565.552,57.996 565.522,58.943 565.378,62.101 M570.82,37.631 C570.674,34.438 570.167,32.258 569.425,30.349 C568.659,28.377 567.633,26.702 565.965,25.035 C564.297,23.368 562.623,22.342 560.652,21.575 C558.743,20.834 556.562,20.326 553.369,20.18 C550.169,20.033 549.148,20 541,20 C532.853,20 531.831,20.033 528.631,20.18 C525.438,20.326 523.257,20.834 521.349,21.575 C519.376,22.342 517.703,23.368 516.035,25.035 C514.368,26.702 513.342,28.377 512.574,30.349 C511.834,32.258 511.326,34.438 511.181,37.631 C511.035,40.831 511,41.851 511,50 C511,58.147 511.035,59.17 511.181,62.369 C511.326,65.562 511.834,67.743 512.574,69.651 C513.342,71.625 514.368,73.296 516.035,74.965 C517.703,76.634 519.376,77.658 521.349,78.425 C523.257,79.167 525.438,79.673 528.631,79.82 C531.831,79.965 532.853,80.001 541,80.001 C549.148,80.001 550.169,79.965 553.369,79.82 C556.562,79.673 558.743,79.167 560.652,78.425 C562.623,77.658 564.297,76.634 565.965,74.965 C567.633,73.296 568.659,71.625 569.425,69.651 C570.167,67.743 570.674,65.562 570.82,62.369 C570.966,59.17 571,58.147 571,50 C571,41.851 570.966,40.831 570.82,37.631"></path></g></g></g></svg></div><div style="padding-top: 8px;"> <div style=" color:#3897f0; font-family:Arial,sans-serif; font-size:14px; font-style:normal; font-weight:550; line-height:18px;">Visualizza questo post su Instagram</div></div><div style="padding: 12.5% 0;"></div> <div style="display: flex; flex-direction: row; margin-bottom: 14px; align-items: center;"><div> <div style="background-color: #F4F4F4; border-radius: 50%; height: 12.5px; width: 12.5px; transform: translateX(0px) translateY(7px);"></div> <div style="background-color: #F4F4F4; height: 12.5px; transform: rotate(-45deg) translateX(3px) translateY(1px); width: 12.5px; flex-grow: 0; margin-right: 14px; margin-left: 2px;"></div> <div style="background-color: #F4F4F4; border-radius: 50%; height: 12.5px; width: 12.5px; transform: translateX(9px) translateY(-18px);"></div></div><div style="margin-left: 8px;"> <div style=" background-color: #F4F4F4; border-radius: 50%; flex-grow: 0; height: 20px; width: 20px;"></div> <div style=" width: 0; height: 0; border-top: 2px solid transparent; border-left: 6px solid #f4f4f4; border-bottom: 2px solid transparent; transform: translateX(16px) translateY(-4px) rotate(30deg)"></div></div><div style="margin-left: auto;"> <div style=" width: 0px; border-top: 8px solid #F4F4F4; border-right: 8px solid transparent; transform: translateY(16px);"></div> <div style=" background-color: #F4F4F4; flex-grow: 0; height: 12px; width: 16px; transform: translateY(-4px);"></div> <div style=" width: 0; height: 0; border-top: 8px solid #F4F4F4; border-left: 8px solid transparent; transform: translateY(-4px) translateX(8px);"></div></div></div> <div style="display: flex; flex-direction: column; flex-grow: 1; justify-content: center; margin-bottom: 24px;"> <div style=" background-color: #F4F4F4; border-radius: 4px; flex-grow: 0; height: 14px; margin-bottom: 6px; width: 224px;"></div> <div style=" background-color: #F4F4F4; border-radius: 4px; flex-grow: 0; height: 14px; width: 144px;"></div></div></a><p style=" color:#c9c8cd; font-family:Arial,sans-serif; font-size:14px; line-height:17px; margin-bottom:0; margin-top:8px; overflow:hidden; padding:8px 0 7px; text-align:center; text-overflow:ellipsis; white-space:nowrap;"><a href="https://www.instagram.com/p/CUSfnLAAM2x/?utm_source=ig_embed&amp;utm_campaign=loading" style=" color:#c9c8cd; font-family:Arial,sans-serif; font-size:14px; font-style:normal; font-weight:normal; line-height:17px; text-decoration:none;" target="_blank">Un post condiviso da RandColors (@ezio.rand)</a></p></div></blockquote> <script async src="//www.instagram.com/embed.js"></script>
+<br>
+<p>
+Nome del progetto :  ENTIRE MIDI Lights Konnakol ACOUSTIC analisi.als <br>
+</p>
+<br>
+ù
+<p> Qui sotto il codice relativo </p>
+
+<pre><code lang="supercollider">
+
+/*
+Regole per L’arrangiamento delle luci:
+In processing semplicemente nota 0 = dmx.channel[0] etc..  
+1) Luci singole
+ es:  corrispondenza tra nota MIDI (0..11) e luce
+Scegli su quale nota deve essere applicato il ritmo.
+Mettere un offset settabile sulla singola KonaWord o su una frase ad esempio 
+*/
+
+KonaWord(4,4,1, argSynth: \SingleSelector,  offset: 0)
+
+// definisci il KonaTani 
+a = KonaTani.new(60, #["I4", "O", "O"], 5, argSynth: \ SingleSelector);
+MIDIClient.init;
+a.midiOut = MIDIOut.newByName("loopMIDI Port", "loopMIDI Port");
+// crea la frase
+(
+~ph1 = KonaTime.newFrom([
+~chatusra["[ 1, 3 ]"],
+~chatusra["[ 1, 1, 1, 1 ]"],
+~chatusra["[ 4 ]"],
+~chatusra["[ 1, 1, 1, 1 ]"],
+~chatusra["[ 1, 2, 1 ]"]
+],a);
+) 
+
+// aggiungi la frase
+a.add(~ph1,offset:0)
+
+/*
+Entrambi i problemi qui sotto sono legati al rendere cambiale realtime dei valori: o dei Synth o dell’0ffset. 
+Problema 1
+Probabilmente per cambiare dinamicamente il valore serve utilizzare un  KonaGenerator, e slegare il valore del argSynth: \SingleSelector dal KonaTani, questo per fari si che alla frase ~ph1 si possano abbinare altri comportamenti di luci definiti nello switch della KonaWord dei synths;
+Problema 2
+ Es: mettiamo di voler prendere la frase ~ph1 e leggerla con il metodo .rout all’interno di una routine, per ottenere una lettura .inf e successivamente agire andando a cambiare il parametro Offset.
+ */
+// make a variation --------------------------------------------------
+m = a.gen.changeOffset(~ph1, offset: 11.rand);
+(
+d = Routine {
+       inf.do {
+m.rout.embedInStream; // read ~ph1 indefinitely with random offset setted once or change it  live 
+       };
+};
+)
+ d.play(a.clock); // Importante mantieni il clock di a ovvero il KonaTani
+/* 
+Problema 3 (lasciare gli Onset invariati e modificare la durata della nota)
+Andando a vedere KonaWord siccome dobbiamo gestire la durata della nota data dalla differenza tra noteON e noteOFF , andiamo ad agire sulla variabile: 
+*/
+
+var speed;		//The duration wait between syllables
+/* 
+Probabilmente devo anche qui come prima usare un KonaGenerator, per avere un metodo che modifichi tutto ciò che ci serve. 
+Codice abbozzato:
+*/
+
+//Automated mapping for single light channel with note dur control
+{\SingleSelector}{
+ 
+rout = Routine {
+word.size.do { |i|
+if(word[i]!='-') {
+if(i==0) // vel fissa a 127
+{note = 0; vel = 127} // Luce indirizzo 0 etc..
+{note = 1; vel = 127};
+if(tani.midiOut != nil) { tani.midiOut.noteOn(0, note, vel); };
+if(i==0) {
+word[i].post;
+} {
+word[i].asString.toLower.post;
+};
+" ".post;
+(speed*(1/4)).post; " ".post;
+(speed/4).wait;
+if(tani.midiOut != nil) { tani.midiOut.noteOff(0, note, vel); };
+    (speed*(3/4)).wait;
+} {
+word[i].post; " ".post;
+speed.post; " ".post;
+
+};
+};
+yieldAndReset(nil);
+};
+};
+
+</pre></code>
+
+<p>
+Problema 4
+Bisogna settare un .wait relativo, se vogliamo  dur*1/4 la durata della nota (speed *(1/4)).wait, 
+Poi bisogna aggiungere dopo il noteOff il tempo tolto sopra , altrimenti velocizza la lettura della frase, noi invece vogliamo solo accorciare la durata delle note.
+Rendere questa una variabile un argomento settabile almeno per ogni frase. 
+</p>
+
+<p>
+2) Regola  Mapped on Syllables
+Ta = midi note 0 
+Ki = midi note 1
+Di = midi note 2
+Mi = midi note 3
+
+words[9] = ['Da', 'Di', 'Gi', 'Na', 'Dom', 'Ta', 'Ka', 'Di', 'Mi'];
+'Da', = midi note 0
+'Di', = midi note 1
+'Gi', = midi note 2
+'Na', = midi note 3
+'Dom', = midi note 4
+'Ta', = midi note 5
+'Ka', = midi note 6
+'Di', = midi note 7
+'Mi' = midi note 8
+Questa è la parola più lunga disponibile.
+Altrimenti per concatenazione con accumulo di indici ed un % per iterare sempre tra 0 - 11
+Parola 9 + parola 3  = parola 12 (9+3) -> dall’indice 0 all’indice 11
+Altra opzione è semplicemente se uno mette una frase quella rimane tra % 0 – 11 
+Come prima possibilità di ridurre la durata, in questo caso anche di allungarla 
+
+Sovrapponi e cicla su tutti i valori (0..11), troncando sull’ultima battuta.
+</p>
+<img src="images/arrangiamento luci/sovrapponi ed itera.PNG" alt="sovrapponi" > <br>
+
+<p> 3 ) Più note contemporaneamente sovrapponi la dur e sposta l’offset   
+  <img src="images/arrangiamento luci/AccumuloDurate.PNG" alt="accumulo" > <br>
+</p>
+
+<p>
+4) Accento a Cluster anche nel mezzo di una frase 
+<img src="images/arrangiamento luci/AccentoaCluster.PNG" alt="Accento" > <br>
+
+</p>
+
+<p></p>
+Questa opzione vince su tutte, ovvero deve essere possibile metterla su qualsiasi nota di una sequenza.
+
+5) alterna 2 o più note.
+È un arpeggiatore essenzialmente, scegli su che note vuoi arpeggiare e fallo in maniera % ciclica,
+Decide anche qui se le note avranno durata < o > rispetto a dur
+<img src="images/arrangiamento luci/arpeggiatore.PNG" alt="arpeggiatore" > <br>
+
+<p>
+6) alterna 2 o più note ma come gruppi 
+<img src="images/arrangiamento luci/Gruppi.PNG" alt="arpeggiatore" > <br>
+
+</p>
+
+<p>
+7) gruppi  durate controllate
+<img src="images/arrangiamento luci/gruppiAlternatiarpeggiati con durate controllate.PNG" alt="decresci"> <br>
+
+</p>
+ 
+<p>
+8) decresci il numero di note di un’unità superiore ed una inferiore, andando verso una nota.  
+<img src="images/arrangiamento luci/decresci verso una nota.PNG" alt="decresci"> <br>
+
+</p>
+<p> 
+9) fai tante note tipo 4 battute da 4/4 in sedicesimi e metti gli accenti in determinati punti senza interrompere la direzione delle note
+In pratica la luce gira in cerchio ed ogni “tot” c’è un accento. 
+
+</p>
+<p>
+Da Aggiungere:
+10) avere la possibilità di fare dei crescendo e diminuendo sulla velocity di intere frasi, decidendo solo il valore iniziale e quello finale, in maniera lineare ed exp potrebbe essere molto utile, sia per enfatizzare dei finali in “dissolvenza”, sia per fare delle frasi più gesture e vive. 
+
+</p>
+Vi è inoltre anche un'altra luce che è un singolo faretto teatrale, da controllare  per accenti, aggiungere quindi un canale dedicato, con un fattore di scaling diverso probabilmente 127 sarebbe una legnata in una stanza(verifica)
+<img src="images/arrangiamento luci/s-l1600.jpg" alt="decresci"> <br>
+
+ 
+</p>
+
+<a href="https://scsynth.org/t/project-guidance/2066/4?u=randcolors" target="_blank" rel="noopener noreferrer">project-guidance</a>
+
+</section>
+
+
+        </article>
+    </main>
+
+</body>
+
+</html>
